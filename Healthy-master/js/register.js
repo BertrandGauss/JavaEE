@@ -2,7 +2,7 @@ CheckRegSuccess1 = false;
 CheckRegSuccess2 = false;
 CheckRegSuccess3 = false;
 CheckRegSuccess4 =false;
-SetBtnDisable();
+// SetBtnDisable();
 
 function checkAll() {
     checkPassword();
@@ -26,13 +26,12 @@ function checkUsername(){
         $("#RegErrInfo").text("用户名不符合规范");
         CheckRegSuccess1 = false;
     }
-    SetBtnDisable();
 }
 
 
 
 function SetBtnDisable() {
-    if (CheckRegSuccess1 && CheckRegSuccess2 && CheckRegSuccess3) {
+    if (CheckRegSuccess1 && CheckRegSuccess2 && CheckRegSuccess3&&CheckRegSuccess4) {
         $('#btn_sub').removeAttr("disabled");
         $("#btn_sub").css('color',"#000");
     } else {
@@ -56,7 +55,6 @@ function checkPhone(){
         $("#RegErrInfo").text("手机号码不合规范");
         CheckRegSuccess4 = false;
     }
-    SetBtnDisable();
 }
 
 function checkPassword(){
@@ -74,7 +72,6 @@ function checkPassword(){
         $("#RegErrInfo").text("");
         CheckRegSuccess2 = true;
     }
-    SetBtnDisable();
 }
 
 
@@ -94,24 +91,31 @@ function checkSurepassword(){
         $("#RegErrInfo").text("");
         CheckRegSuccess3 = true;
     }
-    SetBtnDisable();
+
 }
 
-var info = [];
-info.push($("#user_name").val());
-info.push($("#user_password").val());
-info.push($("#telephone").val());
-info.push($("#gender").val());
-info.push($("#birthday").val());
+// var info = {};
+// info.push($("#user_name").val());
+// info.push($("#user_password").val());
+// info.push($("#telephone").val());
+// info.push($("#gender").val());
+// info.push($("#birthday").val());
 
 $(document).ready(function(){
     $("#btn_sub").click(function(){
         $.ajax({
             type: "POST",   //提交的方法
             url:"http://localhost:8081/user/register",
-            dataType:'json',
+            dataType:"json",
+            contentType: "application/json",
             //url:"#",
-            data: JSON.stringify(info),
+            data: JSON.stringify({
+                "user_name":$("#user_name").val(),
+                "user_password":$("#user_password").val(),
+                "telephone":$("#telephone").val(),
+                "gender":$("#gender").val(),
+                "birthday":$("#birthday").val()
+            }),
             async: false,
             error: function(request) {  //失败的话
                 alert("Connection error");
