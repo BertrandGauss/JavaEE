@@ -1,10 +1,8 @@
 package cn.health.server;
 
-import cn.health.domain.User;
 import cn.health.domain.User_Food;
 import cn.health.domain.UserEat;
 import cn.health.mapper.FoodInfMapper;
-import cn.health.mapper.UserMapper;
 import cn.health.mapper.User_FoodMapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,8 @@ public class User_FoodServer {
         User_Food uf=user_foodMapper.selectByIdDate(userEat.getUser_id(), userEat.getDate());
         if(uf==null){//用户今天还没有记录食物
             User_Food userF=new User_Food();
+            userF.setDate(userEat.getDate());
+            userF.setUser_id(userEat.getUser_id());
             Long ca=(long)(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100;
             userF.setTotal_calorie(ca);
             userF.setTotal_carbs(1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCarbsPer100g())/100);

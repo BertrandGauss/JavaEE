@@ -31,10 +31,7 @@ public class User_Sleep {
         this.starttime = starttime;
     }
 
-    public Long getSleeptime() {
-
-        return sleeptime;
-    }
+    public Long getSleeptime() { return sleeptime;}
 
     public void setSleeptime(Long sleeptime) {
         this.sleeptime = sleeptime;
