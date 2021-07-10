@@ -19,6 +19,7 @@ public class User_FoodServer {
 
 
     public JSONObject setTodayFood(UserEat userEat){
+
         Long id=foodInfMapper.selectByName(userEat.getName()).getFood_id();
         if(id==null){
             JSONObject json = new JSONObject();

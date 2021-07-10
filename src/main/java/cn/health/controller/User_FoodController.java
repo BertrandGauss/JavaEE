@@ -2,6 +2,7 @@ package cn.health.controller;
 
 import cn.health.domain.User;
 import cn.health.domain.UserEat;
+import cn.health.domain.User_Food;
 import cn.health.server.UserServer;
 import cn.health.server.User_FoodServer;
 import com.alibaba.fastjson.JSONObject;
@@ -11,24 +12,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/food")
 public class User_FoodController {
     @Autowired
     private User_FoodServer user_foodServer;
 
+    @Autowired
+    private HttpServletRequest httpServletRequest;
 
     @RequestMapping(value = "/addfood",method = {RequestMethod.POST})
     private JSONObject addTodayfood(@RequestBody UserEat userEat){
         System.out.print("添加食物");
         JSONObject json = new JSONObject();
+        Long id=(Long)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        userEat.setUser_id(id);
         json=user_foodServer.setTodayFood(userEat);
         System.out.print(json);
         return json;
     }
-//    @RequestMapping(value = "/showfood",method = {RequestMethod.GET})
-//    private JSONObject showFood(){
-//        return user_foodServer.selectCloestById();
-//
-//    }
+    @RequestMapping(value = "/showfood",method = {RequestMethod.GET})
+    private JSONObject showFood(){
+        Long id=(Long)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        User_Food user_food=user_foodServer.selectCloestById(id);
+        JSONObject json = new JSONObject();
+        json.put("code",0);
+        json.put("msg","查看成功");
+        json.put("data",user_food);
+        return json;
+
+    }
 }
