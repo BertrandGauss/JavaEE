@@ -14,48 +14,48 @@
         INSERT INTO user_food VALUES (#{date},#{user_id},#{total_calorie},#{total_vA},#{total_vB},#{total_vC},#{total_vD},#{total_vE},#{total_protein},#{total_fat},#{total_carbs})
     </insert>
 
-    <insert id="updatetotal_calorie"  parameterType="cn.health.domain.User_Food">
+    <update id="updatetotal_calorie"  parameterType="cn.health.domain.User_Food">
         UPDATE user_food SET total_calorie = #{total_calorie}
-    </insert>
+    </update>
 
-    <insert id="updatetotal_vitaminA"  parameterType="cn.health.domain.User_Food">
+    <update id="updatetotal_vitaminA"  parameterType="cn.health.domain.User_Food">
         UPDATE user_food SET total_vitaminA = #{total_vitaminA}
-    </insert>
+    </update>
 
-    <insert id="updatetotal_vitaminB"  parameterType="cn.health.domain.User_Food">
+    <update id="updatetotal_vitaminB"  parameterType="cn.health.domain.User_Food">
         UPDATE user_food SET total_vitaminB = #{total_vitaminB}
-    </insert>
+    </update>
 
-    <insert id="updatetotal_vitaminC"  parameterType="cn.health.domain.User_Food">
+    <update id="updatetotal_vitaminC"  parameterType="cn.health.domain.User_Food">
         UPDATE user_food SET total_vitaminC = #{total_vitaminC}
-    </insert>
+    </update>
 
-    <insert id="updatetotal_vitaminD"  parameterType="cn.health.domain.User_Food">
+    <update id="updatetotal_vitaminD"  parameterType="cn.health.domain.User_Food">
         UPDATE user_food SET total_vitaminD = #{total_vitaminD}
-    </insert>
+    </update>
 
-    <insert id="updatetotal_vitaminE"  parameterType="cn.health.domain.User_Food">
+    <update id="updatetotal_vitaminE"  parameterType="cn.health.domain.User_Food">
         UPDATE user_food SET total_vitaminE = #{total_vitaminE}
-    </insert>
+    </update>
 
-    <insert id="updatetotal_fat"  parameterType="cn.health.domain.User_Food">
+    <update id="updatetotal_fat"  parameterType="cn.health.domain.User_Food">
         UPDATE user_food SET total_fat = #{total_fat}
-    </insert>
+    </update>
 
-    <insert id="updatetotal_protein"  parameterType="cn.health.domain.User_Food">
+    <update id="updatetotal_protein"  parameterType="cn.health.domain.User_Food">
         UPDATE user_food SET total_protein = #{total_protein}
-    </insert>
+    </update>
 
-    <insert id="updatetotal_carbs"  parameterType="cn.health.domain.User_Food">
+    <update id="updatetotal_carbs"  parameterType="cn.health.domain.User_Food">
         UPDATE user_food SET total_carbs = #{total_carbs}
-    </insert>
+    </update>
 
-    <insert id="selectByIdDate"  parameterType="cn.health.domain.User_Food">
+    <select id="selectByIdDate"  parameterType="cn.health.domain.User_Food">
         SELECT * From user_food WHERE date = #{date} AND user_id = #{user_id}
-    </insert>
+    </select>
 
-    <insert id="selectCloestById"  parameterType="cn.health.domain.User_Food">
+    <select id="selectCloestById"  parameterType="cn.health.domain.User_Food">
         select * FROM (SELECT * From user_food WHERE user_id = #{user_id}) as new_uf ORDER BY user_id desc LIMIT 1
-    </insert>
+    </select>
 
 </mapper>
