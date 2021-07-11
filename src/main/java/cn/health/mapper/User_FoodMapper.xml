@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.health.mapper.User_FoodMapper">
+
+    <!--<resultMap id="BaseResultMap" type="cn.health.domain.User">-->
+    <!--<id column="user_id" property="user_id" jdbcType="INTEGER"/>-->
+    <!--<result column="user_name" property="user_name" jdbcType="VARCHAR"/>-->
+    <!--<result column="telphone" property="telphone" jdbcType="VARCHAR"/>-->
+    <!--<result column="gender" property="gender" jdbcType="TINYINT"/>-->
+    <!--<result column="birthday" property="birthday" jdbcType="DATE"/>-->
+    <!--</resultMap>-->
+    <insert id="add"  parameterType="cn.health.domain.User_Food">
+        INSERT INTO user_food VALUES (#{date},#{user_id},#{total_calorie},#{total_vitaminA},#{total_vitaminB},#{total_vitaminC},#{total_vitaminD},#{total_vitaminE},#{total_protein},#{total_fat},#{total_carbs})
+    </insert>
+
+    <update id="update">
+        UPDATE user_food SET total_calorie = #{total_calorie}, total_vitaminA = #{total_vitaminA}, total_vitaminB = #{total_vitaminB}, total_vitaminC = #{total_vitaminC},
+            total_vitaminD = #{total_vitaminD}, total_vitaminE = #{total_vitaminE}, total_protein = #{total_protein}, total_fat = #{total_fat},
+            total_carbs = #{total_carbs} WHERE user_id = #{user_id} AND date = #{date}
+    </update>
+
+    <select id="selectByIdDate"  resultType="cn.health.domain.User_Food">
+        SELECT * From user_food WHERE date = #{date} AND user_id = #{user_id}
+    </select>
+
+    <select id="selectCloestById"  resultType="cn.health.domain.User_Food" parameterType="java.lang.Integer">
+        select * FROM (SELECT * From user_food WHERE user_id = #{user_id}) as new_uf ORDER BY user_id desc LIMIT 1
+    </select>
+
+</mapper>
