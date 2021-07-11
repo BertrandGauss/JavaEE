@@ -1,10 +1,10 @@
 package cn.health.domain;
 
 public class FoodInf {
-    private Long food_id;
+    private Integer food_id;
     private String name;
     private Double weightPerOne;
-    private Long caloriePer100g;
+    private Integer caloriePer100g;
     private Double vAPer100g;
     private Double vBper100g;
     private Double vCper100g;
@@ -14,11 +14,11 @@ public class FoodInf {
     private Double fatPer100g;
     private Double carbsPer100g;
 
-    public Long getFood_id() {
+    public Integer getFood_id() {
         return food_id;
     }
 
-    public void setFood_id(Long food_id) {
+    public void setFood_id(Integer food_id) {
         this.food_id = food_id;
     }
 
@@ -38,11 +38,11 @@ public class FoodInf {
         this.weightPerOne = weightPerOne;
     }
 
-    public Long getCaloriePer100g() {
+    public Integer getCaloriePer100g() {
         return caloriePer100g;
     }
 
-    public void setCaloriePer100g(Long caloriePer100g) {
+    public void setCaloriePer100g(Integer caloriePer100g) {
         this.caloriePer100g = caloriePer100g;
     }
 

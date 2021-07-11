@@ -9,9 +9,9 @@ public class User_Sleep {
     @NotNull(message = "日期不能不填")
     private Date date;
     @NotNull(message = "用户id不能不填")
-    private Long user_id;
+    private Integer user_id;
     @NotNull(message = "入睡时长不能不填")
-    private Long sleeptime;
+    private Integer sleeptime;
     @NotNull(message = "入睡时间不能不填")
     private Time starttime;
 
@@ -31,17 +31,20 @@ public class User_Sleep {
         this.starttime = starttime;
     }
 
-    public Long getSleeptime() { return sleeptime;}
+    public Integer getSleeptime() {
 
-    public void setSleeptime(Long sleeptime) {
+        return sleeptime;
+    }
+
+    public void setSleeptime(Integer sleeptime) {
         this.sleeptime = sleeptime;
     }
 
-    public Long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 }

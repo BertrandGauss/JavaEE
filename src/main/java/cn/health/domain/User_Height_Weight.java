@@ -8,9 +8,9 @@ public class User_Height_Weight {
     @NotNull(message = "日期不能不填")
     private Date date;
     @NotNull(message = "用户id不能不填")
-    private Long user_id;
-    private Long height;
-    private Long weight;
+    private Integer user_id;
+    private Integer height;
+    private Integer weight;
 
     public Date getDate() {
         return date;
@@ -20,27 +20,27 @@ public class User_Height_Weight {
         this.date = date;
     }
 
-    public Long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
-    public Long getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(Long height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public Long getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(Long weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 }

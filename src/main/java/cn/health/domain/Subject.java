@@ -4,29 +4,29 @@ import javax.validation.constraints.NotNull;
 
 public class Subject {
     @NotNull(message = "题目id不能不填")
-    private Long subject_id;
+    private Integer subject_id;
     @NotNull(message = "问卷id不能不填")
-    private Long questionnaire_id;
+    private Integer questionnaire_id;
     private String Q;
     private String A1;
     private String A2;
     private String A3;
     private String A4;
-    private Long point;
+    private Integer point;
 
-    public Long getSubject_id() {
+    public Integer getSubject_id() {
         return subject_id;
     }
 
-    public void setSubject_id(Long subject_id) {
+    public void setSubject_id(Integer subject_id) {
         this.subject_id = subject_id;
     }
 
-    public Long getQuestionnaire_id() {
+    public Integer getQuestionnaire_id() {
         return questionnaire_id;
     }
 
-    public void setQuestionnaire_id(Long questionnaire_id) {
+    public void setQuestionnaire_id(Integer questionnaire_id) {
         this.questionnaire_id = questionnaire_id;
     }
 
@@ -70,11 +70,11 @@ public class Subject {
         A4 = a4;
     }
 
-    public Long getPoint() {
+    public Integer getPoint() {
         return point;
     }
 
-    public void setPoint(Long point) {
+    public void setPoint(Integer point) {
         this.point = point;
     }
 }
