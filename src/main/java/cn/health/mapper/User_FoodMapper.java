@@ -1,32 +1,18 @@
 package cn.health.mapper;
 import cn.health.domain.User;
 import cn.health.domain.User_Food;
-
+import org.apache.ibatis.annotations.Param;
 import java.util.Date;
 
 public interface User_FoodMapper {
 
     void add(User_Food user_food);
 
-    void updatetotal_calorie(Long total_calorie);
+    void update(@Param("user_id") Long user_id,@Param("date") Date date,@Param("total_calorie")Long total_calorie,@Param("total_vitaminA")Double total_vitaminA
+                ,@Param("total_vitaminB") Double total_vitaminB,@Param("total_vitaminC") Double total_vitaminC,@Param("total_vitaminD") Double total_vitaminD,
+                @Param("total_vitaminE") Double total_vitaminE,@Param("total_fat") Double total_fat,@Param("total_protein")Double total_protein,@Param("total_carbs")Double total_carbs);
 
-    void updatetotal_vitaminA(Double total_vitaminA);
-
-    void updatetotal_vitaminB(Double total_vitaminB);
-
-    void updatetotal_vitaminC(Double total_vitaminC);
-
-    void updatetotal_vitaminD(Double total_vitaminD);
-
-    void updatetotal_vitaminE(Double total_vitaminE);
-
-    void updatetotal_fat(Double total_fat);
-
-    void updatetotal_protein(Double total_protein);
-
-    void updatetotal_carbs(Double total_carbs);
-
-    User_Food selectByIdDate(Long user_id, Date date);
+    User_Food selectByIdDate(@Param("user_id")Long user_id, @Param("date")Date date);
 
     User_Food selectCloestById(Long user_id);
     //void update

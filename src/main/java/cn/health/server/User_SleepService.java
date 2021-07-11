@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class User_sleepServer {
+public class User_SleepService {
     @Autowired
     private User_SleepMapper user_sleepMapper;
 
-    public void addSleepTime(){
+    public void addSleepTime(User_Sleep user_sleep){
+        user_sleepMapper.add(user_sleep);
 
     }
     public JSONObject getMonthSleepTime(){

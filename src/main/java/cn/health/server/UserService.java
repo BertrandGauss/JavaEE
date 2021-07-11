@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.Null;
 
 @Service
-public class UserServer {
+public class UserService {
     @Autowired
     private UserMapper userMapper;
 

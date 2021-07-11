@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class User_FoodServer {
+public class User_FoodService {
     @Autowired
     private User_FoodMapper user_foodMapper;
     @Autowired
     private FoodInfMapper foodInfMapper;
 
-
+    //添加或更新今天用户的饮食记录
     public JSONObject setTodayFood(UserEat userEat){
 
         Long id=foodInfMapper.selectByName(userEat.getName()).getFood_id();
@@ -44,15 +44,14 @@ public class User_FoodServer {
             user_foodMapper.add(userF);
         }else{
             Long ca=(long)(uf.getTotal_calorie()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100);
-            user_foodMapper.updatetotal_calorie(ca);
-            user_foodMapper.updatetotal_carbs(uf.getTotal_carbs()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCarbsPer100g())/100);
-            user_foodMapper.updatetotal_fat(uf.getTotal_fat()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100);
-            user_foodMapper.updatetotal_protein(uf.getTotal_protein()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100);
-            user_foodMapper.updatetotal_vitaminA(uf.getTotal_vitaminA()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvAPer100g())/100);
-            user_foodMapper.updatetotal_vitaminB(uf.getTotal_vitaminB()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvBper100g())/100);
-            user_foodMapper.updatetotal_vitaminC(uf.getTotal_vitaminC()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvCper100g())/100);
-            user_foodMapper.updatetotal_vitaminD(uf.getTotal_vitaminD()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvDper100g())/100);
-            user_foodMapper.updatetotal_vitaminE(uf.getTotal_vitaminE()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvEper100g())/100);
+            user_foodMapper.update(userEat.getUser_id(), userEat.getDate(),ca,uf.getTotal_carbs()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCarbsPer100g())/100
+            ,uf.getTotal_fat()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100
+            ,uf.getTotal_protein()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100
+            ,uf.getTotal_vitaminA()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvAPer100g())/100
+            ,uf.getTotal_vitaminB()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvBper100g())/100
+            ,uf.getTotal_vitaminC()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvCper100g())/100
+            ,uf.getTotal_vitaminD()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvDper100g())/100
+            ,uf.getTotal_vitaminE()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvEper100g())/100);
         }
         JSONObject json = new JSONObject();
         json.put("msg","添加食物成功");
