@@ -3,29 +3,29 @@ package cn.health.domain;
 import javax.validation.constraints.NotBlank;
 
 public class HealthClassroom {
-    private Long class_id;
-    private Long administrator_id;
+    private Integer class_id;
+    private Integer administrator_id;
     @NotBlank(message = "课程名称不能为空")
     private String title;
     @NotBlank(message = "课程链接不能为空")
     private String link;
     @NotBlank(message = "课程标签不能为空")
     private String tags;
-    private Long viewers;
+    private Integer viewers;
 
-    public Long getClass_id() {
+    public Integer getClass_id() {
         return class_id;
     }
 
-    public void setClass_id(Long class_id) {
+    public void setClass_id(Integer class_id) {
         this.class_id = class_id;
     }
 
-    public Long getAdministrator_id() {
+    public Integer getAdministrator_id() {
         return administrator_id;
     }
 
-    public void setAdministrator_id(Long administrator_id) {
+    public void setAdministrator_id(Integer administrator_id) {
         this.administrator_id = administrator_id;
     }
 
@@ -53,11 +53,11 @@ public class HealthClassroom {
         this.tags = tags;
     }
 
-    public Long getViewers() {
+    public Integer getViewers() {
         return viewers;
     }
 
-    public void setViewers(Long viewers) {
+    public void setViewers(Integer viewers) {
         this.viewers = viewers;
     }
 }

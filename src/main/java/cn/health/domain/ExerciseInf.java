@@ -1,15 +1,15 @@
 package cn.health.domain;
 
 public class ExerciseInf {
-    private Long exercise_id;
+    private Integer exercise_id;
     private String name;
-    private Long caloriePreHour;
+    private Integer caloriePerHour;
 
-    public Long getExercise_id() {
+    public Integer getExercise_id() {
         return exercise_id;
     }
 
-    public void setExercise_id(Long exercise_id) {
+    public void setExercise_id(Integer exercise_id) {
         this.exercise_id = exercise_id;
     }
 
@@ -21,11 +21,11 @@ public class ExerciseInf {
         this.name = name;
     }
 
-    public Long getCaloriePreHour() {
-        return caloriePreHour;
+    public Integer getCaloriePerHour() {
+        return caloriePerHour;
     }
 
-    public void setCaloriePreHour(Long caloriePreHour) {
-        this.caloriePreHour = caloriePreHour;
+    public void setCaloriePerHour(Integer caloriePerHour) {
+        this.caloriePerHour = caloriePerHour;
     }
 }

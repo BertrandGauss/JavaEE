@@ -1,19 +1,20 @@
 package cn.health.domain;
 
 import javax.validation.constraints.NotBlank;
+import java.lang.Integer;
 
 public class Administrator {
-    private Long administrator_id;
+    private Integer administrator_id;
     @NotBlank(message = "管理员名称不能为空")
     private String administrator_name;
     @NotBlank(message = "管理员密码不能为空")
     private String password;
 
-    public Long getAdministrator_id() {
+    public Integer getAdministrator_id() {
         return administrator_id;
     }
 
-    public void setAdministrator_id(Long administrator_id) {
+    public void setAdministrator_id(Integer administrator_id) {
         this.administrator_id = administrator_id;
     }
 

@@ -3,25 +3,25 @@ package cn.health.domain;
 import javax.validation.constraints.NotBlank;
 
 public class Questionnaire {
-    private Long questionnaire_id;
-    private Long administrator_id;
+    private Integer questionnaire_id;
+    private Integer administrator_id;
     @NotBlank(message = "问卷名称不能为空")
     private String name;
-    private Long problemNum;
+    private Integer problemNum;
 
-    public Long getQuestionnaire_id() {
+    public Integer getQuestionnaire_id() {
         return questionnaire_id;
     }
 
-    public void setQuestionnaire_id(Long questionnaire_id) {
+    public void setQuestionnaire_id(Integer questionnaire_id) {
         this.questionnaire_id = questionnaire_id;
     }
 
-    public Long getAdministrator_id() {
+    public Integer getAdministrator_id() {
         return administrator_id;
     }
 
-    public void setAdministrator_id(Long administrator_id) {
+    public void setAdministrator_id(Integer administrator_id) {
         this.administrator_id = administrator_id;
     }
 
@@ -33,11 +33,11 @@ public class Questionnaire {
         this.name = name;
     }
 
-    public Long getProblemNum() {
+    public Integer getProblemNum() {
         return problemNum;
     }
 
-    public void setProblemNum(Long problemNum) {
+    public void setProblemNum(Integer problemNum) {
         this.problemNum = problemNum;
     }
 }

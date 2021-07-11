@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 public class User {
 
-    private Long user_id;
+    private Integer user_id;
     @NotBlank(message = "用户名不能为空")
     private String user_name;
     @NotBlank(message = "手机号不能为空")
@@ -16,11 +16,11 @@ public class User {
     private String gender;
     private Date birthday;
 
-    public Long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 

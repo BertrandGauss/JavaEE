@@ -5,27 +5,27 @@ import java.sql.Date;
 import java.sql.Time;
 
 public class Alarmclock {
-    private Long id;
-    private Long user_id;
+    private Integer id;
+    private Integer user_id;
     private String name;
     @NotBlank(message = "闹钟设定时间不能为空")
     private Time time;
     private String type;
     private Date date;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
