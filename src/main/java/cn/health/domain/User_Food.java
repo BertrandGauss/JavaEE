@@ -8,9 +8,9 @@ public class User_Food {
     @NotNull(message = "日期不能不填")
     private Date date;
     @NotNull(message = "用户id不能不填")
-    private Long user_id;
+    private Integer user_id;
     @NotNull(message = "当日卡路里不能不填")
-    private Long total_calorie;
+    private Integer total_calorie;
     private Double total_vitaminA;
     private Double total_vitaminB;
     private Double total_vitaminC;
@@ -28,19 +28,19 @@ public class User_Food {
         this.date = date;
     }
 
-    public Long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
-    public Long getTotal_calorie() {
+    public Integer getTotal_calorie() {
         return total_calorie;
     }
 
-    public void setTotal_calorie(Long total_calorie) {
+    public void setTotal_calorie(Integer total_calorie) {
         this.total_calorie = total_calorie;
     }
 

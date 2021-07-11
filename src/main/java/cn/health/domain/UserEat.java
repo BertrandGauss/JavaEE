@@ -4,16 +4,16 @@ package cn.health.domain;
 import java.util.Date;
 
 public class UserEat {
-    private Long user_id;
+    private Integer user_id;
     private String name;
     private Integer number;
     private Date date;
 
-    public Long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 

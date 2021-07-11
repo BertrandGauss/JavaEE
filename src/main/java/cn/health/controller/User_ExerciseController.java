@@ -1,8 +1,8 @@
 package cn.health.controller;
 
 import cn.health.domain.UserSport;
-//import cn.health.server.UserServer;
-import cn.health.server.User_Exercise_Service;
+//import cn.health.service.UserServer;
+import cn.health.service.User_Exercise_Service;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class User_ExerciseController {
         System.out.print("添加运动");
         JSONObject json = new JSONObject();
 
-        Long id=(Long)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         userSport.setUser_id(id);
 
         json= user_exercise_Service.setTodayExercise(userSport);

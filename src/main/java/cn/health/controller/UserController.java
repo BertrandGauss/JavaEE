@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import cn.health.server.UserService;
+import cn.health.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 

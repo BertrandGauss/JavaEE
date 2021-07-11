@@ -2,7 +2,7 @@ package cn.health.controller;
 
 import cn.health.domain.UserEat;
 import cn.health.domain.User_Food;
-import cn.health.server.User_FoodService;
+import cn.health.service.User_FoodService;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +25,7 @@ public class User_FoodController {
     private JSONObject addTodayfood(@RequestBody UserEat userEat){
         System.out.print("添加食物");
         JSONObject json = new JSONObject();
-        Long id=(Long)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         userEat.setUser_id(id);
         json= user_foodService.setTodayFood(userEat);
         System.out.print(json);
@@ -33,7 +33,7 @@ public class User_FoodController {
     }
     @RequestMapping(value = "/showfood",method = {RequestMethod.GET})
     private JSONObject showFood(){
-        Long id=(Long)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         User_Food user_food= user_foodService.selectCloestById(id);
         JSONObject json = new JSONObject();
         json.put("code",0);

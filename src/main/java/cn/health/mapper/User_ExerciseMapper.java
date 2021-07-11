@@ -9,6 +9,6 @@ public interface User_ExerciseMapper {
 
     void updatetotal_calorie(Long total_calorie);
 
-    User_Exercise selectByIdDate(Long user_id, Date date);  //根据时间用户id查找信息
+    User_Exercise selectByIdDate(Integer user_id, Date date);  //根据时间用户id查找信息
 
 }

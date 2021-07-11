@@ -3,16 +3,16 @@ package cn.health.domain;
 import java.util.Date;
 
 public class UserSport {
-    private Long user_id;
+    private Integer user_id;
     private String exercise_name;
     private Date exercise_date;
     private Double exercise_time;
 
-    public Long getUser_id() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Long user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
