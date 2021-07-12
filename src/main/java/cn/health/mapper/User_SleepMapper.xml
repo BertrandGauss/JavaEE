@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.health.mapper.User_SleepMapper">
+    <!-- desc表示倒序-->
+    <select id="select30" resultType="cn.health.domain.User_Sleep" >
+        SELECT top 30 FROM user_sleep order by user_sleep.data DESC;
+    </select>
+</mapper>

@@ -13,12 +13,23 @@
     <insert id="add"  parameterType="cn.health.domain.User_Exercise">
         INSERT INTO user_exercise VALUES (#{date},#{user_id},#{total_calorie})
     </insert>
-
-    <update id="updatetotal_calorie">
-        UPDATE user_exercise SET total_calorie = #{total_calorie} WHERE date = #{date} AND user_id = #{user_id}
+    <update id="updatetotal_calorie" >
+        UPDATE user_exercise
+        SET total_calorie=#{total_calorie}
+        WHERE user_id=#{id} and user_exercise.date=#{date}
     </update>
-
     <select id="selectByIdDate" resultType="cn.health.domain.User_Exercise">
-        SELECT * FROM user_exercise WHERE user_id = #{user_id} AND date = #{date}
+        SELECT *
+        FROM user_exercise
+        WHERE user_id=#{id} and user_exercise.date=#{date}
     </select>
+    <select id="selecttotal" resultType="cn.health.domain.User_Exercise">
+        SELECT top 30
+        FROM user_exercise
+        ORDER BY user_exercise.data DESC
+    </select>
+
+
+
+
 </mapper>
