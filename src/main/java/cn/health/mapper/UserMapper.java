@@ -2,6 +2,8 @@ package cn.health.mapper;
 
 import cn.health.domain.User;
 
+import java.util.Date;
+
 public interface UserMapper {
 
 
@@ -13,6 +15,7 @@ public interface UserMapper {
 
     String selectnameByID(Integer id);
 
+    Date selectbirthByID(Integer id);
 
 
 }

@@ -18,4 +18,9 @@
     <select id="selectnameByID" resultType="java.lang.String" >
         SELECT user_name FROM user WHERE user_id = #{user_id}
     </select>
+
+    <select id="selectbirthByID" resultType="java.util.Date" >
+        SELECT birthday FROM user WHERE user_id = #{user_id}
+    </select>
+
 </mapper>
