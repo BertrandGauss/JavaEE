@@ -123,7 +123,7 @@ $(document).ready(function(){
             success: function() {  //成功
                 // $("#username1").val($("#user_name").val());
                 // $(".regText").val("");
-                window.location.href="../../WeAdmin-master/login.html";
+                window.location="../WeAdmin-master/login.html";
             }
         });
     });

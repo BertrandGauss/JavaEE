@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="./static/css/font.css">
 	<link rel="stylesheet" href="./static/css/weadmin.css">
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/idangerous.swiper.min.js"></script>
+    <script type="text/javascript" src="js/wow.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 
 </head>
 <body class="login-bg">
@@ -19,40 +24,41 @@
         <div class="message">WeAdmin 1.0-管理登录</div>
         <div id="darkbannerwrap"></div>
         
-        <form method="post" class="layui-form" >
-            <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+        <div class="layui-form" >
+            <input name="telephone"  id="telephone" placeholder="用户名"  type="text"  class="layui-input" >
             <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <input name="user_password"  id="user_password"  placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
-            <input class="loginin" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <input class="loginin" name="btn_sub" id="btn_sub" value="登录" style="width:100%;" type="button">
             <hr class="hr20" >
             <div>
-            	前端静态展示，请随意输入，即可登录。
+            	欢迎使用healthcare健康管理系统！。
             </div>
-        </form>
+        </div>
     </div>
 
-    <script type="text/javascript">
-        
-        	layui.extend({
-				admin: '{/}./static/js/admin'
-			});
-            layui.use(['form','admin'], function(){
-              var form = layui.form
-              	,admin = layui.admin;
-              // layer.msg('玩命卖萌中', function(){
-              //   //关闭后的操作
-              //   });
-              //监听提交
-              form.on('submit(login)', function(data){
-                // alert(888)
-                layer.msg(JSON.stringify(data.field),function(){
-                    location.href='./index.html'
-                });
-                return false;
-              });
-            });   
-    </script>  
+
+<!--    <script type="text/javascript">-->
+<!--        -->
+<!--        	layui.extend({-->
+<!--				admin: '{/}./static/js/admin'-->
+<!--			});-->
+<!--            layui.use(['form','admin'], function(){-->
+<!--              var form = layui.form-->
+<!--              	,admin = layui.admin;-->
+<!--              // layer.msg('玩命卖萌中', function(){-->
+<!--              //   //关闭后的操作-->
+<!--              //   });-->
+<!--              //监听提交-->
+<!--              form.on('submit(login)', function(data){-->
+<!--                // alert(888)-->
+<!--                layer.msg(JSON.stringify(data.field),function(){-->
+<!--                    location.href='./index.html'-->
+<!--                });-->
+<!--                return false;-->
+<!--              });-->
+<!--            });   -->
+<!--    </script>  -->
     <!-- 底部结束 -->
 </body>
 </html>

@@ -17,31 +17,6 @@
 	<script type="text/javascript" src="js/wow.min.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/register.js"></script>
-	<script>
-		function load_register()
-		{
-			var xmlhttp;
-			if (window.XMLHttpRequest)
-			{
-				//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-				xmlhttp=new XMLHttpRequest();
-			}
-			else
-			{
-				// IE6, IE5 浏览器执行代码
-				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			xmlhttp.onreadystatechange=function()
-			{
-				if ((xmlhttp.readyState==4) && (xmlhttp.status==200))
-				{
-					document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-				}
-			}
-			xmlhttp.open("GET","/try/ajax/ajax_info.txt",true);
-			xmlhttp.send();
-		}
-	</script>
 </head>
 <body>
 <!--	<div class="winBox wow jello" id="winBox">-->
@@ -71,11 +46,14 @@
 			<span id="s_password" class="fa"></span>
 			<p><span class="textWb">确认密码</span><input type="password" name="surepassword" id="surepassword" class="text" placeholder="请再次输入密码" onblur ="checkAll()"/></p>
 			<span id="s_surepassword" class="fa"></span>
-			<p><span class="textWb">性别</span><input type="text" name="gender" id="gender" class="text" placeholder="请输入性别"/></p>
+			<p><span class="textWb">性别</span>
+<!--				<input type="text" name="gender" id="gender" class="text" placeholder="请输入性别"/></p>-->
 <!--			<select name="gender">-->
 <!--				<option id="male" value="male">male</option>-->
 <!--				<option id="female" value="female">female</option>-->
 <!--			</select>-->
+			<input type="radio" id="gender" value="male"/>male
+				<input type="radio" id="gender" value="female"/>female
 			<p><span class="textWb">生日</span><input type="text"  name="birthday" id="birthday" class="text" placeholder="请输入生日" /></p>
 			<p><span class="textWb">验证码</span><input type="text"  class="text2" placeholder="请输入验证码" /> <img class="yzm" src="images/yzm.jpg" height="38" width="95" alt="" /><a class="yzmBtn" href="javascript:;">换一张</a></p>
 			<span id="RegErrInfo" style="font-size: 16px;color:red;">  </span>
