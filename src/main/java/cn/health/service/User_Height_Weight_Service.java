@@ -28,7 +28,7 @@ public class User_Height_Weight_Service {
 
         }
         else{
-            user_height_weightMapper.update_height_weight(user_height_weight.getDate(),user_height_weight.getHeight(),user_height_weight.getWeight());
+            user_height_weightMapper.update_height_weight(user_height_weight.getUser_id(),user_height_weight.getUser_id(),user_height_weight.getDate(),user_height_weight.getHeight(),user_height_weight.getWeight());
 
         }
         JSONObject json = new JSONObject();
