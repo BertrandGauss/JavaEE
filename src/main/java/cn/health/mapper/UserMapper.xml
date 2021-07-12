@@ -14,4 +14,8 @@
     <select id="selectpwByTelphone" resultType="java.lang.String" >
         SELECT user_password FROM user WHERE telephone = #{telephone}
     </select>
+
+    <select id="selectnameByID" resultType="java.lang.String" >
+        SELECT user_name FROM user WHERE user_id = #{user_id}
+    </select>
 </mapper>

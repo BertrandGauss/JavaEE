@@ -11,6 +11,8 @@ public interface UserMapper {
 
     String selectpwByTelphone(String telephone);
 
+    String selectnameByID(Integer id);
+
 
 
 }

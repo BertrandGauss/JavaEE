@@ -16,4 +16,6 @@ public interface User_FoodMapper {
 
     User_Food selectCloestById(Integer user_id);
     //void update
+
+
 }
