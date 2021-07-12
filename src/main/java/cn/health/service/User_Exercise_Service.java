@@ -32,12 +32,9 @@ public class User_Exercise_Service {
             user_exerciseMapper.add(userE);
         }
         else{
-            Long ca=(long)(ue.getTotal_calorie()+1.0*(userSport.getExercise_time()*exerciseInfMapper.selectByName(userSport.getExercise_name()).getCaloriePerHour()));
+            Integer ca=(int)(ue.getTotal_calorie()+1.0*(userSport.getExercise_time()*exerciseInfMapper.selectByName(userSport.getExercise_name()).getCaloriePerHour()));
             user_exerciseMapper.updatetotal_calorie(ca);
-
-
         }
-
         JSONObject json = new JSONObject();
         json.put("msg","添加运动成功");
         json.put("code",0);
