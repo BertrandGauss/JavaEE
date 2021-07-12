@@ -18,6 +18,7 @@ public class UserController {
     private UserService userService;
     @Autowired
     private HttpServletRequest httpServletRequest;
+    //注册
     @RequestMapping(value = "/register",method = {RequestMethod.POST})
     private JSONObject register(@RequestBody User user){
         JSONObject json = new JSONObject();
@@ -26,6 +27,7 @@ public class UserController {
         return json;
     }
 
+    //登录
     @RequestMapping(value = "/login",method = {RequestMethod.POST})
     private JSONObject login(@RequestBody User user){
         System.out.print("登录");

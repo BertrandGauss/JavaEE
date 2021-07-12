@@ -2,7 +2,7 @@ package cn.health.controller;
 
 
 import cn.health.domain.User_Height_Weight;
-import cn.health.server.User_Height_Weight_Service;
+import cn.health.service.User_Height_Weight_Service;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

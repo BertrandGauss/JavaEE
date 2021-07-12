@@ -3,10 +3,14 @@ package cn.health.service;
 import cn.health.domain.User_Food;
 import cn.health.domain.UserEat;
 import cn.health.mapper.FoodInfMapper;
+import cn.health.mapper.UserMapper;
 import cn.health.mapper.User_FoodMapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.Vector;
 
 @Service
 public class User_FoodService {
@@ -14,6 +18,8 @@ public class User_FoodService {
     private User_FoodMapper user_foodMapper;
     @Autowired
     private FoodInfMapper foodInfMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     //添加或更新今天用户的饮食记录
     public JSONObject setTodayFood(UserEat userEat){
@@ -64,6 +70,75 @@ public class User_FoodService {
         return user_food;
 
     }
+
+    //分析用户今日的饮食以及推荐摄入食物
+    public String analize(Integer id){
+        String word="";
+
+        User_Food user_food=user_foodMapper.selectCloestById(id);
+        Vector<String> lack=new Vector<String >();
+        Vector<String> eat=new Vector<String>();
+        if(user_food.getTotal_vitaminA()<0.8){
+            lack.add("维生素A");
+            eat.add(foodInfMapper.selectMaxVA());
+        }
+        if(user_food.getTotal_vitaminB()<1){
+            lack.add("维生素B");
+            eat.add(foodInfMapper.selectMaxVB());
+        }
+        if(user_food.getTotal_vitaminC()<75){
+            lack.add("维生素C");
+            eat.add(foodInfMapper.selectMaxVC());
+        }
+        if(user_food.getTotal_vitaminD()<0.005){
+            lack.add("维生素D");
+            eat.add(foodInfMapper.selectMaxVD());
+        }
+        if(user_food.getTotal_vitaminE()<12){
+            lack.add("维生素D");
+            eat.add(foodInfMapper.selectMaxVE());
+        }
+        if(user_food.getTotal_fat()<100){
+            lack.add("脂肪");
+            eat.add(foodInfMapper.selectMaxfat());
+        }
+        if(user_food.getTotal_protein()<80){
+            lack.add("蛋白质");
+            eat.add(foodInfMapper.selectMaxprotein());
+        }
+        if(user_food.getTotal_carbs()<300){
+            lack.add("碳水化合物");
+            eat.add(foodInfMapper.selectMaxcarbs());
+        }
+        if(lack.size()==0){
+            word=userMapper.selectnameByID(user_food.getUser_id())+"，您今日各类营养成分摄入充分，请您明天继续保持";
+        }
+        else{
+            word=userMapper.selectnameByID(user_food.getUser_id() )+",用户您今日";
+            for(int i=0;i<lack.size();i++){
+                if(i==lack.size()-1){
+                   word+=lack.get(i)+"摄入不足,";
+                }
+                else{
+                    word+=lack.get(i)+",";
+                }
+            }
+            word+="建议您可以多吃";
+            for(int i=0;i<eat.size();i++){
+                if(i==eat.size()-1){
+                    word+=eat.get(i)+"等食物。";
+                }
+                else{
+                    word+=lack.get(i)+",";
+                }
+            }
+
+        }
+        return word;
+
+
+    }
+
 
 
 }

@@ -20,7 +20,7 @@ public class User_FoodController {
 
     @Autowired
     private HttpServletRequest httpServletRequest;
-
+    //用户添加食物
     @RequestMapping(value = "/addfood",method = {RequestMethod.POST})
     private JSONObject addTodayfood(@RequestBody UserEat userEat){
         System.out.print("添加食物");
@@ -31,6 +31,7 @@ public class User_FoodController {
         System.out.print(json);
         return json;
     }
+    //展示用户最近的饮食
     @RequestMapping(value = "/showfood",method = {RequestMethod.GET})
     private JSONObject showFood(){
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
@@ -40,6 +41,17 @@ public class User_FoodController {
         json.put("msg","查看成功");
         json.put("data",user_food);
         return json;
-
+    }
+    //饮食分析报告
+    @RequestMapping(value = "/foodAnaly",method = {RequestMethod.GET})
+    private JSONObject foodAnaly(){
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        User_Food user_food= user_foodService.selectCloestById(id);
+        String analy=user_foodService.analize(id);
+        JSONObject json = new JSONObject();
+        json.put("code",0);
+        json.put("msg","分析成功");
+        json.put("data",analy);
+        return json;
     }
 }
