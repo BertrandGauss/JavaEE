@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.health.mapper.FoodInfMapper">
+
+    <!--<resultMap id="BaseResultMap" type="cn.health.domain.User">-->
+    <!--<id column="user_id" property="user_id" jdbcType="INTEGER"/>-->
+    <!--<result column="user_name" property="user_name" jdbcType="VARCHAR"/>-->
+    <!--<result column="telphone" property="telphone" jdbcType="VARCHAR"/>-->
+    <!--<result column="gender" property="gender" jdbcType="TINYINT"/>-->
+    <!--<result column="birthday" property="birthday" jdbcType="DATE"/>-->
+    <!--</resultMap>-->
+
+    <select id="selectByName" resultType="cn.health.domain.FoodInf" parameterType="java.lang.String">
+        SELECT * FROM foodinf WHERE name = #{name}
+    </select>
+
+    <select id="selectMaxVA" resultType="java.lang.String">
+        SELECT name FROM foodinf ORDER BY vAPer100g DESC LIMIT 1
+    </select>
+
+    <select id="selectMaxVB" resultType="java.lang.String">
+        SELECT name FROM foodinf ORDER BY vBper100g DESC LIMIT 1
+    </select>
+
+    <select id="selectMaxVC" resultType="java.lang.String">
+        SELECT name FROM foodinf ORDER BY vCper100g DESC LIMIT 1
+    </select>
+
+    <select id="selectMaxVD" resultType="java.lang.String">
+        SELECT name FROM foodinf ORDER BY vDper100g DESC LIMIT 1
+    </select>
+
+    <select id="selectMaxVE" resultType="java.lang.String">
+        SELECT name FROM foodinf ORDER BY vEper100g DESC LIMIT 1
+    </select>
+
+    <select id="selectMaxfat" resultType="java.lang.String">
+        SELECT name FROM foodinf ORDER BY fatPer100g DESC LIMIT 1
+    </select>
+
+    <select id="selectMaxprotein" resultType="java.lang.String">
+        SELECT name FROM foodinf ORDER BY proteinPer100g DESC LIMIT 1
+    </select>
+
+    <select id="selectMaxcarbs" resultType="java.lang.String">
+        SELECT name FROM foodinf ORDER BY carbsPer100g DESC LIMIT 1
+    </select>
+</mapper>

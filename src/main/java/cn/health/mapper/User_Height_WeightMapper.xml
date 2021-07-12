@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.health.mapper.User_Height_WeightMapper">
+
+
+    <select id="selectByIdDate" resultType="cn.health.domain.User_Height_Weight" >
+        SELECT *
+        FROM user_height_weight
+        WHERE user_height_weight.user_id = #{user_id} and user_height_weight.date = #{date}
+    </select>
+    <select id="selecttotal" resultType="cn.health.domain.User_Height_Weight">
+        SELECT *
+        FROM user_height_weight
+        WHERE user_height_weight.user_id = #{user_id}
+    </select>
+    <insert id="add">
+        INSERT INTO user_height_weight
+        VALUES (#{date},#{user_id},#{height},#{weight})
+    </insert>
+    <update id="update_height_weight">
+        UPDATE user_height_weight
+        SET user_height_weight.height=#{height},user_height_weight.weight=#{weight}
+        WHERE user_height_weight.user_id=#{user_id} AND user_height_weight.date=#{date}
+    </update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,481 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="keywords" content="关键字" />
+	<meta name="description" content="网站描述" />
+	<title>生活圈</title>
+	<link rel="stylesheet" href="css/Normalize_Css_1.0.min.css" />
+	<link rel="stylesheet" href="css/animate.min.css" />
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/idangerous.swiper.css" />
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/idangerous.swiper.min.js"></script>
+	<script type="text/javascript" src="js/wow.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/register.js"></script>
+</head>
+<body>
+<!--	<div class="winBox wow jello" id="winBox">-->
+<!--		<a class="winClosBtn" href="javascript:;"></a>-->
+<!--		<div class="winTitle">-->
+<!--			<h3>登录生活圈-Life</h3>-->
+<!--		</div>-->
+<!--		<div class="winMain">-->
+<!--			<p><span class="textWb">手机/邮箱</span><input type="text" class="text" value="手机/邮箱" /></p>-->
+<!--			<p><span class="textWb">密码</span><input type="text"  class="text" value="密码" /></p>-->
+<!--			<p class="p_right"><span ><input  type="checkbox" >下次自动登录</span><a href="#">忘记密码</a></p>-->
+<!--			<p class="winBtn"><input type="button" value="登录" /></p>-->
+<!--			<p class="p_text"><a href="#" id="infoBtn">立即注册</a></p>-->
+<!--		</div>-->
+<!--	</div>-->
+	<div class="winBox wow flipInY" id="infoMain">
+		<a class="winClosBtn" href="javascript:;"></a>
+		<div class="winTitle">
+			<h3>注册healthcare管理系统</h3>
+		</div>
+		<div class="winMain" >
+			<p><span class="textWb">手机</span><input type="text" name="telephone" id="telephone" class="text" placeholder="请输入手机号" onblur ="checkAll()"/></p>
+			<span id="s_phone" class="fa"></span>
+			<p><span class="textWb">用户名</span><input type="text" name="user_name" id="user_name" class="text" placeholder="请输入用户名" onblur ="checkAll()"/></p>
+			<span id="s_username" class="fa"></span>
+			<p><span class="textWb">密码</span><input type="password" name="user_password" id="user_password" class="text" placeholder="请输入密码" onblur ="checkAll()"/></p>
+			<span id="s_password" class="fa"></span>
+			<p><span class="textWb">确认密码</span><input type="password" name="surepassword" id="surepassword" class="text" placeholder="请再次输入密码" onblur ="checkAll()"/></p>
+			<span id="s_surepassword" class="fa"></span>
+			<p><span class="textWb">性别</span>
+<!--				<input type="text" name="gender" id="gender" class="text" placeholder="请输入性别"/></p>-->
+<!--			<select name="gender">-->
+<!--				<option id="male" value="male">male</option>-->
+<!--				<option id="female" value="female">female</option>-->
+<!--			</select>-->
+			<input type="radio" id="gender" value="male"/>male
+				<input type="radio" id="gender" value="female"/>female
+			<p><span class="textWb">生日</span><input type="text"  name="birthday" id="birthday" class="text" placeholder="请输入生日" /></p>
+			<p><span class="textWb">验证码</span><input type="text"  class="text2" placeholder="请输入验证码" /> <img class="yzm" src="images/yzm.jpg" height="38" width="95" alt="" /><a class="yzmBtn" href="javascript:;">换一张</a></p>
+			<span id="RegErrInfo" style="font-size: 16px;color:red;">  </span>
+			<p class="winBtn"><input type="button" name="btn_sub" id="btn_sub" value="注册" /></p>
+		</div>
+	</div>
+	<div id="mark"></div>
+	<div class="box" id="bodyBox">
+	<div class="header ">
+		<a href="index.html" class="logo"><img src="images/logo.jpg" height="96" width="217" alt="" /></a>
+		<div href="javascript:;" title="用户登录" class="loginBtn" id="loginBtn"><img src="images/indexIcon3.gif" alt="用户登录" />
+			<div class="loginDown">
+				<a href="../WeAdmin-master/login.html" class="loginBtn1">登录</a>
+				<a href="#" class="loginBtn2">注册</a>
+			</div>
+		</div>
+		<ul class="nav " id="nav">
+			<li class="menuItem"><a href="index.html" class="active menuA">首页</a></li>
+			<li class="menuItem"><a href="Familydoctor.html" class="menuA">家庭医生</a>
+				 <ul>
+				 	<li><a href="Familydoctor1-1.html" class="menuB">宝贝计划</a>
+						<div>
+							<a href="Familydoctor1-1.html">儿童成长发育</a>
+							<a href="Familydoctor1-2.html">儿童眼疾病</a>
+							<a href="Familydoctor1-3.html">自闭症</a>
+							<a href="Familydoctor1-4.html">慢性食物过敏测定</a>
+						</div>
+				 	</li>
+				 	<li><a href="Familydoctor2-1.html" class="menuB">丽人计划</a>
+					 	<div>
+					 		<a href="Familydoctor2-1.html">全面深度查体</a>
+					 		<a href="Familydoctor2-2.html">宫颈癌疫苗</a>
+					 		<a href="Familydoctor2-3.html">雌激素代谢分析</a>
+					 		<a href="Familydoctor2-4.html">疤痕修复治疗</a>
+					 		<a href="Familydoctor2-5.html">甲状腺微创切口</a>
+					 		<a href="Familydoctor2-6.html">内分泌</a>
+					 		<a href="Familydoctor2-7.html">卵巢保养</a>
+					 	</div>
+				 	</li>
+				 	<li><a href="Familydoctor3-1.html" class="menuB">绅士计划</a>
+						<div>
+							<a href="Familydoctor3-1.html">全面深度查体</a>
+							<a href="Familydoctor3-2.html">氧化压力分析</a>
+							<a href="Familydoctor3-3.html">全套男性荷尔蒙...</a>
+						</div>
+				 	</li>
+				 	<li><a href="Familydoctor4-1.html" class="menuB">抗癌计划</a>
+						<div>
+							<a href="Familydoctor4-1.html">早期癌症筛查</a>
+							<a href="Familydoctor4-2.html">肾病</a>
+							<a href="Familydoctor4-3.html">心脏病</a>
+							<a href="Familydoctor4-4.html">癌症治疗</a>
+						</div>
+				 	</li>
+				 	<li><a href="Familydoctor5-1.html" class="menuB">中老年计划</a>
+						<div>
+							<a href="Familydoctor5-1.html">中医埋线</a>
+							<a href="Familydoctor5-2.html">头面部拔筋</a>
+							<a href="Familydoctor5-3.html">干细胞储存</a>
+							<a href="Familydoctor5-4.html">重金属排毒</a>
+						</div>
+				 	</li>
+				 </ul>
+			</li>
+			<li class="menuItem"><a href="HealthyControl1.html"  class="menuA">健康管理</a>
+				<ul class="gl">
+					 <!-- <li><a href="HealthyControl1.html" class="menuB">心脏病管理</a></li> -->
+					<li><a href="HealthyControl2.html" class="menuB">肝病管理</a></li>
+					<!-- <li><a href="HealthyControl3.html" class="menuB">睡眠管理</a></li> -->
+					<li><a href="HealthyControl4.html" class="menuB">营养管理</a></li>
+					<li><a href="HealthyControl5.html" class="menuB">功能医学介绍</a></li>
+					<li><a href="HealthyControl6.html" class="menuB">运动医学管理</a></li>
+					<!-- <li><a href="HealthyControl7.html" class="menuB">重金属排毒管理</a></li> -->
+					<li><a href="HealthyControl8.html" class="menuB">内分泌及糖尿病管理</a></li>
+					<li><a href="HealthyControl9.html" class="menuB">甲状腺癌术后智能管理</a></li>
+					<li><a href="HealthyControl10.html" class="menuB">甲状腺癌综合康复计划</a></li>
+					<!-- <li><a href="HealthyControl11.html" class="menuB">关节置换术及术后管理</a></li> -->
+					<!-- <li><a href="HealthyControl12.html" class="menuB">防癌体检及其综合治疗</a></li> -->
+				</ul>
+			</li>
+			<li class="menuItem"><a href="HealthyVideo.html"  class="menuA">健康生活</a>
+				<ul>
+					<li><a href="HealthyVideo.html" class="menuB">iLife 视频</a></li>
+					<li><a href="HealthyActivity.html" class="menuB">iLife 活动</a></li>
+				</ul>
+			</li>
+			<li class="menuItem"><a href="Member.html"  class="menuA">会员中心</a>
+				<ul>
+					<li><a href="Member.html" class="menuB">会员卡</a></li>
+					<li><a href="#" class="menuB">用户管理</a></li>
+				</ul>
+			</li>
+			<li class="menuItem"><a href="aboutUs1.html"  class="menuA">关于我们</a>
+				<ul>
+					<li><a href="aboutUs1.html" class="menuB">关于我们</a></li>
+					<li><a href="aboutUs2.html" class="menuB">加入我们</a></li>
+					 
+					<li><a href="aboutUs3.html" class="menuB">联系方式</a></li>
+				</ul>
+			</li>
+		</ul>
+		<a href="javascript:;" class="phoneMenu" id="phoneMenu"><img src="images/phoneMenu.jpg" alt="" />
+			
+		</a>
+	</div>
+	<div class="swiper-container swiper-container1 ">
+		  <div class="swiper-wrapper">
+		      <div class="swiper-slide" style="background-image:url(images/indexBanner1.jpg)"><a href="indexTab.html?0"></a></div>
+		      <div class="swiper-slide"  style="background-image:url(images/indexBanner2.jpg)"><a href="indexTab.html?1"></a></div>
+		      <div class="swiper-slide"  style="background-image:url(images/indexBanner3.jpg)"><a href="HealthyActivity.html"></a></div>
+		  </div>
+		  <div class="pagination"></div>
+	</div>
+	<div class="indexPage">
+		<div class="indexTop wow pulse">
+			<a class="tel"><img src="images/indexIcon1.gif" alt="" />4000 350 235</a>
+			<a href="http://p1.qiao.baidu.com/im/index?siteid=3242464&ucid=5688585&lastsubid=&from=%E5%8C%97%E4%BA%AC%E6%9C%9D%E9%98%B3&bid=9f1d145fdec7b9173871c553&chattype=1&groupid=&groupname=&subid=&subname=&ref=http%3A%2F%2Fqiao.baidu.com%2Fhome%2F" target="_blank" class="Consultation"><img src="images/indexIcon2.gif" alt="" />在线咨询</a>
+		</div>
+		<div class="indexPageTab">
+			<div class="left wow fadeInLeft">
+				<a href="indexTab.html?0" class="indexTabicon1">
+					<img src="images/indexBannerIcon1.gif"alt="" />
+					<img src="images/indexBannerIcon1_hover.gif" class="hover" alt="" />
+					<br class="br" />
+					<span><b>1.</b>家庭医生一对一服务</span>	
+				</a>
+				<a href="indexTab.html?2" class="indexTabicon3">
+					<img src="images/indexBannerIcon3.gif" alt="" />
+					<img src="images/indexBannerIcon3_hover.gif"  class="hover" alt="" />
+					<br class="br" />
+					<span><b>3.</b>独家海外医疗资源</span>	
+				</a>
+			</div>
+			<div class="center wow fadeInDownBig">
+				<a href="HealthyControl1.html">我们为您提供的<br />不仅仅是<br />健康管理<br />......</a>
+			</div>
+			<div class="right wow fadeInRight">
+				<a href="indexTab.html?1" class="indexTabicon2">
+					<img src="images/indexBannerIcon2.gif" alt="" />
+					<img src="images/indexBannerIcon2_hover.gif" class="hover"  alt="" />
+					<br class="br" />
+					<span><b>2.</b>专家为您量身打造健康计划</span>	
+				</a>
+				<a href="indexTab.html?3" class="indexTabicon4">
+					<img src="images/indexBannerIcon4.gif" alt="" />
+					<img src="images/indexBannerIcon4_hover.gif" class="hover"  alt="" />
+					<br class="br" />
+					<span><b>4.</b>三甲医院专业治疗</span>	
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="adPanel">
+		<div class="adPanelMain">
+			<div class="left wow rotateInDownLeft">
+				<a href="HealthyVideo.html">
+					<img src="images/adImg1.jpg" alt="" />
+					<span>
+						<b>热衷公益也让我们收获了健康</b><br />
+						心灵的满足才会让身体里的每个细胞激发出埋藏已久的灵性
+					</span>
+				</a>
+			</div>
+			<div class="right wow rotateInDownRight">
+				<a href="HealthyControl1.html" class="title">我们都有哪些健康管理？</a>
+				<div class="all">
+				<a href="HealthyControl1.html">心脏病管理></a>
+				<a href="HealthyControl2.html">肝病管理></a>
+				<a href="HealthyControl3.html">睡眠管理></a>
+				<a href="HealthyControl4.html">营养管理></a>
+				<a href="HealthyControl5.html">功能医学介绍></a>
+				<a href="HealthyControl6.html">运动医学管理></a>
+				<a href="HealthyControl7.html">重金属排毒管理></a>
+				<a href="HealthyControl8.html">内分泌及糖尿病管理></a>
+				<a href="HealthyControl9.html">甲状腺癌术后智能管理></a>
+				<a href="HealthyControl10.html">甲状腺癌综合康复计划></a>
+				<a href="HealthyControl11.html">关节置换术及术后管理></a>
+				<a href="HealthyControl12.html">防癌体检及其综合治疗></a>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="commentsPanel">
+		<div class="title">开发人员</div>
+		<ul id="comments">
+			<li class="left wow pulse">
+				<div class="commentsTop">
+					<img src="images/indexPic1.jpg" alt="" />
+					<span>
+						<b>彭超</b>组长
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+					<p>承担了架构师的职责，负责后端开发</p>
+				</div>
+			</li>
+			<li class=" wow pulse">
+				<div class="commentsTop">
+					<img src="images/indexPic2.jpg" alt="" />
+					<span>
+						<b>杨兴宇</b>组员
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+					<p>负责前端开发
+					</p>
+				</div>
+			</li>
+			<li class="right wow pulse">
+				<div class="commentsTop">
+					<img src="images/indexPic3.jpg" alt="" />
+					<span>
+						<b>卡吾力</b>组员
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+					<p>负责前端设计，协助前端开发
+					</p>
+				</div>
+			</li>
+			<li class="clear"></li>
+			<li class="left wow pulse">
+				<div class="commentsTop">
+					<img src="images/indexPic4.jpg" alt="" />
+					<span>
+						<b>黄瑞雪</b>组员
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+					<p>协助后端开发
+					</p>
+				</div>
+			</li>
+			<li class=" wow pulse">
+				<div class="commentsTop">
+					<img src="images/indexPic5.jpg" alt="" />
+					<span>
+						<b>何灿灿</b>组员
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+					<p>负责数据库的设计与实现
+					</p>
+				</div>
+			</li>
+			<li class="right wow pulse">
+				<div class="commentsTop">
+					<img src="images/indexPic6.jpg" alt="" />
+					<span>
+						<b>彭钰萍</b>组员
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+					<p>负责数据库的设计与实现
+					</p>
+				</div>
+			</li>
+		</ul>
+	
+	</div>
+	<div class="cooperationPanel wow fadeInUp">
+		<div class="title">合作伙伴</div>
+		<div class="cooperationBtn">
+			<a href="javascript:;" class="right" id="rollRight"></a><a href="javascript:;" id="rollLeft" class="left"></a>
+		</div>
+
+		<div class="swiper-container cooperationMain">
+			  <div class="swiper-wrapper">
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/cqu.jpg" alt="" /></a>
+			      </div>
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/huadee.jpg" alt="" /></a>
+			      </div>
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/indexLogo3.jpg" alt="" /></a>
+			      </div>
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/indexLogo4.jpg" alt="" /></a>
+			      </div>
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/indexLogo5.jpg" alt="" /></a>
+			      </div>
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/indexLogo6.jpg" alt="" /></a>
+			      </div>
+			      
+			      
+			  </div>
+			  <div class="pagination"></div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="footerMain  wow pulse">
+			<div class="left"><a href="#"><img src="images/logo.jpg" alt="" /></a></div>
+			<div class="center">
+				<div class="title">联系我们</div>
+				<a href="#"><img src="images/indexIcon6.gif" alt="" class="footerPc" /><img src="images/phone_icon5.png" class="phone_icon" alt="" />400 350 235</a>
+				<a href="#"  class="mail"><img src="images/indexIcon7.gif" alt="" class="footerPc" /><img src="images/phone_icon4.png" class="phone_icon" alt="" />life@life-centre.net </a>
+			</div>
+			<div class="right">
+				<div class="bottom">
+					<a href="#"><img src="images/indexIcon8.gif" alt=""  class="footerPc" /><img class="phone_icon" src="images/phone_icon3.png" alt="" />北京市东城区东单三条8-2国话大厦6层</a>
+				</div>
+				<div class="top topMa">
+					<a href="#"><img src="images/indexIcon4.gif" class="int" alt="" /><img class="hover" src="images/indexIcon4_hover.gif" alt="" /></a>
+					<a href="#"><img src="images/indexIcon5.gif" class="int" alt="" /><img class="hover" src="images/indexIcon5_hover.gif" alt="" /></a>
+
+					<div>
+						<img src="images/qm.jpg" alt="微信" />
+						<img src="images/qm.jpg" alt="微博" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="phoneMenumain" id="phoneMenu2">
+		<div class="phoneMenuTop">
+			<a href="#">登录</a><a href="">注册</a>
+		</div>
+		 <ul class="phoneUL">
+				<li class="menuItem"><a href="index.html" class="active menuA">首页</a></li>
+				<li class="menuItem"><a href="javascript:;" class="menuA">家庭医生<b class="on">+</b><b class="off">-</b></a>
+					 <ul>
+					 	<li><a href="javascript:;" class="menuB">宝贝计划<b class="on">+</b><b class="off">-</b></a>
+							<div>
+								<a href="Familydoctor1-1.html">儿童成长发育</a>
+								<a href="Familydoctor1-2.html">儿童眼疾病</a>
+								<a href="Familydoctor1-3.html">自闭症</a>
+								<a href="Familydoctor1-4.html">慢性食物过敏测定</a>
+							</div>
+					 	</li>
+					 	<li><a href="javascript:;" class="menuB">丽人计划<b class="on">+</b><b class="off">-</b></a>
+						 	<div>
+						 		<a href="Familydoctor2-1.html">全面深度查体</a>
+						 		<a href="Familydoctor2-2.html">宫颈癌疫苗</a>
+						 		<a href="Familydoctor2-3.html">雌激素代谢分析</a>
+						 		<a href="Familydoctor2-4.html">疤痕修复治疗</a>
+						 		<a href="Familydoctor2-5.html">甲状腺微创切口</a>
+						 		<a href="Familydoctor2-6.html">内分泌</a>
+						 		<a href="Familydoctor2-7.html">卵巢保养</a>
+						 	</div>
+					 	</li>
+					 	<li><a href="javascript:;" class="menuB">绅士计划<b class="on">+</b><b class="off">-</b></a>
+							<div>
+								<a href="Familydoctor3-1.html">全面深度查体</a>
+								<a href="Familydoctor3-2.html">氧化压力分析</a>
+								<a href="Familydoctor3-3.html">全套男性荷尔蒙...</a>
+							</div>
+					 	</li>
+					 	<li><a href="javascript:;" class="menuB">抗癌计划<b class="on">+</b><b class="off">-</b></a>
+							<div>
+								<a href="Familydoctor4-1.html">早期癌症筛查</a>
+								<a href="Familydoctor4-2.html">肾病</a>
+								<a href="Familydoctor4-3.html">心脏病</a>
+								<a href="Familydoctor4-4.html">癌症治疗</a>
+							</div>
+					 	</li>
+					 	<li><a href="javascript:;" class="menuB">中老年计划<b class="on">+</b><b class="off">-</b></a>
+							<div>
+								<a href="Familydoctor5-1.html">中医埋线</a>
+								<a href="Familydoctor5-2.html">头面部拔筋</a>
+								<a href="Familydoctor5-3.html">干细胞储存</a>
+								<a href="Familydoctor5-4.html">重金属排毒</a>
+							</div>
+					 	</li>
+					 </ul>
+				</li>
+				<li class="menuItem"><a href="javascript:;"  class="menuA">健康管理<b class="on">+</b><b class="off">-</b></a>
+					<ul class="gl">
+						<li><a href="HealthyControl1.html" class="menuB">心脏病管理</a></li>
+						<li><a href="HealthyControl2.html" class="menuB">肝病管理</a></li>
+						<li><a href="HealthyControl3.html" class="menuB">睡眠管理</a></li>
+						<li><a href="HealthyControl4.html" class="menuB">营养管理</a></li>
+						<li><a href="HealthyControl5.html" class="menuB">功能医学介绍</a></li>
+						<li><a href="HealthyControl6.html" class="menuB">运动医学管理</a></li>
+						<li><a href="HealthyControl7.html" class="menuB">重金属排毒管理</a></li>
+						<li><a href="HealthyControl8.html" class="menuB">内分泌及糖尿病管理</a></li>
+						<li><a href="HealthyControl9.html" class="menuB">甲状腺癌术后智能管理</a></li>
+						<li><a href="HealthyControl10.html" class="menuB">甲状腺癌综合康复计划</a></li>
+						<li><a href="HealthyControl11.html" class="menuB">关节置换术及术后管理</a></li>
+						<li><a href="HealthyControl12.html" class="menuB">防癌体检及其综合治疗</a></li>
+					</ul>
+				</li>
+				<li class="menuItem"><a href="javascript:;"  class="menuA">健康生活<b class="on">+</b><b class="off">-</b></a>
+					<ul>
+						<li><a href="HealthyVideo.html" class="menuB">iLife 视频</a></li>
+						<li><a href="HealthyActivity.html" class="menuB">iLife 活动</a></li>
+					</ul>
+				</li>
+				<li class="menuItem"><a href="javascript:;"  class="menuA">会员中心<b class="on">+</b><b class="off">-</b></a>
+					<ul>
+						<li><a href="Member.html" class="menuB">会员卡</a></li>
+						<li><a href="#" class="menuB">用户管理</a></li>
+					</ul>
+				</li>
+				<li class="menuItem"><a href="javascript:;"  class="menuA">关于我们<b class="on">+</b><b class="off">-</b></a>
+					<ul>
+						<li><a href="aboutUs1.html" class="menuB">关于我们</a></li>
+						<li><a href="aboutUs2.html" class="menuB">加入我们</a></li>
+						 
+						<li><a href="aboutUs3.html" class="menuB">联系方式</a></li>
+					</ul>
+				</li>
+			</ul>
+		<div class="phoneMenuBottom">
+			<a href="#"><img src="images/phoneIcon1.png" alt="" />在线咨询</a>
+			<a href="#"><img src="images/phoneIcon2.png" alt="" />400 350 235</a>
+			<!-- <img src="images/menu_logo.png" alt="" class="logo" /> -->
+		</div>
+	</div>
+
+</body>
+
+</html>
