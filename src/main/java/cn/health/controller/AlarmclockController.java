@@ -15,11 +15,16 @@ public class AlarmclockController {
     private AlarmclockService alarmclockService;
 
     //添加警告记录
-    @RequestMapping(value = "/addalarmclock",method = {RequestMethod.POST})
-    public void addAlarmclock(@RequestBody Alarmclock alarmclock){
+    @RequestMapping(value = "/addalarmclock", method = {RequestMethod.POST})
+    public void addAlarmclock(@RequestBody Alarmclock alarmclock) {
         alarmclockService.addAlarmclock(alarmclock);
     }
 
 
-
+//    @RequestMapping(value = "/sentalarmclock",method = {RequestMethod.GET})
+//    public void sent(){
+//        alarmclockService.sendMail();
+//    }
 }
+
+

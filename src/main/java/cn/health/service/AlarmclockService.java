@@ -2,55 +2,74 @@ package cn.health.service;
 
 
 import cn.health.domain.Alarmclock;
-import cn.health.domain.User_Food;
 import cn.health.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.*;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.validation.constraints.Max;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 @Service
+
 public class AlarmclockService {
+
     @Autowired
     private AlarmclockMapper alarmclockMapper;
     @Autowired
-    private User_FoodMapper user_foodMapper;
-    @Autowired
-    private User_SleepMapper user_sleepMapper;
-    @Autowired
-    private User_ExerciseMapper user_exerciseMapper;
+    private UserMapper userMapper;
 
-    @Scheduled(cron = "0/2 * * * * *")  //没两秒执行一次
-    public void timer(){
-        //获取当前时间
-        LocalDateTime localDateTime =LocalDateTime.now();
-        System.out.println("当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-    }
+
+//    @Value("${spring.mail.username}")
+//    private String whoAmI;
+//
+    @Autowired
+    private JavaMailSenderImpl mailSender;
+
+//    @Scheduled(cron = "0/2 * * * * *")  //没两秒执行一次
+//    public void timer(){
+//        //获取当前时间
+//        LocalDateTime localDateTime =LocalDateTime.now();
+//        System.out.println("当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+//    }
     //添加闹钟记录
     public void addAlarmclock(Alarmclock alarmclock){
         alarmclockMapper.add(alarmclock);
     }
 
-    //发送邮件
-    public void sendMail(Integer id){
+    //按时间发送邮件
+    @Scheduled(cron = "0 */1 * * * ?")  //每1分钟执行一次
+    public void sendMail(){
 
-        //List<Alarmclock> clocks=alarmclockMapper.selectByIdDate();
-
-
+        LocalDate localDate=LocalDate.now();  // 获取当前日期 format: yyyy-MM-dd
+        LocalTime localTime=LocalTime.now();  // 获取当前时间 format: HH:mm:ss
+        ZonedDateTime zonedDateTime = localDate.atStartOfDay(ZoneId.systemDefault());
+        Instant instant1 = zonedDateTime.toInstant();
+        Date now = Date.from(instant1);
+        List<Alarmclock> clocks=alarmclockMapper.selectByDate(now);
+        for (int i=0;i<clocks.size();i++){
+            Alarmclock clock=clocks.get(i);
+            if(clock.getTime().toLocalTime().equals(localTime)){
+                sendSimpleMail(clock);
+            }
+        }
     }
+
+    //发邮件
+    public void sendSimpleMail(Alarmclock alarmclock) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        String email = userMapper.selectEmailByID(alarmclock.getUser_id());
+        String content="尊敬的"+userMapper.selectnameByID(alarmclock.getUser_id())+"用户，您好。您设置的"+alarmclock.getName()+"时间已到，请及时"+alarmclock.getName();
+        message.setTo(email);
+        message.setSubject("健康管理系统提醒");
+        message.setText(content);
+        message.setFrom("healthcare_group@yeah.net");
+        mailSender.send(message);
+    }
+
 //    public
 }
