@@ -11,6 +11,8 @@ public interface UserMapper {
 
     Integer selectByTelphone(String telephone);
 
+    Integer selectByEmail(String email);
+
     String selectpwByTelphone(String telephone);
 
     String selectnameByID(Integer user_id);
@@ -20,8 +22,6 @@ public interface UserMapper {
     String findgenderByID(Integer user_id);
 
     String selectEmailByID(Integer user_id);
-
-    Integer selectByEmail(String email);
 
 
 }
