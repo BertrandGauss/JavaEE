@@ -4,7 +4,7 @@
 <mapper namespace="cn.health.mapper.UserMapper">
 
     <insert id="add"  parameterType="cn.health.domain.User" useGeneratedKeys="true" keyProperty="user_id">
-        INSERT INTO user (user_name,telephone,user_password,gender,birthday) VALUES (#{user_name},#{telephone},#{user_password},#{gender},#{birthday})
+        INSERT INTO user (user_name,telephone,user_password,gender,birthday,email) VALUES (#{user_name},#{telephone},#{user_password},#{gender},#{birthday},#{email})
     </insert>
 
     <select id="selectByTelphone" resultType="java.lang.Integer" >
@@ -25,6 +25,14 @@
 
     <select id="findgenderByID" resultType="java.lang.String" >
         SELECT gender FROM user WHERE user_id = #{user_id}
+    </select>
+
+    <select id="selectEmailByID" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT email FROM user WHERE user_id = #{user_id}
+    </select>
+
+    <select id="selectByEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT user_id FROM user WHERE email = #{email}
     </select>
 
 </mapper>

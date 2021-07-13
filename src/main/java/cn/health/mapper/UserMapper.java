@@ -19,5 +19,9 @@ public interface UserMapper {
 
     String findgenderByID(Integer user_id);
 
+    String selectEmailByID(Integer user_id);
+
+    Integer selectByEmail(String email);
+
 
 }

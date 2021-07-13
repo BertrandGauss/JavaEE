@@ -15,6 +15,16 @@ public class User {
     @NotNull(message = "性别不能不填")
     private String gender;
     private Date birthday;
+    @NotBlank(message = "邮箱不能为空")
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Integer getUser_id() {
         return user_id;
