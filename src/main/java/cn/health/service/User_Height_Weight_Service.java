@@ -55,8 +55,12 @@ public class User_Height_Weight_Service {
             Integer height=user_H_W.get(i).getHeight();
             Integer weight=user_H_W.get(i).getWeight();
             Double bmi=(double)weight/((height/1000)^2);
-            Double tizhi=(double)1.2*bmi+0.23*GetAgeUtil.getAge(birth);
-            Pair<Double,Double> p=new Pair<>(bmi,tizhi);
+            int mark=0;
+            if(userMapper.findgenderByID(id).equals("male")){
+                mark=1;
+            }
+            Double tizhi=(double)1.2*bmi+0.23*GetAgeUtil.getAge(birth)-5.4-10.8*mark;
+            Pair<Double,Double> p=new Pair<Double,Double>(bmi,tizhi);
             user_BmiandTizhi.add(p);
         }
         JSONObject json=new JSONObject();

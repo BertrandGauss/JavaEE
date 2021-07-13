@@ -23,4 +23,8 @@
         SELECT birthday FROM user WHERE user_id = #{user_id}
     </select>
 
+    <select id="findgenderByID" resultType="java.lang.String" >
+        SELECT gender FROM user WHERE user_id = #{user_id}
+    </select>
+
 </mapper>

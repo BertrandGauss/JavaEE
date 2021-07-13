@@ -13,9 +13,11 @@ public interface UserMapper {
 
     String selectpwByTelphone(String telephone);
 
-    String selectnameByID(Integer id);
+    String selectnameByID(Integer user_id);
 
-    Date selectbirthByID(Integer id);
+    Date selectbirthByID(Integer user_id);
+
+    String findgenderByID(Integer user_id);
 
 
 }

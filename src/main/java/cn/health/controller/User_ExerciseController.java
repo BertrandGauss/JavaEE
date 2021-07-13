@@ -37,6 +37,17 @@ public class User_ExerciseController {
         return json;
     }
 
+    @RequestMapping(value = "/showexercise",method = {RequestMethod.GET})
+    private JSONObject showExercise(){
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        JSONObject user_exercise=user_exercise_Service.selectAllById(id);
+
+        user_exercise.put("code",0);
+        user_exercise.put("msg","查看成功");
+
+        return user_exercise;
+
+    }
 
 
 }

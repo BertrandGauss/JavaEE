@@ -14,6 +14,6 @@ public interface User_ExerciseMapper {
 
     User_Exercise selectByIdDate(@Param("user_id") Integer user_id,@Param("date") Date date);  //根据时间用户id查找信息
 
-    List<User_Exercise> selectTotal();
+    List<User_Exercise> selectTotal(Integer user_id);
 
 }

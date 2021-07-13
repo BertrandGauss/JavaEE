@@ -11,6 +11,8 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class User_Exercise_Service {
     @Autowired
@@ -33,7 +35,7 @@ public class User_Exercise_Service {
         }
         else{
             Integer ca=(int)(ue.getTotal_calorie()+1.0*(userSport.getExercise_time()*exerciseInfMapper.selectByName(userSport.getExercise_name()).getCaloriePerHour()));
-            user_exerciseMapper.updatetotal_calorie(ca);
+            user_exerciseMapper.updatetotal_calorie(ca,userSport.getExercise_date(),userSport.getUser_id());
         }
         JSONObject json = new JSONObject();
         json.put("msg","添加运动成功");
@@ -41,6 +43,17 @@ public class User_Exercise_Service {
         return json;
     }
 
+    public JSONObject selectAllById(Integer id){
+
+        List<User_Exercise> user_all_exercise = user_exerciseMapper.selectTotal(id);
+        JSONObject json=new JSONObject();
+        json.put("code",0);
+        json.put("msg","运动展示");
+        json.put("data",user_all_exercise);
+        return json;
+
+
+    }
 
 
 
