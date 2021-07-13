@@ -13,8 +13,12 @@ public class User_SleepService {
     @Autowired
     private User_SleepMapper user_sleepMapper;
 
-    public void addSleepTime(User_Sleep user_sleep){
+    public JSONObject addSleepTime(User_Sleep user_sleep){
         user_sleepMapper.add(user_sleep);
+        JSONObject json=new JSONObject();
+        json.put("code",0);
+        json.put("msg","睡眠记录添加成功");
+        return json;
 
     }
     public JSONObject getMonthSleepTime(){

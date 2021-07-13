@@ -3,7 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.health.mapper.User_SleepMapper">
     <!-- desc表示倒序-->
+    <insert id="add" parameterType="cn.health.domain.User_Sleep">
+        INSERT INTO user_sleep (date,user_id,sleeptime, starttime)  VALUE (#{date},#{user_id},#{sleeptime},#{starttime})
+    </insert>
     <select id="select30" resultType="cn.health.domain.User_Sleep" >
-        SELECT top 30 FROM user_sleep order by user_sleep.data DESC;
+--         SELECT * FROM user_sleep order by user_sleep.data DESC LIMIT 30;
+        SELECT *
+        FROM user_sleep
+        ORDER BY user_sleep.date DESC LIMIT 30
     </select>
 </mapper>

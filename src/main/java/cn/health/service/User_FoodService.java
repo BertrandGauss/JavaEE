@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 
 @Service
@@ -33,7 +35,9 @@ public class User_FoodService {
         }
 
         User_Food uf=user_foodMapper.selectByIdDate(userEat.getUser_id(), userEat.getDate());
+
         if(uf==null){//用户今天还没有记录食物
+            System.out.print("food add");
             User_Food userF=new User_Food();
             userF.setDate(userEat.getDate());
             userF.setUser_id(userEat.getUser_id());
@@ -49,6 +53,7 @@ public class User_FoodService {
             userF.setTotal_vitaminE(1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvEper100g())/100);
             user_foodMapper.add(userF);
         }else{
+            System.out.print("update");
             Integer ca=(int)(uf.getTotal_calorie()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100);
             user_foodMapper.update(userEat.getUser_id(), userEat.getDate(),ca,uf.getTotal_carbs()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCarbsPer100g())/100
             ,uf.getTotal_fat()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100
@@ -77,7 +82,7 @@ public class User_FoodService {
 
         User_Food user_food=user_foodMapper.selectCloestById(id);
         Vector<String> lack=new Vector<String >();
-        Vector<String> eat=new Vector<String>();
+        HashSet<String> eat=new HashSet<String>() ;
         if(user_food.getTotal_vitaminA()<0.8){
             lack.add("维生素A");
             eat.add(foodInfMapper.selectMaxVA());
@@ -124,13 +129,15 @@ public class User_FoodService {
                 }
             }
             word+="建议您可以多吃";
-            for(int i=0;i<eat.size();i++){
+            int i=0;
+            for (String s : eat) {
                 if(i==eat.size()-1){
-                    word+=eat.get(i)+"等食物。";
+                    word+=s+"等食物。";
                 }
                 else{
-                    word+=lack.get(i)+",";
+                    word+=s+",";
                 }
+                i++;
             }
 
         }

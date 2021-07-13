@@ -37,7 +37,6 @@ public class UserController {
         this.httpServletRequest.getSession().setAttribute("LOGIN",true);
         //保存用户id在session
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.phoneisregister(user.getTelephone()));
-
         return json;
     }
 
