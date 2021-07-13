@@ -491,7 +491,7 @@ a {
 .winBox {
   display: none;
   width: 570px;
-  height: 600px;
+  height: 700px;
   background: #fff;
   position: fixed;
   z-index: 1000; }

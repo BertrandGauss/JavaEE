@@ -3,40 +3,19 @@
 	"msg": "ok",
 	"data": [{
 			"id": 1,
-			"name": "会员管理",
+			"name": "基本情况统计",
 			"icon": "&#xe6b8;",
 			"url": "",
 			"children": [{
 				"id": 2,
-				"name": "会员列表",
+				"name": "身高体重统计",
 				"icon": "",
 				"url": "./pages/member/list.html"
 			}, {
 				"id": 3,
-				"name": "会员删除",
+				"name": "BMI指数变化",
 				"icon": "",
 				"url": "./pages/member/del.html"
-			}, {
-				"id": 4,
-				"name": "会员管理",
-				"icon": "&#xe70b;",
-				"url": "",
-				"children": [{
-					"id": 5,
-					"name": "输入框操作",
-					"icon": "",
-					"url": "./pages/member/addInput.html"
-				}, {
-					"id": 6,
-					"name": "三级菜单演示",
-					"icon": "",
-					"url": "./pages/404.html"
-				}, {
-					"id": 7,
-					"name": "导航菜单演示",
-					"icon": "&#xe70b;",
-					"url": "./pages/404.html"
-				}]
 			}]
 		},
 		{

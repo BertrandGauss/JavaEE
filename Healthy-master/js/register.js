@@ -2,6 +2,7 @@ CheckRegSuccess1 = false;
 CheckRegSuccess2 = false;
 CheckRegSuccess3 = false;
 CheckRegSuccess4 =false;
+CheckRegSuccess5 = false;
 // SetBtnDisable();
 
 function checkAll() {
@@ -9,6 +10,23 @@ function checkAll() {
     checkSurepassword();
     checkUsername();
     checkPhone();
+}
+
+function checkEmail(){
+    var email = $("#email").val();
+    var c_email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$ /;
+    var flag = c_email.test(email)
+    if(flag){
+        $("#s_email").text("");
+        CheckRegSuccess5 = True;
+    }
+    else{
+        $("#s_email").removeClass("fa-check");
+        $("#s_email").addClass("fa-times");
+        $("#s_email").css("color","#EB2929");
+        $("#RegErrInfo").text("邮箱不合规范");
+        CheckRegSuccess5 = false;
+    }
 }
 
 function checkUsername(){
@@ -31,7 +49,7 @@ function checkUsername(){
 
 
 function SetBtnDisable() {
-    if (CheckRegSuccess1 && CheckRegSuccess2 && CheckRegSuccess3&&CheckRegSuccess4) {
+    if (CheckRegSuccess1 && CheckRegSuccess2 && CheckRegSuccess3&&CheckRegSuccess4 && CheckRegSuccess5) {
         $('#btn_sub').removeAttr("disabled");
         $("#btn_sub").css('color',"#000");
     } else {
