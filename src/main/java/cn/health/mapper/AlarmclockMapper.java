@@ -9,7 +9,7 @@ import java.util.List;
 public interface AlarmclockMapper {
     void add(Alarmclock alarmclock);
 
-    List<Alarmclock> selectByDate(Date  date);
+    List<Alarmclock> selectByDate(Date date);
 
 
 }

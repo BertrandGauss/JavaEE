@@ -7,4 +7,7 @@
         INSERT INTO alarmclock VALUES (#{id}, #{user_id}, #{name}, #{time}, #{type}, #{date})
     </insert>
 
+    <select id="selectByDate" parameterType="java.util.Date" resultType="cn.health.domain.Alarmclock">
+        SELECT * FROM alarmclock WHERE type = 'everyday' OR date = #{date}
+    </select>
 </mapper>
