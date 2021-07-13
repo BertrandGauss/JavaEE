@@ -11,13 +11,16 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-//
-//import org.apache.commons.httpclient.Header;
-//import org.apache.commons.httpclient.HttpClient;
-//import org.apache.commons.httpclient.HttpException;
-//import org.apache.commons.httpclient.NameValuePair;
-//import org.apache.commons.httpclient.methods.PostMethod;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.validation.constraints.Max;
+
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 @Service
@@ -40,6 +43,14 @@ public class AlarmclockService {
     //添加闹钟记录
     public void addAlarmclock(Alarmclock alarmclock){
         alarmclockMapper.add(alarmclock);
+    }
+
+    //发送邮件
+    public void sendMail(Integer id){
+
+        //List<Alarmclock> clocks=alarmclockMapper.selectByIdDate();
+
+
     }
 //    public
 }

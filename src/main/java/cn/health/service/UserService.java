@@ -12,23 +12,34 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public Integer isregister(String telephone){//查询手机号是否被注册
+    public Integer phoneisregister(String telephone){//查询手机号是否被注册
         System.out.print(telephone);
         Integer result=userMapper.selectByTelphone(telephone);//查询结果
         System.out.print(result);
         return result;
     }
-    public JSONObject register(User user){
-        String telephone=user.getTelephone();
-        System.out.print("123456");
-        Integer re=isregister(telephone);
+    public Integer emailisregister(String email){//查询手机号是否被注册
+        System.out.print(email);
+        Integer result=userMapper.selectByEmail(email);//查询结果
+        System.out.print(result);
+        return result;
+    }
+    public JSONObject register(User user){ ;
+        Integer re=phoneisregister(user.getTelephone());
+        Integer res=emailisregister(user.getEmail());
 
         //开始校验
 
         if(re!=null){
             JSONObject json = new JSONObject();
             json.put("msg","该手机号被注册过");
-            json.put("code",5);
+            json.put("code",1);
+            return json;
+        }
+        if(res!=null){
+            JSONObject json = new JSONObject();
+            json.put("msg","该邮箱被注册过");
+            json.put("code",2);
             return json;
         }
         user.setUser_password(MD5Util.md5(user.getUser_password()));//给用户密码加密
@@ -43,7 +54,7 @@ public class UserService {
     public JSONObject login(User user){
         String telephone=user.getTelephone();
 
-        Integer re=isregister(telephone);
+        Integer re=phoneisregister(telephone);
         String pw=MD5Util.md5(user.getUser_password());
         String passw=userMapper.selectpwByTelphone(telephone);
         if(re==null){

@@ -36,7 +36,7 @@ public class UserController {
         //将登录凭证加入到用户登录成功的Session类
         this.httpServletRequest.getSession().setAttribute("LOGIN",true);
         //保存用户id在session
-        this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.isregister(user.getTelephone()));
+        this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.phoneisregister(user.getTelephone()));
 
         return json;
     }

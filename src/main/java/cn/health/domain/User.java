@@ -10,21 +10,15 @@ public class User {
     private String user_name;
     @NotBlank(message = "手机号不能为空")
     private String telephone;
+    @NotBlank(message = "邮箱不能为空")
+    private String email;
     @NotBlank(message = "密码不能为空")
     private String user_password;
     @NotNull(message = "性别不能不填")
     private String gender;
     private Date birthday;
     @NotBlank(message = "邮箱不能为空")
-    private String email;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public Integer getUser_id() {
         return user_id;
@@ -57,6 +51,10 @@ public class User {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+
+    public String getEmail() {return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     public String getGender() {
         return gender;
