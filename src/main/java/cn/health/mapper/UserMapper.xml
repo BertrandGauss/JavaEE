@@ -4,7 +4,7 @@
 <mapper namespace="cn.health.mapper.UserMapper">
 
     <insert id="add"  parameterType="cn.health.domain.User" useGeneratedKeys="true" keyProperty="user_id">
-        INSERT INTO user (user_name,telephone,user_password,gender,birthday,email) VALUES (#{user_name},#{telephone},#{user_password},#{gender},#{birthday},#{email})
+        INSERT INTO user (user_name,telephone,email,user_password,gender,birthday) VALUES (#{user_name},#{telephone},#{email},#{user_password},#{gender},#{birthday})
     </insert>
 
     <select id="selectByTelphone" resultType="java.lang.Integer" >
