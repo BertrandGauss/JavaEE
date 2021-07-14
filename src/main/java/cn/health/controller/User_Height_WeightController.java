@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 @RestController
 @RequestMapping("/height_weight")
@@ -33,12 +36,26 @@ public class User_Height_WeightController {
 
         return json;
     }
-    @RequestMapping( value= "/selectheight_weight",method = {RequestMethod.GET})
-    private  JSONObject searchInfor(@RequestParam("startdate")Date startdate,@RequestParam("enddate")Date enddate){
+    @RequestMapping( value= "/selectheight_weight",method = {RequestMethod.POST})
+    private  JSONObject searchInfor(@RequestParam(value ="startdate",required = true)String startdate,@RequestParam(value ="enddate",required = true)String enddate){
         System.out.print("查找身高体重");
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         JSONObject json = new JSONObject();
-        json=user_height_weight_service.searchInfor(id,startdate,enddate);
+        Date sdate = null;
+        Date edate = null;
+        try {
+            sdate = formatter.parse(startdate);
+            System.out.print(sdate);
+            edate = formatter.parse(enddate);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+        json=user_height_weight_service.searchInfor(id,sdate,edate);
         return json;
     }
 
@@ -51,6 +68,18 @@ public class User_Height_WeightController {
         user_bmi.put("msg","查看成功");
 
         return user_bmi;
+
+    }
+
+    @RequestMapping(value = "/showinformation",method = {RequestMethod.GET})
+    private JSONObject showINFO(){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        JSONObject user_info=user_height_weight_service.showAllinfo(id);
+
+        user_info.put("code",0);
+        user_info.put("msg","查看成功");
+
+        return user_info;
 
     }
 
