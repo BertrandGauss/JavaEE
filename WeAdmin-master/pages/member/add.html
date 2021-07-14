@@ -9,6 +9,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<link rel="stylesheet" href="../../static/css/font.css">
 		<link rel="stylesheet" href="../../static/css/weadmin.css">
+		<script src="../../js/jquery.min.js"></script>
 		<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 		<!--[if lt IE 9]>
 	      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -35,7 +36,6 @@
 				    <div class="layui-input-block" id="L_sex">
 				      <input type="radio" name="sex" value="男" title="男" checked>
 				      <input type="radio" name="sex" value="女" title="女">
-				      <input type="radio" name="sex" value="未知" title="未知">
 				    </div>
 				</div>
 
@@ -64,7 +64,7 @@
                   <span class="we-red">*</span>体重
               </label>
 					<div class="layui-input-inline">
-						<input type="password" id="weight" name="weight" lay-verify="required" autocomplete="off" class="layui-input">
+						<input type="text" id="weight" name="weight" lay-verify="required" autocomplete="off" class="layui-input">
 					</div>
 					<div class="layui-form-mid layui-word-aux">
 						单位：kg
@@ -136,20 +136,21 @@
 					}, function() {
 						//获取提交成功的时间
 						var time = new Date();
-						var timeNow = util.toDateString(time);
+						var timeNow = util.toDateString(time.getDate());
 						// 获得frame索引
 						var index = parent.layer.getFrameIndex(window.name);
-					
-    					var _len = parent.$('#memberList tr').length;
+						// parent.getElementsByClassName("layui-table").length
+    					var _len = $("#memberList").length;
 						$.ajax({
 							type: "POST",   //提交的方法
-							url:"http://localhost:8081/user/login",
+							url:"http://localhost:8081/height_weight/addheight_weight",
 							dataType:"json",
 							contentType: "application/json",
 							//url:"#",
 							data: JSON.stringify({
-								"telephone":$("#telephone").val(),
-								"user_password":$("#user_password").val()
+								"date":timeNow,
+								"height":$("#height").val(),
+								"weight":$("#weight").val()
 							}),
 							async: false,
 							error: function(request) {  //失败的话
@@ -158,35 +159,15 @@
 							success: function(data) {
 
 								if (data.code==0){
-									window.location.href="./index.html";
+									parent.layer.close(index);
 								}
 								else{
 									alert(data.msg)
 								}
 							}
 						});
-    					alert(_len);
-						// parent.$('#memberList').append(
-						// 	'<tr data-id="' + _len + '">' +
-						// 		'<td>'+
-						// 			'<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + _len + '"><i class="layui-icon">&#xe605;</i></div>'+
-						// 		'</td>'+
-						// 		'<td>' + _len + '</td>'+
-						// 		'<td>'+f.sex+'</td>'+
-						// 		'<td>'+f.height+'</td>'+
-						// 		'<td>'+f.weight+'</td>'+
-						// 		'<td>'+timeNow+'</td>'+
-						// 		'<td class="td-status"><span class="layui-btn layui-btn-normal layui-btn-xs">已启用</span></td>'+
-						// 		'<td class="td-manage">'+
-						// 			'<a onclick="member_stop(this,\'10001\')" href="javascript:;" title="启用"><i class="layui-icon">&#xe601;</i></a>'+
-						// 			'<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
-						// 			'<a onclick="WeAdminShow(\'修改密码\',\'./password.html\',600,400)" title="修改密码" href="javascript:;"><i class="layui-icon">&#xe631;</i></a>'+
-						// 			'<a title="删除" onclick="member_del(this,\'要删除的id\')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>'+
-						// 		'</td>'+
-						// 	'</tr>'
-						// );
-						//关闭当前frame
-						parent.layer.close(index);
+
+						// 关闭当前frame
 					});
 					return false;
 				});
