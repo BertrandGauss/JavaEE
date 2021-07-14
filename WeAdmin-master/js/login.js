@@ -28,11 +28,6 @@ $(document).ready(function(){
                     alert(data.msg)
                 }
 
-                //成功
-                // $("#username1").val($("#user_name").val());
-                // $(".regText").val("");
-                // window.location.href="./index.html";
-                // alert("Connection error");
             }
         });
     });

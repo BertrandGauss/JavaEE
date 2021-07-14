@@ -15,17 +15,17 @@
 				"id": 3,
 				"name": "BMI指数变化",
 				"icon": "",
-				"url": "./pages/member/del.html"
+				"url": "./pages/member/show.html"
 			}]
 		},
 		{
 			"id": 8,
-			"name": "文章管理",
+			"name": "饮食管理",
 			"icon": "&#xe705;",
 			"url": "",
 			"children": [{
 				"id": 9,
-				"name": "文章列表",
+				"name": "记录饮食",
 				"icon": "",
 				"url": "./pages/article/list.html"
 			}, {
