@@ -136,9 +136,11 @@
 					}, function() {
 						//获取提交成功的时间
 						var time = new Date();
-						var timeNow = util.toDateString(time.getDate());
+						// var timeNow = util.toDateString(time.getDate());
+						var timeNow = time.getDate()
 						// 获得frame索引
 						var index = parent.layer.getFrameIndex(window.name);
+						// var user_id = sessionStorage.getItem("user_id");
 						// parent.getElementsByClassName("layui-table").length
     					var _len = $("#memberList").length;
 						$.ajax({
@@ -149,8 +151,9 @@
 							//url:"#",
 							data: JSON.stringify({
 								"date":timeNow,
-								"height":$("#height").val(),
-								"weight":$("#weight").val()
+								// "user_id":1,
+								"height":Number($("#height").val()),
+								"weight":Number($("#weight").val())
 							}),
 							async: false,
 							error: function(request) {  //失败的话
