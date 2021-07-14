@@ -23,7 +23,7 @@
         SET user_height_weight.height=#{height},user_height_weight.weight=#{weight}
         WHERE user_height_weight.user_id=#{user_id} AND user_height_weight.date=#{date}
     </update>
-    <select id="selectByDate" resultType="cn.health.domain.User_Height_Weight">
+    <select id="selectByTwoDate" resultType="cn.health.domain.User_Height_Weight">
         SELECT *
         FROM user_height_weight
         WHERE user_id = #{user_id} AND date BETWEEN #{startDate} and #{endDate}
