@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.health.mapper.User_ExerciseMapper">
+
+    <!--<resultMap id="BaseResultMap" type="cn.health.domain.User">-->
+    <!--<id column="user_id" property="user_id" jdbcType="INTEGER"/>-->
+    <!--<result column="user_name" property="user_name" jdbcType="VARCHAR"/>-->
+    <!--<result column="telphone" property="telphone" jdbcType="VARCHAR"/>-->
+    <!--<result column="gender" property="gender" jdbcType="TINYINT"/>-->
+    <!--<result column="birthday" property="birthday" jdbcType="DATE"/>-->
+    <!--</resultMap>-->
+    <insert id="add"  parameterType="cn.health.domain.User_Exercise">
+        INSERT INTO user_exercise VALUES (#{date},#{user_id},#{total_calorie})
+    </insert>
+    <update id="updatetotal_calorie" >
+        UPDATE user_exercise
+        SET total_calorie=#{total_calorie}
+        WHERE user_id=#{id} and user_exercise.date=#{date}
+    </update>
+    <select id="selectByIdDate" resultType="cn.health.domain.User_Exercise">
+        SELECT *
+        FROM user_exercise
+        WHERE user_id=#{id} and user_exercise.date=#{date}
+    </select>
+    <select id="selecttotal" resultType="cn.health.domain.User_Exercise">
+        SELECT top 30
+        FROM user_exercise
+        ORDER BY user_exercise.data DESC
+    </select>
+
+
+
+
+</mapper>

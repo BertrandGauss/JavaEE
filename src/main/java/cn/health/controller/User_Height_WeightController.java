@@ -29,9 +29,10 @@ public class User_Height_WeightController {
 
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
         user_height_weight.setUser_id(id);
-
+        System.out.println(httpServletRequest.getSession().getId());
         json=user_height_weight_service.SetHeightWeight(user_height_weight);
         System.out.print(json);
+
         return json;
     }
 

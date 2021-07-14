@@ -14,6 +14,7 @@ Date: 2021-07-13 09:11:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+use health_management;
 
 -- ----------------------------
 -- Table structure for administrator

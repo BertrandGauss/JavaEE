@@ -60,6 +60,7 @@ public class User_Height_Weight_Service {
             userBMITZ.setDate(user_H_W.get(i).getDate());
             userBMITZ.setBMI(bmi);
             userBMITZ.setTiZhi(tizhi);
+            userBMITZ.setWeight(weight);
             user_BmiandTizhi.add(userBMITZ);
         }
         JSONObject json=new JSONObject();

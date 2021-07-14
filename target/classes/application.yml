@@ -1,21 +1,28 @@
 server:
   port: 8081
 spring:
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 955099
-    url: jdbc:mysql://127.0.0.1:3306/health_management?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    thymeleaf:
-      cache: false
-      prefix: classpath:/templates
-      suffix: .html
-      content-type: text/html
-      encoding: utf-8
-    mybatis:
-      type-aliases-package: com.jx.medical.pojo,com.jx.medical.vo
-      mapper-locations: classpath:mappers/*.xml
-    logging:
-      level:
-        com.jx.medical.mapper: debug
+    url: jdbc:mysql://127.0.0.1:3306/health_management?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8
+  mail:
+    username: healthcare_group@yeah.net
+    password: CRTXXAKKXSNGROZE
+    host: smtp.yeah.net
+    default-encoding: utf-8
+#        smtp:
+#          socketFactory:
+#            class: javax.net.ssl.SSLSocketFactory
+#        properties:
+#          mail:
+#            smtp:
+#              ssl:
+#                enable: true
+  jackson:
+    time-zone: GMT+8
+
+
+
 

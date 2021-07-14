@@ -10,6 +10,8 @@ public class UserBMITZ {
     //体脂
     private Double TiZhi;
 
+    private Integer weight;
+
     public Date getDate() {
         return date;
     }
@@ -33,4 +35,8 @@ public class UserBMITZ {
     public void setTiZhi(Double tiZhi) {
         TiZhi = tiZhi;
     }
+
+    public Integer getWeight() { return weight; }
+
+    public void setWeight(Integer weight) { this.weight = weight; }
 }
