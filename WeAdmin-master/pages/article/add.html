@@ -50,9 +50,10 @@
     </div>
 	<script src="../../lib/layui/layui.js" charset="utf-8"></script>
     <script>
-        layui.use(['form','layer'], function(){
+        layui.use(['form','layer','util'], function(){
             var form = layui.form,
                 $ = layui.jquery,
+                util = layui.util,
                 layer = layui.layer;
 
             //监听提交
@@ -63,6 +64,7 @@
                     // var timeNow = util.toDateString(time.getDate());
                     var timeNow = time.getDate()
                     // 获得frame索引
+                    // var newtimeNow = timeNow.split('-')[0] +timeNow.split('-')[1] +timeNow.split('-')[2]
                     var index = parent.layer.getFrameIndex(window.name);
                     $.ajax({
                         type: "POST",   //提交的方法
@@ -77,6 +79,11 @@
                             "number":Number($("#food_wei").val()),
                             "date":timeNow
                         }),
+                        // data:{
+                        //     "name":"猪肉",
+                        //     "number":1,
+                        //     "date":"1970-01-01"
+                        // },
                         async: false,
                         error: function(request) {  //失败的话
                             alert("Connection error");

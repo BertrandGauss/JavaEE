@@ -73,45 +73,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr data-id="1">
-						<td>
-							<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="1">
-								<i class="layui-icon">&#xe605;</i>
-							</div>
-						</td>
-						<td>1</td>
-						<td>男</td>
-						<td>17600000000</td>
-						<td>admin@mail.com</td>
-						<td>2017-01-01 11:11:42</td>
-<!--						<td class="td-status">-->
-<!--							<span class="layui-btn layui-btn-normal layui-btn-xs">已启用</span>-->
-<!--						</td>-->
-						<td class="td-manage">
-<!--							<a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">-->
-<!--								<i class="layui-icon layui-icon-download-circle"></i>-->
-<!--							</a>-->
-							<a title="编辑" onclick="WeAdminEdit('编辑','./edit.html', 1, 600, 400)" href="javascript:;">
-								<i class="layui-icon layui-icon-edit"></i>
-							</a>
-<!--							<a onclick="WeAdminShow('修改密码','./password.html',600,400)" title="修改密码" href="javascript:;">-->
-<!--								<i class="layui-icon layui-icon-util"></i>-->
-<!--							</a>-->
-							<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-								<i class="layui-icon layui-icon-delete"></i>
-							</a>
-						</td>
-					</tr>
-
 				</tbody>
 			</table>
 
 		</div>
+		<script src="../../lib/layui/layui.js" charset="utf-8"></script>
 		<script type="text/javascript">
+			layui.use(['form', 'jquery','util','admin', 'layer'], function() {
+				var $ = layui.jquery;
 			$(document).ready(
 					$.ajax({
 						type: "GET",   //提交的方法
-						url:"http://localhost:8081/user/login",
+						url:"http://localhost:8081/height_weight/showinformation",
 						xhrFields: {
 							withCredentials: true,
 						},
@@ -122,19 +95,34 @@
 							alert("Connection error");
 						},
 						success: function(data) {
+							var f = data.data
+							for(var i = 0; i <f.length;i++){
+								var h=i+1
+								$("#memberList").append(
+										'<tr data-id="' + h + '">' +
+										'<td>'+
+										'<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + h + '"><i class="layui-icon">&#xe605;</i></div>'+
+										'</td>'+
+										'<td>' + h + '</td>'+
+										'<td>男</td>'+
+										'<td>'+f[i]["height"]+'</td>'+
+										'<td>'+f[i]["weight"]+'</td>'+
+										'<td>'+f[i]["date"]+'</td>'+
+										'<td class="td-manage">'+
+										'<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
+										'<a title="删除" onclick="member_del(this,\'要删除的id\')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>'+
+										'</td>'+
+										'</tr>'
+								)
 
-							//成功
-							// $("#username1").val($("#user_name").val());
-							// $(".regText").val("");
-							// window.location.href="./index.html";
-							// alert("Connection error");
+							}
+
 						}
 					})
-			)
+			)})
 
 		</script>
 		<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
-		<script src="../../lib/layui/layui.js" charset="utf-8"></script>
 		<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 </html>

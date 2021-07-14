@@ -63,7 +63,7 @@
 			</button>
 			<span class="fr" style="line-height:40px">共有数据：88 条</span>
 		</div>
-		<table class="layui-table" id="memberList">
+		<table class="layui-table" id="foodList">
 			<thead>
 			<tr>
 				<th>
@@ -72,45 +72,32 @@
 					</div>
 				</th>
 				<th>ID</th>
-				<th>摄入食物</th>
-				<th>摄入量</th>
+				<th>摄入卡路里</th>
+				<th>摄入维生素A</th>
+				<th>摄入维生素B</th>
+				<th>摄入维生素C</th>
+				<th>摄入维生素D</th>
+				<th>摄入维生素E</th>
+				<th>摄入蛋白质</th>
+				<th>摄入脂肪</th>
+				<th>摄入碳水化合物</th>
 				<th>加入时间</th>
 				<th>操作</th>
 			</tr>
 			</thead>
 			<tbody>
-			<tr data-id="1">
-				<td>
-					<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="1">
-						<i class="layui-icon">&#xe605;</i>
-					</div>
-				</td>
-				<td>1</td>
-				<td>17600000000</td>
-				<td>admin@mail.com</td>
-				<td>2017-01-01 11:11:42</td>
-
-				<td class="td-manage">
-
-					<a title="编辑" onclick="WeAdminEdit('编辑','./edit.html', 1, 600, 400)" href="javascript:;">
-						<i class="layui-icon layui-icon-edit"></i>
-					</a>
-
-					<a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-						<i class="layui-icon layui-icon-delete"></i>
-					</a>
-				</td>
-			</tr>
-
 			</tbody>
 		</table>
 
 	</div>
+	<script src="../../lib/layui/layui.js" charset="utf-8"></script>
 	<script type="text/javascript">
+		layui.use(['form', 'jquery','util','admin', 'layer'], function() {
+			var $ = layui.jquery;
 		$(document).ready(
 				$.ajax({
 					type: "GET",   //提交的方法
-					url:"http://localhost:8081/user/login",
+					url:"http://localhost:8081/food/showfood",
 					xhrFields: {
 						withCredentials: true,
 					},
@@ -121,19 +108,39 @@
 						alert("Connection error");
 					},
 					success: function(data) {
+						var f = data.data
+						var h=1
+						$("#foodList").append(
+								'<tr data-id="' + h + '">' +
+								'<td>'+
+								'<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + h + '"><i class="layui-icon">&#xe605;</i></div>'+
+								'</td>'+
+								'<td>' + h + '</td>'+
+								'<td>'+f["total_calorie"]+'</td>'+
+								'<td>'+f["total_vitaminA"]+'</td>'+
+								'<td>'+f["total_vitaminB"]+'</td>'+
+								'<td>'+f["total_vitaminC"]+'</td>'+
+								'<td>'+f["total_vitaminD"]+'</td>'+
+								'<td>'+f["total_vitaminE"]+'</td>'+
+								'<td>'+f["total_protein"]+'</td>'+
+								'<td>'+f["total_fat"]+'</td>'+
+								'<td>'+f["total_carbs"]+'</td>'+
+								'<td>'+f["date"]+'</td>'+
+								'<td class="td-manage">'+
+								'<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
+								'<a title="删除" onclick="member_del(this,\'要删除的id\')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>'+
+								'</td>'+
+								'</tr>'
+						)
 
-						//成功
-						// $("#username1").val($("#user_name").val());
-						// $(".regText").val("");
-						// window.location.href="./index.html";
-						// alert("Connection error");
+
 					}
 				})
+		)}
 		)
 
 	</script>
 	<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
-	<script src="../../lib/layui/layui.js" charset="utf-8"></script>
 	<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 
