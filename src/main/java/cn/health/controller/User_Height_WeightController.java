@@ -1,6 +1,7 @@
 package cn.health.controller;
 
 
+import cn.health.domain.DateRange;
 import cn.health.domain.User_Height_Weight;
 import cn.health.service.User_Height_Weight_Service;
 import com.alibaba.fastjson.JSONObject;
@@ -37,25 +38,25 @@ public class User_Height_WeightController {
         return json;
     }
     @RequestMapping( value= "/selectheight_weight",method = {RequestMethod.POST})
-    private  JSONObject searchInfor(@RequestParam(value ="startdate",required = true)String startdate,@RequestParam(value ="enddate",required = true)String enddate){
+    private  JSONObject searchInfor(@RequestBody DateRange dateRange){//@RequestParam(value ="startdate",required = true)String startdate,@RequestParam(value ="enddate",required = true)String enddate){
         System.out.print("查找身高体重");
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         JSONObject json = new JSONObject();
-        Date sdate = null;
-        Date edate = null;
-        try {
-            sdate = formatter.parse(startdate);
-            System.out.print(sdate);
-            edate = formatter.parse(enddate);
+//        Date sdate = null;
+//        Date edate = null;
+//        try {
+//            sdate = formatter.parse(startdate);
+//            System.out.print(sdate);
+//            edate = formatter.parse(enddate);
+//
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
 
-
-        json=user_height_weight_service.searchInfor(id,sdate,edate);
+        json=user_height_weight_service.searchInfor(id,dateRange.getStartdate(),dateRange.getEnddate());
         return json;
     }
 
