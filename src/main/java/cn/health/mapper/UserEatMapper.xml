@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.health.mapper.UserEatMapper">
+
+    <insert id="add"  parameterType="cn.health.domain.UserEat">
+        INSERT INTO usereat VALUES (#{user_id},#{name},#{number},#{date})
+    </insert>
+
+    <update id="update">
+        UPDATE usereat SET name = #{name}, number = #{number} WHERE user_id = #{user_id} AND date = #{date}
+    </update>
+
+    <delete id="delete">
+       DELETE FROM usereat  WHERE user_id = #{user_id} AND date = #{date}
+    </delete>
+
+    <select id="showOne"  resultType="cn.health.domain.UserEat">
+        SELECT * From usereat WHERE user_id = #{user_id} AND date=#{date}
+    </select>
+
+    <select id="selectByDateIdName"  resultType="java.lang.Integer">
+        SELECT number From usereat WHERE user_id = #{user_id} AND name = #{name} AND date=#{date}
+    </select>
+
+</mapper>

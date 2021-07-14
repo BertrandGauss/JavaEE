@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
+import java.util.List;
 
 @Mapper
 public interface User_FoodMapper {
@@ -17,4 +18,8 @@ public interface User_FoodMapper {
     User_Food selectByIdDate(@Param("user_id") Integer user_id, @Param("date") Date date);
 
     User_Food selectCloestById(Integer user_id);
+
+    List<User_Food> selectALLByID(Integer user_id);
+
+    List<User_Food> selectRangeByID(@Param("user_id") Integer user_id,@Param("startdate") Date startdate,@Param("enddate") Date enddate);
 }

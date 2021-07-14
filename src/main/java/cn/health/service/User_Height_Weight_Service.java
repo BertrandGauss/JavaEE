@@ -30,12 +30,9 @@ public class User_Height_Weight_Service {
             uHW.setHeight(user_height_weight.getHeight());
             uHW.setWeight(user_height_weight.getWeight());
             user_height_weightMapper.add(uHW);
-
-
         }
         else{
             user_height_weightMapper.update_height_weight(user_height_weight.getUser_id(),user_height_weight.getDate(),user_height_weight.getHeight(),user_height_weight.getWeight());
-
         }
         JSONObject json = new JSONObject();
         json.put("msg","添加身高体重信息成功");
@@ -93,5 +90,12 @@ public class User_Height_Weight_Service {
         return json;
     }
 
-    //
+    //修改具体的一条体重记录
+    public JSONObject updateInfor(User_Height_Weight user_height_weight){
+        JSONObject json =new JSONObject();
+        user_height_weightMapper.update_height_weight(user_height_weight.getUser_id(),user_height_weight.getDate(),user_height_weight.getHeight(),user_height_weight.getWeight());
+        json.put("msg","修改身高体重信息成功");
+        json.put("code",0);
+        return json;
+    }
 }

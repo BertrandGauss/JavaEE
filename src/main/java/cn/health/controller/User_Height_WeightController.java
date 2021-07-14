@@ -41,21 +41,7 @@ public class User_Height_WeightController {
     private  JSONObject searchInfor(@RequestBody DateRange dateRange){//@RequestParam(value ="startdate",required = true)String startdate,@RequestParam(value ="enddate",required = true)String enddate){
         System.out.print("查找身高体重");
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         JSONObject json = new JSONObject();
-//        Date sdate = null;
-//        Date edate = null;
-//        try {
-//            sdate = formatter.parse(startdate);
-//            System.out.print(sdate);
-//            edate = formatter.parse(enddate);
-//
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
-
-
         json=user_height_weight_service.searchInfor(id,dateRange.getStartdate(),dateRange.getEnddate());
         return json;
     }
@@ -83,5 +69,9 @@ public class User_Height_WeightController {
         return user_info;
 
     }
+//    @RequestMapping(value = "/updateheight_weight",method = {RequestMethod.POST})
+//    private JSONObject updatehw(@RequestBody User_Height_Weight user_height_weight){
+//
+//    }
 
 }

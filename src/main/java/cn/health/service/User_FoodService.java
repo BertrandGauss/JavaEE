@@ -3,16 +3,14 @@ package cn.health.service;
 import cn.health.domain.User_Food;
 import cn.health.domain.UserEat;
 import cn.health.mapper.FoodInfMapper;
+import cn.health.mapper.UserEatMapper;
 import cn.health.mapper.UserMapper;
 import cn.health.mapper.User_FoodMapper;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 @Service
 public class User_FoodService {
@@ -22,6 +20,9 @@ public class User_FoodService {
     private FoodInfMapper foodInfMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserEatMapper userEatMapper;
+
 
     //添加或更新今天用户的饮食记录
     public JSONObject setTodayFood(UserEat userEat){
@@ -74,6 +75,12 @@ public class User_FoodService {
         User_Food user_food=user_foodMapper.selectCloestById(id);
         return user_food;
 
+    }
+
+    //用户展示全部饮食分析
+    public List<User_Food> showAllFood(Integer id){
+        List<User_Food> user_foods=user_foodMapper.selectALLByID(id);
+        return  user_foods;
     }
 
     //分析用户今日的饮食以及推荐摄入食物
@@ -142,8 +149,41 @@ public class User_FoodService {
 
         }
         return word;
+    }
+    //用户添加今日饮食信息
+    public void addTodayEat(UserEat userEat){
+        Integer number = userEatMapper.selectByDateIdName(userEat.getUser_id(),userEat.getName(),userEat.getDate());
+        if(number==null){
+            userEatMapper.add(userEat);
+        }else{
+            UserEat userEat1 = new UserEat();
+            userEat1.setDate(userEat.getDate());
+            userEat1.setUser_id(userEat.getUser_id());
+            userEat1.setName(userEat.getName());
+            userEat1.setNumber(userEat.getNumber()+number);
+            userEatMapper.update(userEat1);
+        }
 
+    }
+    //用户更新今日饮食信息
+    public void updateTodayEat(UserEat userEat){
+        userEatMapper.update(userEat);
+    }
+    //用户删除今日饮食信息
+    public void  deleteEat(UserEat userEat){
+        userEatMapper.delete(userEat);
+    }
+    //用户展示某天饮食信息
+    public List<UserEat> showEat(Integer user_id,Date date){
+        List<UserEat> userEats = userEatMapper.showOne(user_id,date);
+        return userEats;
 
+    }
+
+    //用户展示一段时间饮食分析
+    public List<User_Food> showRangeEat(Integer user_id,Date startdate, Date enddate){
+        List<User_Food> user_foods =  user_foodMapper.selectRangeByID(user_id,startdate,enddate);
+        return user_foods;
     }
 
 
