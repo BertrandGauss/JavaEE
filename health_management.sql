@@ -1,20 +1,19 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : demo
-Source Server Version : 80023
+Source Server         : localhost_3306
+Source Server Version : 80025
 Source Host           : localhost:3306
 Source Database       : health_management
 
 Target Server Type    : MYSQL
-Target Server Version : 80023
+Target Server Version : 80025
 File Encoding         : 65001
 
-Date: 2021-07-13 09:11:14
+Date: 2021-07-14 20:39:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-use health_management;
 
 -- ----------------------------
 -- Table structure for administrator
@@ -239,6 +238,23 @@ CREATE TABLE `user` (
 
 -- ----------------------------
 -- Records of user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for usereat
+-- ----------------------------
+DROP TABLE IF EXISTS `usereat`;
+CREATE TABLE `usereat` (
+  `user_id` int NOT NULL,
+  `name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `number` int NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`user_id`,`name`,`date`),
+  CONSTRAINT `FK_Relationship12` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of usereat
 -- ----------------------------
 
 -- ----------------------------
