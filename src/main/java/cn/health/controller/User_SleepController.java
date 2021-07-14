@@ -20,12 +20,12 @@ public class User_SleepController {
     private HttpServletRequest httpServletRequest;
     //展示用户睡眠时间
     @RequestMapping(value = "/showsleepTime",method = {RequestMethod.GET})
-    public JSONObject showSleep(){
+    private JSONObject showSleep(){
         return  user_sleepService.getMonthSleepTime();
     }
     //增加睡眠记录
     @RequestMapping(value = "/addsleepTime",method = {RequestMethod.POST})
-    public JSONObject addSleep(@RequestBody User_Sleep user_sleep){
+    private JSONObject addSleep(@RequestBody User_Sleep user_sleep){
 
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         user_sleep.setUser_id(id);

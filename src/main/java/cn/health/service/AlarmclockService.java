@@ -24,8 +24,8 @@ public class AlarmclockService {
     private UserMapper userMapper;
 
 
-//    @Value("${spring.mail.username}")
-//    private String whoAmI;
+    @Value("${spring.mail.username}")
+    private String whoAmI;
 //
     @Autowired
     private JavaMailSenderImpl mailSender;
@@ -65,11 +65,13 @@ public class AlarmclockService {
         System.out.print("发送邮件----》");
         SimpleMailMessage message = new SimpleMailMessage();
         String email = userMapper.selectEmailByID(alarmclock.getUser_id());
-        String content="尊敬的"+userMapper.selectnameByID(alarmclock.getUser_id())+"用户，您好。您设置的"+alarmclock.getName()+"时间已到，请及时"+alarmclock.getName();
+        String content="尊敬的"+userMapper.selectnameByID(alarmclock.getUser_id())+"用户，您好。您设置的"+alarmclock.getName()+"时间已到，请及时"+alarmclock.getName()+"。";
         message.setTo(email);
+        //添加抄送人，防止邮件发送失败
+        message.setCc(whoAmI);
         message.setSubject("健康管理系统提醒");
         message.setText(content);
-        message.setFrom("healthcare_group@yeah.net");
+        message.setFrom(whoAmI);
         mailSender.send(message);
     }
 
