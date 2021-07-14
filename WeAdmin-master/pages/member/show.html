@@ -13,6 +13,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<link rel="stylesheet" href="../../static/css/font.css">
 		<link rel="stylesheet" href="../../static/css/weadmin.css">
+		<script src="../../js/jquery.min.js"></script>
 		<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 		<!--[if lt IE 9]>
 	      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -45,62 +46,92 @@
 		<script type="text/javascript">
 			// 基于准备好的dom，初始化echarts实例
 			var myChart = echarts.init(document.getElementById('main'));
+			$(document).ready(
+					$.ajax({
+						type: "GET",
+						url:"http://localhost:8081/height_weight/showbmi",
+						xhrFields: {
+							withCredentials: true,
+						},
+						dataType:"json",
+						contentType: "application/json",
+						async: false,
+						error: function(request) {  //失败的话
+							alert("Connection error");
+						},
+						success: function(data) {
+							var weights = new Array();
+							var bmis = new Array();
+							var tizhis = new Array();
+							var dates = new Array();
+							var f = data.data;
+							for(var i = 0; i <f.length ; i++){
+								json1 = f[i];
+								weights.push(json1["weight"]);
+								bmis.push(json1["bmi"]);
+								tizhis.push(json1["tiZhi"]);
+								temp_date = json1["date"].split("T")[0]
+								dates.push(temp_date);
 
-			// 指定图表的配置项和数据
-			var option = {
-				title: {
-					text: 'BMI指数变化情况'
-				},
-				tooltip: {
-					trigger: 'axis'
-				},
-				legend: {
-					data:['身高','体重','BMI指数']
-				},
-				grid: {
-					left: '3%',
-					right: '4%',
-					bottom: '3%',
-					containLabel: true
-				},
-				toolbox: {
-					feature: {
-						saveAsImage: {}
-					}
-				},
-				xAxis: {
-					type: 'category',
-					boundaryGap: false,
-					data: ['周一','周二','周三','周四','周五','周六','周日']
-				},
-				yAxis: {
-					type: 'value'
-				},
-				series: [
-					{
-						name:'邮件营销',
-						type:'line',
-						stack: '总量',
-						data:[120, 132, 101, 134, 90, 230, 210]
-					},
-					{
-						name:'联盟广告',
-						type:'line',
-						stack: '总量',
-						data:[220, 182, 191, 234, 290, 330, 310]
-					},
-					{
-						name:'视频广告',
-						type:'line',
-						stack: '总量',
-						data:[150, 232, 201, 154, 190, 330, 410]
-					},
-				]
-			};
+							}
+							// 指定图表的配置项和数据
+							var option = {
+								title: {
+									text: '变化情况'
+								},
+								tooltip: {
+									trigger: 'axis'
+								},
+								legend: {
+									data:['体重','BMI指数','体脂率']
+								},
+								grid: {
+									left: '3%',
+									right: '4%',
+									bottom: '3%',
+									containLabel: true
+								},
+								toolbox: {
+									feature: {
+										saveAsImage: {}
+									}
+								},
+								xAxis: {
+									type: 'category',
+									boundaryGap: false,
+									data: dates
+								},
+								yAxis: {
+									type: 'value'
+								},
+								series: [
+									{
+										name:'体重',
+										type:'line',
+										stack: '总量',
+										data: weights
+									},
+									{
+										name:'BMI指数',
+										type:'line',
+										stack: '总量',
+										data:bmis
+									},
+									{
+										name:'体脂',
+										type:'line',
+										stack: '总量',
+										data:tizhis
+									},
+								]
+							};
 
 
-			// 使用刚指定的配置项和数据显示图表。
-			myChart.setOption(option);
+							// 使用刚指定的配置项和数据显示图表。
+							myChart.setOption(option);
+						}
+					})
+			)
 		</script>
 
 
