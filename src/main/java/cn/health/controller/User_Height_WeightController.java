@@ -5,12 +5,10 @@ import cn.health.domain.User_Height_Weight;
 import cn.health.service.User_Height_Weight_Service;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/height_weight")
@@ -33,6 +31,14 @@ public class User_Height_WeightController {
         json=user_height_weight_service.SetHeightWeight(user_height_weight);
         System.out.print(json);
 
+        return json;
+    }
+    @RequestMapping( value= "/selectheight_weight",method = {RequestMethod.GET})
+    private  JSONObject searchInfor(@RequestParam("startdate")Date startdate,@RequestParam("enddate")Date enddate){
+        System.out.print("查找身高体重");
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        JSONObject json = new JSONObject();
+        json=user_height_weight_service.searchInfor(id,startdate,enddate);
         return json;
     }
 

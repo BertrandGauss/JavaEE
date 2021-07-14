@@ -71,4 +71,15 @@ public class User_Height_Weight_Service {
 
     }
 
+    //查找指定日期内的身体记录
+    public JSONObject  searchInfor(Integer user_id,Date startdate,Date enddate){
+        JSONObject json=new JSONObject();
+        List<User_Height_Weight> user_height_weights= user_height_weightMapper.searchInfor(user_id,startdate,enddate);
+        json.put("code",0);
+        json.put("msg","查询成功");
+        json.put("date",user_height_weights);
+        return json;
+
+    }
+
 }
