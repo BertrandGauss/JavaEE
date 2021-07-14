@@ -5,6 +5,9 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",   //提交的方法
             url:"http://localhost:8081/user/login",
+            xhrFields: {
+                 withCredentials: true,
+           },
             dataType:"json",
             contentType: "application/json",
             //url:"#",

@@ -37,18 +37,24 @@ public class UserController {
         this.httpServletRequest.getSession().setAttribute("LOGIN",true);
         //保存用户id在session
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.phoneisregister(user.getTelephone()));
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        System.out.println("get"+id);
+        System.out.println("sessionId"+httpServletRequest.getSession().getId());
         return json;
     }
     //忘记密码
     @RequestMapping(value = "/forget",method = {RequestMethod.POST})
     private JSONObject forgetpassword(@RequestBody User user){
-        System.out.print("登录");
+        System.out.println("登录");
         JSONObject json = new JSONObject();
         json= userService.login(user);
+
         //将登录凭证加入到用户登录成功的Session类
-        this.httpServletRequest.getSession().setAttribute("LOGIN",true);
+        httpServletRequest.getSession().setAttribute("LOGIN",true);
         //保存用户id在session
-        this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.phoneisregister(user.getTelephone()));
+        httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.phoneisregister(user.getTelephone()));
+
         return json;
     }
 
