@@ -21,7 +21,7 @@
     </update>
 
     <select id="selectByIdDate"  resultType="cn.health.domain.User_Food">
-        SELECT * From user_food WHERE date = #{date} AND user_id = #{user_id}
+        SELECT * From user_food WHERE user_id = #{user_id}  AND  date = #{date}
     </select>
 
     <select id="selectCloestById"  resultType="cn.health.domain.User_Food" parameterType="java.lang.Integer">

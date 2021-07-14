@@ -23,7 +23,7 @@
     <select id="selectByIdDate" resultType="cn.health.domain.User_Exercise">
         SELECT *
         FROM user_exercise
-        WHERE user_id=#{user_id} and user_exercise.date=#{date}
+        WHERE user_id=#{user_id} AND user_exercise.date=#{date}
     </select>
 
     <select id="selectTotal" resultType="cn.health.domain.User_Exercise">

@@ -20,7 +20,7 @@ public class AlarmclockController {
 
     //添加警告记录
     @RequestMapping(value = "/addalarmclock", method = {RequestMethod.POST})
-    public void addAlarmclock(@RequestBody Alarmclock alarmclock) {
+    private void addAlarmclock(@RequestBody Alarmclock alarmclock) {
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         alarmclock.setUser_id(id);
         alarmclockService.addAlarmclock(alarmclock);

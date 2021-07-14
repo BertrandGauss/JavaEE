@@ -28,10 +28,9 @@ public class User_ExerciseController {
     private JSONObject addTodayexercise(@RequestBody UserSport userSport){
         System.out.print("添加运动");
         JSONObject json = new JSONObject();
-
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         userSport.setUser_id(id);
-
+        System.out.print(userSport.getUser_id()+userSport.getExercise_time());
         json= user_exercise_Service.setTodayExercise(userSport);
         System.out.print(json);
         return json;
