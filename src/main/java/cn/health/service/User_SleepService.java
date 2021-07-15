@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,6 +30,19 @@ public class User_SleepService {
         json.put("data",sleepList);
         return  json;
 
+    }
+
+    public void updateSleepTime(User_Sleep user_sleep){
+        user_sleepMapper.update(user_sleep);
+
+    }
+
+    public void deleteALL(Integer id){
+        user_sleepMapper.deleteALL(id);
+    }
+
+    public  void deleteOne(Date date , Integer id ){
+        user_sleepMapper.deleteOne(date,id);
     }
 
 

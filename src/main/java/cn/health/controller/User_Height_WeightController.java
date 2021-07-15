@@ -105,7 +105,6 @@ public class User_Height_WeightController {
         user_height_weight.setUser_id(id);
         JSONObject json = new JSONObject();
         return json;
-
     }
 
     @RequestMapping(value = "/selectbydate",method = {RequestMethod.GET})

@@ -7,9 +7,20 @@
         INSERT INTO user_sleep (date,user_id,sleeptime, starttime)  VALUE (#{date},#{user_id},#{sleeptime},#{starttime})
     </insert>
     <select id="select30" resultType="cn.health.domain.User_Sleep" >
---         SELECT * FROM user_sleep order by user_sleep.data DESC LIMIT 30;
         SELECT *
         FROM user_sleep
         ORDER BY user_sleep.date DESC LIMIT 30
     </select>
+
+    <update id="update" parameterType="cn.health.domain.User_Sleep">
+        UPDATE user_sleep SET date=#{date} , sleeptime=#{sleeptime} , starttime = #{starttime}
+    </update>
+
+    <delete id="deleteOne" >
+        DELETE FROM user_sleep WHERE  date = #{date} AND user_id=#{user_id}
+    </delete>
+
+    <delete id="deleteALL" >
+        DELETE FROM user_sleep WHERE user_id=#{user_id}
+    </delete>
 </mapper>
