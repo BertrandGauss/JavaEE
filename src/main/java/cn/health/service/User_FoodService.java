@@ -57,7 +57,7 @@ public class User_FoodService {
             System.out.print("update");
             Integer ca=(int)(uf.getTotal_calorie()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100);
             user_foodMapper.update(userEat.getUser_id(), userEat.getDate(), ca, uf.getTotal_carbs()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCarbsPer100g())/100
-            ,uf.getTotal_fat()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getProteinPer100g())/100
+            ,uf.getTotal_fat()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getFatPer100g())/100
             ,uf.getTotal_protein()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getProteinPer100g())/100
             ,uf.getTotal_vitaminA()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvAPer100g())/100
             ,uf.getTotal_vitaminB()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvBper100g())/100
