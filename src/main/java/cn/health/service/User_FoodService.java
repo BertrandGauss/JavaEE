@@ -56,12 +56,9 @@ public class User_FoodService {
         }else{
             System.out.print("update");
             Integer ca=(int)(uf.getTotal_calorie()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100);
-            user_foodMapper.update(
-                    userEat.getUser_id(),
-                    userEat.getDate(),ca,
-                    uf.getTotal_carbs()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCarbsPer100g())/100
-            ,uf.getTotal_fat()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100
-            ,uf.getTotal_protein()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100
+            user_foodMapper.update(userEat.getUser_id(), userEat.getDate(), ca, uf.getTotal_carbs()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCarbsPer100g())/100
+            ,uf.getTotal_fat()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getProteinPer100g())/100
+            ,uf.getTotal_protein()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getProteinPer100g())/100
             ,uf.getTotal_vitaminA()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvAPer100g())/100
             ,uf.getTotal_vitaminB()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvBper100g())/100
             ,uf.getTotal_vitaminC()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvCper100g())/100
@@ -85,9 +82,18 @@ public class User_FoodService {
         List<User_Food> user_foods=user_foodMapper.selectALLByID(id);
         return  user_foods;
     }
+
+    //用户删除某天的饮食记录
      public  void deleteFood(User_Food user_food){
         user_foodMapper.delete(user_food);
         userEatMapper.delete(user_food.getUser_id(),user_food.getDate());
+
+     }
+
+     //用户删除全部的饮食
+     public  void deleteALLFood(Integer id){
+         user_foodMapper.deleteALL(id);
+         userEatMapper.deleteALL(id);
 
      }
     //分析用户今日的饮食以及推荐摄入食物

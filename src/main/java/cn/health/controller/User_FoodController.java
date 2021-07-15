@@ -52,8 +52,9 @@ public class User_FoodController {
 
     }
 
+    //删除一条饮食记录
     @RequestMapping(value = "/deletefood",method = {RequestMethod.POST})
-    private JSONObject deleteAllInfor(User_Food user_food) {
+    private JSONObject deleteInfor(User_Food user_food) {
         JSONObject json = new JSONObject();
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         user_food.setUser_id(id);
@@ -62,6 +63,19 @@ public class User_FoodController {
         json.put("msg","删除饮食记录成功");
         return  json;
     }
+
+    //删除全部
+    @RequestMapping(value = "/deleteAllFood",method = {RequestMethod.POST})
+    private JSONObject deleteALLInfor(User_Food user_food) {
+        JSONObject json = new JSONObject();
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        user_foodService.deleteALLFood(id);
+        json.put("code",0);
+        json.put("msg","删除用户全部饮食记录成功");
+        return  json;
+    }
+
+
     //展示用户某天的饮食
     @RequestMapping(value = "/showeat",method = {RequestMethod.POST})
     private JSONObject showTodayEat(@RequestBody User_Food user_food){

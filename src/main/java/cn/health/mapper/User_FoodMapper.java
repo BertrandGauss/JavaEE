@@ -25,4 +25,6 @@ public interface User_FoodMapper {
     List<User_Food> selectRangeByID(@Param("user_id") Integer user_id,@Param("startdate") Date startdate,@Param("enddate") Date enddate);
 
     void delete(User_Food user_food);
+
+    void deleteALL(Integer user_id);
 }

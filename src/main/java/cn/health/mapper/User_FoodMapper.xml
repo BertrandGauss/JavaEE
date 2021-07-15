@@ -8,9 +8,9 @@
     </insert>
 
     <update id="update">
-        UPDATE user_food SET total_calorie = #{total_calorie}, total_vitaminA = #{total_vitaminA}, total_vitaminB = #{total_vitaminB}, total_vitaminC = #{total_vitaminC},
-            total_vitaminD = #{total_vitaminD}, total_vitaminE = #{total_vitaminE}, total_protein = #{total_protein}, total_fat = #{total_fat},
-            total_carbs = #{total_carbs} WHERE user_id = #{user_id} AND date = #{date}
+        UPDATE user_food SET total_calorie = #{total_calorie}, total_protein = #{total_protein}, total_fat = #{total_fat},
+            total_carbs = #{total_carbs}, total_vitaminA = #{total_vitaminA}, total_vitaminB = #{total_vitaminB}, total_vitaminC = #{total_vitaminC},
+            total_vitaminD = #{total_vitaminD}, total_vitaminE = #{total_vitaminE}  WHERE user_id = #{user_id} AND date = #{date}
     </update>
 
     <select id="selectByIdDate"  resultType="cn.health.domain.User_Food">
@@ -33,6 +33,10 @@
 
     <delete id="delete">
         DELETE FROM user_food WHERE user_id=#{user_id} AND date = #{date}
+    </delete>
+
+    <delete id="deleteALL">
+        DELETE FROM user_food WHERE user_id=#{user_id}
     </delete>
 
 </mapper>

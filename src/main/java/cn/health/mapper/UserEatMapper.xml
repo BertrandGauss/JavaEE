@@ -15,6 +15,10 @@
        DELETE FROM usereat  WHERE user_id = #{user_id} AND date = #{date}
     </delete>
 
+    <delete id="deleteALL">
+        DELETE FROM usereat  WHERE user_id = #{user_id}
+    </delete>
+
     <select id="showOne"  resultType="cn.health.domain.UserEat">
         SELECT * From usereat WHERE user_id = #{user_id} AND date=#{date}
     </select>
