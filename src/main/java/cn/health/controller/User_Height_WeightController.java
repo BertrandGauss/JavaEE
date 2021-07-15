@@ -73,16 +73,14 @@ public class User_Height_WeightController {
    @RequestMapping(value = "/updateheight_weight",method = {RequestMethod.POST})    
    private JSONObject updatehw(@RequestBody User_Height_Weight user_height_weight){
        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-       
+       user_height_weight.setUser_id(id);
        JSONObject json = new JSONObject();
        json = user_height_weight_service.updateInfor(user_height_weight);
        json.put("code",0);
        json.put("msg","更改信息成功");
 
        return json;
-       
-       
-   
+
    
    }
     
@@ -101,11 +99,19 @@ public class User_Height_WeightController {
 
     }
 
+    @RequestMapping(value = "/deleteOne", method = {RequestMethod.POST})
+    private JSONObject deleteOne(@RequestBody User_Height_Weight user_height_weight){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        user_height_weight.setUser_id(id);
+        JSONObject json = new JSONObject();
+        return json;
+
+    }
 
     @RequestMapping(value = "/selectbydate",method = {RequestMethod.GET})
     private JSONObject selectByDate(@RequestBody DateRange dateRange){
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-        
+
         List<User_Height_Weight> user_date_info = user_height_weight_service.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
 
 

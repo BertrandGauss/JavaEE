@@ -87,6 +87,7 @@ public class User_Height_Weight_Service {
         json.put("code",0);
         json.put("msg","所有身高体重信息");
         json.put("data",user_info);
+        json.put("count",user_info.size());
         return json;
     }
 

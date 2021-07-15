@@ -39,6 +39,7 @@ public class User_FoodController {
         System.out.print(json);
         return json;
     }
+
     //展示用户全部饮食情况
     @RequestMapping(value = "/showallfood",method = {RequestMethod.GET})
     private JSONObject showAllInfor(){
@@ -66,7 +67,7 @@ public class User_FoodController {
 
     //删除全部
     @RequestMapping(value = "/deleteAllFood",method = {RequestMethod.POST})
-    private JSONObject deleteALLInfor(User_Food user_food) {
+    private JSONObject deleteALLInfor() {
         JSONObject json = new JSONObject();
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         user_foodService.deleteALLFood(id);

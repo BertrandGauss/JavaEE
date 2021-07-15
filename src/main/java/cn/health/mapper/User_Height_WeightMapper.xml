@@ -29,6 +29,13 @@
         WHERE user_id = #{user_id} AND date BETWEEN #{startDate} and #{endDate}
     </select>
 
+    <delete id="deleteall">
+        DELETE FROM user_height_weight WHERE user_id = #{user_id}
+    </delete>
+
+    <delete id="deleteone">
+        DELETE FROM user_height_weight WHERE user_id = #{user_id} AND  date=#{date}
+    </delete>
 </mapper>
 
 
