@@ -44,14 +44,14 @@
 			</button>
 		</form>
 	</div>
-	<div class="weadmin-block">
+	<div class="weadmin-block" id="topline" name="topline">
 		<button class="layui-btn layui-btn-danger" onclick="delAll()">
 			<i class="layui-icon layui-icon-delete"></i>批量删除
 		</button>
 		<button class="layui-btn" onclick="WeAdminShow('添加信息','./add.html',600,400)">
 			<i class="layui-icon layui-icon-add-circle-fine"></i>添加信息
 		</button>
-		<span class="fr" style="line-height:40px">共有数据：88 条</span>
+<!--		<span class="fr" style="line-height:40px">共有数据：88 条</span>-->
 	</div>
 	<table class="layui-table" id="memberList">
 		<thead>
@@ -92,19 +92,23 @@
 						var f = data.data
 						for(var i = 0; i <f.length;i++){
 							var h=i+1
+							time = f[i]["date"].split("T")[0]
 							$("#memberList").append(
 									'<tr data-id="' + h + '">' +
 									'<td>'+
 									'<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + h + '"><i class="layui-icon">&#xe605;</i></div>'+
 									'</td>'+
 									'<td>' + h + '</td>'+
-									'<td>'+f[i]["date"]+'</td>'+
+									'<td>'+time+'</td>'+
 									'<td>'+f[i]["total_calorie"]+'</td>'+
 									'<td class="td-manage">'+
 									'<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
 									'<a title="删除" onclick="member_del(this,\'要删除的id\')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>'+
 									'</td>'+
 									'</tr>'
+							)
+							$("#topline").append(
+									'<span class="fr" style="line-height:40px">共有数据：'+f.length+' 条</span>'
 							)
 
 						}
