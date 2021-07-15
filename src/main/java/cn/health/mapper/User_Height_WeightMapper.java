@@ -13,4 +13,6 @@ public interface User_Height_WeightMapper {
     void update_height_weight(@Param("user_id")Integer user_id,@Param("date")Date date,@Param("height")Integer height,@Param("weight")Integer weight);//根据时间和id找到某用户的一条信息，
     // 更新该信息中的身高和体重数据
     List<User_Height_Weight> selectByTwoDate(@Param("user_id") Integer user_id, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    void deleteall(Integer id);
+
 }
