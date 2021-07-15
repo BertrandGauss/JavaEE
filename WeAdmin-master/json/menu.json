@@ -25,7 +25,7 @@
 			"url": "",
 			"children": [{
 				"id": 9,
-				"name": "记录饮食",
+				"name": "饮食记录",
 				"icon": "",
 				"url": "./pages/food/list.html"
 			}, {
@@ -37,15 +37,22 @@
 		},
 		{
 			"id": 11,
-			"name": "订单管理",
+			"name": "睡眠管理",
 			"icon": "&#xe723;",
 			"url": "",
 			"children": [{
 				"id": 12,
-				"name": "订单列表",
+				"name": "睡眠记录",
 				"icon": "",
-				"url": "./pages/order/list.html"
-			}]
+				"url": "./pages/sleep/list.html"
+			},
+				{
+					"id": 15,
+					"name": "睡眠展示",
+					"icon": "",
+					"url": "./pages/sleep/show.html"
+				}
+			]
 		},
 		{
 			"id": 13,
@@ -57,12 +64,6 @@
 				"name": "管理员列表",
 				"icon": "",
 				"url": "./pages/admin/list.html"
-			},
-			{
-				"id": 15,
-				"name": "角色管理",
-				"icon": "",
-				"url": "./pages/admin/role.html"
 			},
 			{
 				"id": 16,
