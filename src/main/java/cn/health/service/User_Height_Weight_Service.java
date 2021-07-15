@@ -98,4 +98,25 @@ public class User_Height_Weight_Service {
         json.put("code",0);
         return json;
     }
+    
+    //删除所有记录
+    public JSONObject deleteAll(Integer id){
+
+        user_height_weightMapper.deleteall(id);
+
+        JSONObject json=new JSONObject();
+        json.put("code",0);
+        json.put("msg","删除全部记录成功");
+        return json;
+
+    }
+
+    //删除某条身高体重
+
+    //查找记录
+    public List<User_Height_Weight> selectByDate(Integer id,Date stat,Date end){
+        List<User_Height_Weight> userinfoBydate =user_height_weightMapper.selectByTwoDate(id,stat,end);
+        return userinfoBydate;
+
+    }
 }
