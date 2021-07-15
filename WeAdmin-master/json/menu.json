@@ -27,12 +27,12 @@
 				"id": 9,
 				"name": "记录饮食",
 				"icon": "",
-				"url": "./pages/article/list.html"
+				"url": "./pages/food/list.html"
 			}, {
 				"id": 10,
-				"name": "分类管理",
+				"name": "饮食分析",
 				"icon": "",
-				"url": "./pages/article/category.html"
+				"url": "./pages/food/show.html"
 			}]
 		},
 		{
@@ -146,12 +146,12 @@
 				"id": 29,
 				"name": "运动记录",
 				"icon": "",
-				"url": "./pages/article/list.html"
+				"url": "./pages/sports/list.html"
 			}, {
 				"id": 30,
 				"name": "消耗卡路里",
 				"icon": "",
-				"url": "./pages/article/category.html"
+				"url": "./pages/sports/show.html"
 			}]
 		}
 	]
