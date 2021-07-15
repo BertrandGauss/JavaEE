@@ -97,7 +97,7 @@
 		$(document).ready(
 				$.ajax({
 					type: "GET",   //提交的方法
-					url:"http://localhost:8081/food/showfood",
+					url:"http://localhost:8081/food/showallfood",
 					xhrFields: {
 						withCredentials: true,
 					},
@@ -109,31 +109,31 @@
 					},
 					success: function(data) {
 						var f = data.data
-						var h=1
-						$("#foodList").append(
-								'<tr data-id="' + h + '">' +
-								'<td>'+
-								'<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + h + '"><i class="layui-icon">&#xe605;</i></div>'+
-								'</td>'+
-								'<td>' + h + '</td>'+
-								'<td>'+f["total_calorie"]+'</td>'+
-								'<td>'+f["total_vitaminA"]+'</td>'+
-								'<td>'+f["total_vitaminB"]+'</td>'+
-								'<td>'+f["total_vitaminC"]+'</td>'+
-								'<td>'+f["total_vitaminD"]+'</td>'+
-								'<td>'+f["total_vitaminE"]+'</td>'+
-								'<td>'+f["total_protein"]+'</td>'+
-								'<td>'+f["total_fat"]+'</td>'+
-								'<td>'+f["total_carbs"]+'</td>'+
-								'<td>'+f["date"]+'</td>'+
-								'<td class="td-manage">'+
-								'<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
-								'<a title="删除" onclick="member_del(this,\'要删除的id\')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>'+
-								'</td>'+
-								'</tr>'
-						)
-
-
+						for(var i = 0; i <f.length;i++) {
+							var h = i + 1
+							$("#foodList").append(
+									'<tr data-id="' + h + '">' +
+									'<td>' +
+									'<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + h + '"><i class="layui-icon">&#xe605;</i></div>' +
+									'</td>' +
+									'<td>' + h + '</td>' +
+									'<td>' + f[i]["total_calorie"] + '</td>' +
+									'<td>' + f[i]["total_vitaminA"] + '</td>' +
+									'<td>' + f[i]["total_vitaminB"] + '</td>' +
+									'<td>' + f[i]["total_vitaminC"] + '</td>' +
+									'<td>' + f[i]["total_vitaminD"] + '</td>' +
+									'<td>' + f[i]["total_vitaminE"] + '</td>' +
+									'<td>' + f[i]["total_protein"] + '</td>' +
+									'<td>' + f[i]["total_fat"] + '</td>' +
+									'<td>' + f[i]["total_carbs"] + '</td>' +
+									'<td>' + f[i]["date"] + '</td>' +
+									'<td class="td-manage">' +
+									'<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>' +
+									'<a title="删除" onclick="member_del(this,\'要删除的id\')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>' +
+									'</td>' +
+									'</tr>'
+							)
+						}
 					}
 				})
 		)}
