@@ -136,6 +136,23 @@
 				"icon": "",
 				"url": "./pages/echarts/echarts9.html"
 			}]
+		},
+		{
+			"id": 28,
+			"name": "运动管理",
+			"icon": "&#xe705;",
+			"url": "",
+			"children": [{
+				"id": 29,
+				"name": "运动记录",
+				"icon": "",
+				"url": "./pages/article/list.html"
+			}, {
+				"id": 30,
+				"name": "消耗卡路里",
+				"icon": "",
+				"url": "./pages/article/category.html"
+			}]
 		}
 	]
 }
