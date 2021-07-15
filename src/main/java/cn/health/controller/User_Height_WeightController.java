@@ -69,9 +69,53 @@ public class User_Height_WeightController {
         return user_info;
 
     }
-//    @RequestMapping(value = "/updateheight_weight",method = {RequestMethod.POST})
-//    private JSONObject updatehw(@RequestBody User_Height_Weight user_height_weight){
-//
-//    }
+   @RequestMapping(value = "/updateheight_weight",method = {RequestMethod.POST})    
+   private JSONObject updatehw(@RequestBody User_Height_Weight user_height_weight){
+       Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+       
+       JSONObject json = new JSONObject();
+       json = user_height_weight_service.updateInfor(user_height_weight);
+       json.put("code",0);
+       json.put("msg","更改信息成功");
+
+       return json;
+       
+       
+   
+   
+   }
+    
+    @RequestMapping(value = "/deleteall",method = {RequestMethod.POST})
+    private JSONObject deleteAllInfo(){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        JSONObject json = new JSONObject();
+
+        json = user_height_weight_service.deleteAll(id);
+
+        json.put("code",0);
+        json.put("msg","删除所有成功");
+
+        return json;
+
+    }
+
+
+    @RequestMapping(value = "/selectbydate",method = {RequestMethod.GET})
+    private JSONObject selectByDate(@RequestBody DateRange dateRange){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        List<User_Height_Weight> user_date_info = user_height_weight_service.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
+
+
+        JSONObject json = new JSONObject();
+
+        json.put("code",0);
+        json.put("data",user_date_info);
+        json.put("msg","查看部分信息成功");
+
+        return json;
+
+    }
 
 }
