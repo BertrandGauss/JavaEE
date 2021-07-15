@@ -60,9 +60,21 @@
             form.on('submit(add)', function(data){
                 console.log(data);
                 layer.alert("增加成功", {icon: 6},function () {
-                    var time = new Date();
-                    // var timeNow = util.toDateString(time.getDate());
-                    var timeNow = time.getDate()
+                    // var time = new Date();
+                    // // var timeNow = util.toDateString(time.getDate());
+                    // var timeNow = time.getDate()
+                    var date = new Date();
+                    var seperator1 = "-";
+                    var year = date.getFullYear();
+                    var month = date.getMonth() + 1;
+                    var strDate = date.getDate();
+                    if (month >= 1 && month <= 9) {
+                        month = "0" + month;
+                    }
+                    if (strDate >= 0 && strDate <= 9) {
+                        strDate = "0" + strDate;
+                    }
+                    var timeNow = year + seperator1 + month + seperator1 + strDate;
                     // 获得frame索引
                     // var newtimeNow = timeNow.split('-')[0] +timeNow.split('-')[1] +timeNow.split('-')[2]
                     var index = parent.layer.getFrameIndex(window.name);
