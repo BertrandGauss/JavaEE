@@ -67,11 +67,11 @@
 							var f = data.data;
 							for(var i = 0; i <f.length ; i++){
 								json1 = f[i];
-								weights.push(json1["weight"]);
-								bmis.push(json1["bmi"]);
-								tizhis.push(json1["tiZhi"]);
+								weights.unshift(json1["weight"]);
+								bmis.unshift(json1["bmi"]);
+								tizhis.unshift(json1["tiZhi"]);
 								temp_date = json1["date"].split("T")[0]
-								dates.push(temp_date);
+								dates.unshift(temp_date);
 
 							}
 							// 指定图表的配置项和数据
