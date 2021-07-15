@@ -21,7 +21,7 @@
         select * FROM (SELECT * From user_food WHERE user_id = #{user_id}) as new_uf ORDER BY user_id desc LIMIT 1
     </select>
 
-    <select id="selectALLById"  resultType="cn.health.domain.User_Food" >
+    <select id="selectALLByID"  resultType="cn.health.domain.User_Food" >
          SELECT * From user_food WHERE user_id = #{user_id}
     </select>
 
@@ -30,5 +30,9 @@
         FROM user_food
         WHERE user_id = #{user_id} AND date BETWEEN #{startDate} and #{endDate}
     </select>
+
+    <delete id="delete">
+        DELETE FROM user_food WHERE user_id=#{user_id} AND date = #{date}
+    </delete>
 
 </mapper>

@@ -14,7 +14,7 @@ public interface UserEatMapper {
 
     void update(UserEat userEat);
 
-    void delete(UserEat userEat);
+    void delete(@Param("user_id") Integer user_id,@Param("date") Date date);
 
     Integer selectByDateIdName(@Param("user_id") Integer user_id,@Param("name")String name,@Param("date")Date date);
 }

@@ -56,7 +56,10 @@ public class User_FoodService {
         }else{
             System.out.print("update");
             Integer ca=(int)(uf.getTotal_calorie()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100);
-            user_foodMapper.update(userEat.getUser_id(), userEat.getDate(),ca,uf.getTotal_carbs()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCarbsPer100g())/100
+            user_foodMapper.update(
+                    userEat.getUser_id(),
+                    userEat.getDate(),ca,
+                    uf.getTotal_carbs()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCarbsPer100g())/100
             ,uf.getTotal_fat()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100
             ,uf.getTotal_protein()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getCaloriePer100g())/100
             ,uf.getTotal_vitaminA()+1.0*(userEat.getNumber()*foodInfMapper.selectByName(userEat.getName()).getWeightPerOne()*foodInfMapper.selectByName(userEat.getName()).getvAPer100g())/100
@@ -82,7 +85,11 @@ public class User_FoodService {
         List<User_Food> user_foods=user_foodMapper.selectALLByID(id);
         return  user_foods;
     }
+     public  void deleteFood(User_Food user_food){
+        user_foodMapper.delete(user_food);
+        userEatMapper.delete(user_food.getUser_id(),user_food.getDate());
 
+     }
     //分析用户今日的饮食以及推荐摄入食物
     public String analize(Integer id){
         String word="";
@@ -153,6 +160,7 @@ public class User_FoodService {
     //用户添加今日饮食信息
     public void addTodayEat(UserEat userEat){
         Integer number = userEatMapper.selectByDateIdName(userEat.getUser_id(),userEat.getName(),userEat.getDate());
+        System.out.println("添加食品记录"+number+userEat.getUser_id()+userEat.getName()+userEat.getDate());
         if(number==null){
             userEatMapper.add(userEat);
         }else{
@@ -169,10 +177,11 @@ public class User_FoodService {
     public void updateTodayEat(UserEat userEat){
         userEatMapper.update(userEat);
     }
-    //用户删除今日饮食信息
-    public void  deleteEat(UserEat userEat){
-        userEatMapper.delete(userEat);
-    }
+//    //用户删除今日饮食信息
+//    public void  deleteEat(UserEat userEat){
+//        userEatMapper.delete(userEat);
+//
+//    }
     //用户展示某天饮食信息
     public List<UserEat> showEat(Integer user_id,Date date){
         List<UserEat> userEats = userEatMapper.showOne(user_id,date);

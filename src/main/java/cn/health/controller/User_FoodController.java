@@ -6,6 +6,7 @@ import cn.health.domain.UserEat;
 import cn.health.domain.User_Food;
 import cn.health.service.User_FoodService;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ public class User_FoodController {
 
     @Autowired
     private HttpServletRequest httpServletRequest;
+
 
 
     //用户添加食物
@@ -49,6 +51,17 @@ public class User_FoodController {
         return  json;
 
     }
+
+    @RequestMapping(value = "/deletefood",method = {RequestMethod.POST})
+    private JSONObject deleteAllInfor(User_Food user_food) {
+        JSONObject json = new JSONObject();
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        user_food.setUser_id(id);
+        user_foodService.deleteFood(user_food);
+        json.put("code",0);
+        json.put("msg","删除饮食记录成功");
+        return  json;
+    }
     //展示用户某天的饮食
     @RequestMapping(value = "/showeat",method = {RequestMethod.POST})
     private JSONObject showTodayEat(@RequestBody User_Food user_food){
@@ -61,6 +74,7 @@ public class User_FoodController {
         return json;
 
     }
+
     //展示用户最近的饮食
     @RequestMapping(value = "/showfood",method = {RequestMethod.GET})
     private JSONObject showFood(){
