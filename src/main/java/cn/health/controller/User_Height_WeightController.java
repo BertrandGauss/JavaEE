@@ -103,7 +103,10 @@ public class User_Height_WeightController {
     private JSONObject deleteOne(@RequestBody User_Height_Weight user_height_weight){
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
         user_height_weight.setUser_id(id);
+        user_height_weight_service.deleteOne(id,user_height_weight.getDate());
         JSONObject json = new JSONObject();
+        json.put("code",0);
+        json.put("msg","删除成功");
         return json;
     }
 

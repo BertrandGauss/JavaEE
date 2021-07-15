@@ -65,7 +65,7 @@ layui.use(['laydate', 'jquery', 'admin'], function() {
 
 	window.delAll = function (argument) {
 		var data = tableCheck.getData();
-		layer.confirm('确认要删除吗？' + data, function(index) {
+		layer.confirm('确认要删除吗？' , function(index) {
 			//捉到所有被选中的，发异步进行删除
 			layer.msg('删除成功', {
 				icon: 1

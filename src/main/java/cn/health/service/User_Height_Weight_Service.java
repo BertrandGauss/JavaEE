@@ -113,7 +113,9 @@ public class User_Height_Weight_Service {
     }
 
     //删除某条身高体重
-
+    public  void deleteOne(Integer id,Date date){
+        user_height_weightMapper.deleteone(id,date);
+    }
     //查找记录
     public List<User_Height_Weight> selectByDate(Integer id,Date stat,Date end){
         List<User_Height_Weight> userinfoBydate =user_height_weightMapper.selectByTwoDate(id,stat,end);
