@@ -14,11 +14,11 @@ function checkAll() {
 
 function checkEmail(){
     var email = $("#email").val();
-    var c_email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$ /;
+    var c_email = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$ /;
     var flag = c_email.test(email)
     if(flag){
         $("#s_email").text("");
-        CheckRegSuccess5 = True;
+        CheckRegSuccess5 = true;
     }
     else{
         $("#s_email").removeClass("fa-check");
@@ -35,7 +35,7 @@ function checkUsername(){
     var flag = reg_username.test(username);
     if(flag){
         $("#s_username").text("");
-        CheckRegSuccess1=True;
+        CheckRegSuccess1=true;
     }
     else{
         $("#s_username").removeClass("fa-check");
@@ -64,7 +64,7 @@ function checkPhone(){
     var flag = reg_phone.test(phone);
     if(flag){
         $("#s_phone").text("");
-        CheckRegSuccess4=True;
+        CheckRegSuccess4=true;
     }
     else{
         $("#s_phone").removeClass("fa-check");
@@ -129,8 +129,9 @@ $(document).ready(function(){
             //url:"#",
             data: JSON.stringify({
                 "user_name":$("#user_name").val(),
-                "user_password":$("#user_password").val(),
                 "telephone":$("#telephone").val(),
+                "email":$("#email").val(),
+                "user_password":$("#user_password").val(),
                 "gender":$("#gender").val(),
                 "birthday":$("#birthday").val()
             }),
