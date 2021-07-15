@@ -120,7 +120,7 @@ public class User_FoodService {
             eat.add(foodInfMapper.selectMaxVD());
         }
         if(user_food.getTotal_vitaminE()<12){
-            lack.add("维生素D");
+            lack.add("维生素E");
             eat.add(foodInfMapper.selectMaxVE());
         }
         if(user_food.getTotal_fat()<100){
@@ -139,7 +139,7 @@ public class User_FoodService {
             word=userMapper.selectnameByID(user_food.getUser_id())+"，您今日各类营养成分摄入充分，请您明天继续保持";
         }
         else{
-            word=userMapper.selectnameByID(user_food.getUser_id() )+",用户您今日";
+            word=userMapper.selectnameByID(user_food.getUser_id() )+",您今日";
             for(int i=0;i<lack.size();i++){
                 if(i==lack.size()-1){
                    word+=lack.get(i)+"摄入不足,";
