@@ -63,7 +63,7 @@ public class User_Height_WeightController {
     private JSONObject showINFO(){
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
         JSONObject user_info=user_height_weight_service.showAllinfo(id);
-
+        System.out.println("sessionId"+httpServletRequest.getSession().getId());
         return user_info;
 
     }
