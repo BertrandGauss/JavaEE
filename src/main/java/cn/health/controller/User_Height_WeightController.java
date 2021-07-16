@@ -64,9 +64,6 @@ public class User_Height_WeightController {
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
         JSONObject user_info=user_height_weight_service.showAllinfo(id);
 
-        user_info.put("code",0);
-        user_info.put("msg","查看成功");
-
         return user_info;
 
     }
@@ -110,15 +107,12 @@ public class User_Height_WeightController {
         return json;
     }
 
-    @RequestMapping(value = "/selectbydate",method = {RequestMethod.GET})
+    @RequestMapping(value = "/selectbydate",method = {RequestMethod.POST})
     private JSONObject selectByDate(@RequestBody DateRange dateRange){
+        System.out.print("查询");
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-
         List<User_Height_Weight> user_date_info = user_height_weight_service.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
-
-
         JSONObject json = new JSONObject();
-
         json.put("code",0);
         json.put("data",user_date_info);
         json.put("msg","查看部分信息成功");

@@ -1,7 +1,9 @@
 package cn.health.controller;
 
+import cn.health.domain.DateRange;
 import cn.health.domain.UserSport;
 
+import cn.health.domain.User_Exercise;
 import cn.health.service.User_Exercise_Service;
 
 import com.alibaba.fastjson.JSONObject;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/exercise")
@@ -65,6 +68,7 @@ public class User_ExerciseController {
 
     @RequestMapping(value = "/selectbydate",method = {RequestMethod.GET})
     private JSONObject selectByDate(@RequestBody DateRange dateRange){
+
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
 
         List<User_Exercise> user_date_info = user_exercise_Service.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
@@ -83,6 +87,7 @@ public class User_ExerciseController {
 
     @RequestMapping(value = "/deleteone",method = {RequestMethod.POST})
     private JSONObject deleteOneInfo(@RequestBody User_Exercise user_exercise){
+
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
 
         JSONObject json = new JSONObject();
