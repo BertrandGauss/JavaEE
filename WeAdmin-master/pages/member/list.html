@@ -65,7 +65,7 @@
 			<th lay-data="{field:'gender'}">性别</th>
 			<th lay-data="{field:'height'}">身高</th>
 			<th lay-data="{field:'weight'}">体重</th>
-			<th lay-data="{field:'date', sort: true,templet:'<div>{{ layui.laytpl.toDateString(d.date) }}</div>'}">加入时间</th>
+			<th lay-data="{field:'date', sort: true}">加入时间</th>
 			<th  lay-data="{fixed: 'right',align:'left', toolbar: '#barDemo'}">操作</th>
 		 </tr>
 		</thead>
@@ -80,13 +80,6 @@
 	<a title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
 </script>
 <script>
-    layui.use('laytpl', function(){
-        var laytpl = layui.laytpl;
-        //时间戳的处理
-        layui.laytpl.toDateString = function(d, format){
-            return d.split("T")[0];
-        };
-    });
     layui.use('table', function() {
         var $ = layui.jquery
         var table = layui.table;
@@ -99,7 +92,7 @@
             var data = obj.data;
             console.log(data.date)
             if (obj.event === 'del') {
-                layer.confirm('确认要删除吗？', function(index) {
+                layer.confirm('真的删除这条记录吗？', function(index) {
                     var data = obj.data;
                     $.ajax({
                         //几个参数需要注意一下
