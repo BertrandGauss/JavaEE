@@ -90,7 +90,7 @@ public class User_ExerciseController {
         json = user_exercise_Service.deleteOne(user_exercise.getUser_id(),user_exercise.getDate());
 
         json.put("code",0);
-        json.put("msg","删除所有成功");
+        json.put("msg","删除一条信息成功");
 
         return json;
 
