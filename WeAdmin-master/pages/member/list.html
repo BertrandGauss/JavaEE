@@ -130,22 +130,7 @@
                 });
             }
             if (obj.event === 'edit') {
-                var editFrom = layui.layer.open({
-                    title : "编辑个人基本信息",
-                    type : 2,
-                    content : "edit.html",//弹出层页面
-                    area: ['800px', '400px'],
-                    success : function(layero, index){
-                        var body = layui.layer.getChildFrame('body', index);
-                        //获取窗口对象
-                        var iframeWindow = layero.find('iframe')[0].contentWindow;
-                        body.find("#scoreValue").val(data.scoreValue);
-                        body.find("#scoreId").val(data.scoreId);
-                        body.find("#scoreType option[value="+data.scoreType+"]").attr("selected","selected");
-                        body.find("#studentId option[value="+data.studentId+"]").attr("selected","selected");
-                        iframeWindow.layui.form.render();
-                        iframeWindow.layui.form.render('select');
-                    }});
+				WeAdminShow('编辑','./edit.html',600,400)
             }
         });
 
