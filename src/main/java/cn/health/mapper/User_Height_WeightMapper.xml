@@ -36,6 +36,12 @@
     <delete id="deleteone">
         DELETE FROM user_height_weight WHERE user_id = #{user_id} AND  date=#{date}
     </delete>
+    
+    <select id="selectgender" resultType="java.long.String">
+        SELECT gender
+        FROM user
+        WHERE user_id = #{user_id}
+    </select>    
 </mapper>
 
 
