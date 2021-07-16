@@ -81,7 +81,7 @@ public class User_Height_Weight_Service {
     }
     
    //返回所有身高体重信息
-   public JSONObject showAllinfo(Integer id){
+ public JSONObject showAllinfo(Integer id){
 
         List<User_Height_Weight> user_info = user_height_weightMapper.selecttotal(id);
 
@@ -89,14 +89,15 @@ public class User_Height_Weight_Service {
 
         List<User_Information> user_all_info=new ArrayList<User_Information>();
         for (int i=0;i<user_info.size();i++){
-            User_Information ui=new User_Information(user_info.get(i).getHeight(),user_info.get(i).getWeight(),gender);
+            User_Information ui=new User_Information(user_info.get(i).getDate(),user_info.get(i).getHeight(),user_info.get(i).getWeight(),gender);
             user_all_info.add(ui);
 
         }
-       
+
+
         JSONObject json=new JSONObject();
         json.put("code",0);
-        json.put("msg","用户基本信息");
+        json.put("msg","所有身高体重信息");
         json.put("data",user_all_info);
         return json;
 
