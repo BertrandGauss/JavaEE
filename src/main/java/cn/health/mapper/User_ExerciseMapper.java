@@ -15,5 +15,11 @@ public interface User_ExerciseMapper {
     User_Exercise selectByIdDate(@Param("user_id") Integer user_id,@Param("date") Date date);  //根据时间用户id查找信息
 
     List<User_Exercise> selectTotal(Integer user_id);
+    
+    void deleteall(Integer id);
+
+    List<User_Exercise> selectByTwoDate(@Param("user_id") Integer user_id,@Param("startDate") Date startDate,@Param("endDate") Date endDate);
+
+    void deleteone(@Param("user_id")Integer user_id,@Param("date")Date date);
 
 }
