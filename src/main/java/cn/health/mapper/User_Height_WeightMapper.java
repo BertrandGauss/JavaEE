@@ -15,5 +15,7 @@ public interface User_Height_WeightMapper {
     List<User_Height_Weight> selectByTwoDate(@Param("user_id") Integer user_id, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
     void deleteall(Integer user_id);
     void deleteone(@Param("user_id") Integer user_id,@Param("date")Date date);
+   
+    String selectgender(Integer user_id);
 
 }
