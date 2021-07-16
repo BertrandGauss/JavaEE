@@ -8,7 +8,7 @@ import cn.health.mapper.User_Height_WeightMapper;
 import cn.health.util.GetAgeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import cn.health.domain.User_Information;
 
 import java.util.ArrayList;
 import java.util.Date;
