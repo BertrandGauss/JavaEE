@@ -154,6 +154,18 @@
 				"icon": "",
 				"url": "./pages/sports/show.html"
 			}]
+		},
+		{
+			"id": 31,
+			"name": "个性化设置",
+			"icon": "&#xe723;",
+			"url": "",
+			"children":[{
+				"id": 32,
+				"name": "闹钟",
+				"icon": "",
+				"url": "./pages/personal/list.html"
+			}]
 		}
 	]
 }

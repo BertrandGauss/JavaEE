@@ -11,5 +11,5 @@ public interface AlarmclockMapper {
 
     List<Alarmclock> selectByDate(Date date);
 
-
+    List<Alarmclock> selectALLByID(Integer user_id);
 }
