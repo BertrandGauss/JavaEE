@@ -34,7 +34,7 @@
 		<form class="layui-form layui-col-md12 we-search">
 			信息搜索：
 			<div class="layui-inline">
-				<input class="layui-input" placeholder="开始日" name="start" id="start"  pattern="yyyy-MM-dd"/>
+				<input class="layui-input" placeholder="开始日" name="start" id="start"  />
 			</div>
 			<div class="layui-inline">
 				<input class="layui-input" placeholder="截止日" name="end" id="end"  />
@@ -219,19 +219,23 @@
             admin = layui.admin,
             layer = layui.layer;
         form.on('submit(search)',function (data){(
-            console.log(data)
+
             table.reload('height_weight', {
-                url: 'http://localhost:8081/height_weight/selectbydate',
-                    method:'post'
-                ,where: {
+                url:"http://localhost:8081/height_weight/selectbydate",
+                method: 'POST',
+                contentType: 'application/json'
+                , where: {
                     "startdate":data.field.start,
                     "enddate":data.field.end
-                }
-            } //设定异步数据接口的额外参数
-                //,height: 300
-            )
 
-        )})})
+                }, page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            })
+
+        )
+            return false;
+        })})
 </script>
 <script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 </body>
