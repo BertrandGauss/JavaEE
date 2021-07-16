@@ -89,7 +89,7 @@ public class User_Height_Weight_Service {
 
         List<User_Information> user_all_info=new ArrayList<User_Information>();
         for (int i=0;i<user_info.size();i++){
-            User_Information ui=new User_Information(user_info.get(i).getDate(),user_info.get(i).getHeight(),user_info.get(i).getWeight(),gender);
+            User_Information ui=new User_Information(i+1,user_info.get(i).getDate(),user_info.get(i).getHeight(),user_info.get(i).getWeight(),gender);
             user_all_info.add(ui);
 
         }
