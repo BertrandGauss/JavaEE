@@ -39,7 +39,7 @@
 			<div class="layui-inline">
 				<input class="layui-input" placeholder="截止日" name="end" id="end" />
 			</div>
-			<button class="layui-btn" lay-submit="" lay-filter="sreach">
+			<button class="layui-btn" lay-submit="" lay-filter="search">
 				<i class="layui-icon layui-icon-search"></i>
 			</button>
 		</form>
@@ -52,21 +52,22 @@
 			<i class="layui-icon layui-icon-add-circle-fine"></i>添加信息
 		</button>
 	</div>
-	<table class="layui-table" id="memberList">
+	<table class="layui-table"  lay-data="{ url:'http://localhost:8081/height_weight/showinformation', page:true, id:'memberList'}" lay-filter="height_weight">
 		<thead>
 		<tr>
-			<th>
-				<div class="layui-unselect header layui-form-checkbox" lay-skin="primary">
-					<i class="layui-icon">&#xe605;</i>
-				</div>
-			</th>
-			<th>ID</th>
-			<th>性别</th>
-			<th>身高</th>
-			<th>体重</th>
-			<th>加入时间</th>
-			<th>操作</th>
-		</tr>
+			<!--<th>-->
+				<!--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary">-->
+					<!--<i class="layui-icon">&#xe605;</i>-->
+				<!--</div>-->
+			<!--</th>-->
+			<th lay-data="{type:'checkbox', }"></th>
+			<th >ID</th>
+			<th lay-data="{field:'gender'}">性别</th>
+			<th lay-data="{field:'height'}">身高</th>
+			<th lay-data="{field:'weight'}">体重</th>
+			<th lay-data="{field:'date', sort: true}">加入时间</th>
+			<th  lay-data="{fixed: 'right', width:220, align:'left', toolbar: '#barDemo'}">操作</th>
+		 </tr>
 		</thead>
 		<tbody>
 		</tbody>
@@ -74,54 +75,157 @@
 
 </div>
 <script src="../../lib/layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript">
-    layui.use(['form', 'jquery','util','admin', 'layer'], function() {
-        var $ = layui.jquery;
-        $(document).ready(
-            $.ajax({
-                type: "GET",   //提交的方法
-                url:"http://localhost:8081/height_weight/showinformation",
-                xhrFields: {
-                    withCredentials: true,
-                },
-                dataType:"json",
-                contentType: "application/json",
-                async: false,
-                error: function(request) {  //失败的话
-                    alert("Connection error");
-                },
-                success: function(data) {
-                    var f = data.data
-                    for(var i = 0; i <f.length;i++){
-                        var h=i+1
-                        time = f[i]["date"].split("T")[0]
-                        $("#memberList").append(
-                            '<tr data-id="' + h + '">' +
-                            '<td>'+
-                            '<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + h + '"><i class="layui-icon">&#xe605;</i></div>'+
-                            '</td>'+
-                            '<td>' + h + '</td>'+
-                            '<td>男</td>'+
-                            '<td>'+f[i]["height"]+'</td>'+
-                            '<td>'+f[i]["weight"]+'</td>'+
-                            '<td>'+time+'</td>'+
-                            '<td class="td-manage">'+
-                            '<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
-                            '<a title="删除" onclick="deleteOne(this,1,time)" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>'+
-                            '</td>'+
-                            '</tr>'
-                        )
-                        $("#topline").append(
-                            '<span class="fr" style="line-height:40px">共有数据：'+f.length+' 条</span>'
-                        )
+<script type="text/html" id="barDemo">
+	<a title="编辑" class="layui-btn layui-btn-sm" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
+	<a title="删除"  class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
+</script>
+<script>
+    layui.use('table', function() {
+        var $ = layui.jquery
+        var table = layui.table;
+        //监听表格复选框选择
+        table.on('checkbox(height_weight)', function(obj) {
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(demo)', function(obj) {
+            var data = obj.data;
+            if (obj.event === 'del') {
+                layer.confirm('真的删除成绩信息吗？', function(index) {
+                    var data = obj.data;
+                    $.ajax({
+                        //几个参数需要注意一下
+                        type: "POST",//方法类型
+                        dataType: "json",//预期服务器返回的数据类型
+                        url: "http://localhost:8081//",//url
+                        data: data,
+                        success: function (result) {
+                            if (result.code == "0") {
+                                layer.close(index);
+                                layer.msg('删除成绩成功');
+                                layui.table.reload('scoreTest',{page:{curr:1}});
+                            }else{
+                                layer.msg('删除成绩失败', {
+                                    icon: 5
+                                });
+                            }
+                        },
+                        error : function() {
+                            layer.msg('服务器错误', {
+                                icon: 5
+                            });
+                        }
+                    });
+                });
+            }
+            if (obj.event === 'edit') {
+                var editFrom = layui.layer.open({
+                    title : "编辑学生成绩信息",
+                    type : 2,
+                    content : "/score-edit.html",//弹出层页面
+                    area: ['800px', '400px'],
+                    success : function(layero, index){
+                        var body = layui.layer.getChildFrame('body', index);
+                        //获取窗口对象
+                        var iframeWindow = layero.find('iframe')[0].contentWindow;
+                        body.find("#scoreValue").val(data.scoreValue);
+                        body.find("#scoreId").val(data.scoreId);
+                        body.find("#scoreType option[value="+data.scoreType+"]").attr("selected","selected");
+                        body.find("#studentId option[value="+data.studentId+"]").attr("selected","selected");
+                        iframeWindow.layui.form.render();
+                        iframeWindow.layui.form.render('select');
+                    }});
+            }
+        });
 
+        //触发事件
+        var active = {
+            tabAdd : function() {
+
+                layer.open({
+                    type: 2,
+                    title: '添加学生成绩信息',
+                    shadeClose: true,
+                    shade: false,
+                    /*    maxmin: true,  *///开启最大化最小化按钮
+                    area: ['800px', '400px'],
+                    content: '/score-add.html'
+                });
+
+            },search:function(){
+                var name=$("#studentNameSearch").val();
+                table.reload('scoreTest',{
+                    method: 'POST'
+                    , where: {"studentName":name},page: {
+                        curr: 1 //重新从第 1 页开始
                     }
 
-                }
-            })
-        )})
+                })
+            }
+        };
 
+        $('#studentSearch .layui-btn').on('click', function() {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+    });
 </script>
+<!--<script type="text/javascript">-->
+    <!--layui.use(['form', 'jquery','util','admin', 'layer'], function() {-->
+        <!--var form = layui.form,-->
+            <!--$ = layui.jquery,-->
+            <!--util = layui.util,-->
+            <!--admin = layui.admin,-->
+            <!--layer = layui.layer;-->
+        <!--$(document).ready(-->
+            <!--$.ajax({-->
+                <!--type: "GET",   //提交的方法-->
+                <!--url:"http://localhost:8081/height_weight/showinformation",-->
+                <!--xhrFields: {-->
+                    <!--withCredentials: true,-->
+                <!--},-->
+                <!--dataType:"json",-->
+                <!--contentType: "application/json",-->
+                <!--async: false,-->
+                <!--error: function(request) {  //失败的话-->
+                    <!--alert("Connection error");-->
+                <!--},-->
+                <!--success: function(data) {-->
+                    <!--var f = data.data-->
+
+                    <!--for(var i = 0; i <f.length;i++){-->
+                        <!--var h=i+1-->
+                       <!--timenow = f[i]["date"].split("T")[0]-->
+						<!--console.log(timenow)-->
+                        <!--$("#memberList").append(-->
+                            <!--'<tr data-id="' + h + '">' +-->
+                            <!--'<td>'+-->
+                            <!--'<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + h + '"><i class="layui-icon">&#xe605;</i></div>'+-->
+                            <!--'</td>'+-->
+                            <!--'<td>' + h + '</td>'+-->
+                            <!--'<td>男</td>'+-->
+                            <!--'<td>'+f[i]["height"]+'</td>'+-->
+                            <!--'<td>'+f[i]["weight"]+'</td>'+-->
+                            <!--'<td>'+timenow+'</td>'+-->
+                            <!--'<td class="td-manage">'+-->
+                            <!--'<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+-->
+                            <!--'<a title="删除" onclick="deleteOne(this,1)" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>'+-->
+                            <!--'</td>'+-->
+                            <!--'</tr>'-->
+                        <!--)-->
+                        <!--$("#topline").append(-->
+                            <!--'<span class="fr" style="line-height:40px">共有数据：'+f.length+' 条</span>'-->
+                        <!--)-->
+
+                    <!--}-->
+
+                <!--}-->
+            <!--})-->
+        <!--)})-->
+
+<!--</script>-->
+
 <script>
     function deleAll() {
         layui.use(['form', 'jquery','util','admin', 'layer'], function() {
@@ -148,9 +252,10 @@
     }
 </script>
 <script>
-    function deleteOne(obj,h,date) {
+    function deleteOne(obj,h) {
         layui.use(['form', 'jquery','util','admin', 'layer'], function() {
-            var $ = layui.jquery;
+			console.log(obj)
+			var $ = layui.jquery;
             $.ajax({
                 type: "POST",   //提交的方法
                 url:"http://localhost:8081/height_weight/deleteOne",
@@ -160,7 +265,7 @@
                 dataType:"json",
                 contentType: "application/json",
                 data: JSON.stringify({
-                    "date":date,
+                    "date":obj.date,
                     "height":0,
                     "weight":0
                 }),
@@ -169,13 +274,69 @@
                     alert("Connection error");
                 },
                 success: function(data) {
-                     alert(date);
+                    //alert(date);
                 }
             })
         });
         member_del(obj,h);
 
     }
+</script>
+<script>
+    layui.use(['form', 'jquery','util','admin', 'layer'], function() {
+        var form = layui.form,
+            $ = layui.jquery,
+            util = layui.util,
+            admin = layui.admin,
+            layer = layui.layer;
+        form.on('submit(search)',function (){(
+            $.ajax({
+                type: "POST",   //提交的方法
+                url:"http://localhost:8081/height_weight/selectbydate",
+                xhrFields: {
+                    withCredentials: true,
+                },
+                dataType:"json",
+                contentType: "application/json",
+                async: false,
+                error: function(request) {  //失败的话
+                    alert("Connection error");
+                },
+                success: function(data) {
+                    var f = data.data
+                    for(var i = 0; i <f.length;i++){
+                        var h=i+1
+                        // if(f[i]["date"]){
+                        //     time = f[i]["date"].split("T")[0]
+                        //
+                        // }
+                        time = f[i]["date"].split("T")[0]
+                        console.log(f[i])
+                        $("#memberList").append(
+                            '<tr data-id="' + h + '">' +
+                            '<td>'+
+                            '<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + h + '"><i class="layui-icon">&#xe605;</i></div>'+
+                            '</td>'+
+                            '<td>' + h + '</td>'+
+                            '<td>男</td>'+
+                            '<td>'+f[i]["height"]+'</td>'+
+                            '<td>'+f[i]["weight"]+'</td>'+
+                            '<td>'+time+'</td>'+
+                            '<td class="td-manage">'+
+                            '<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
+                            '<a title="删除" onclick="deleteOne(this,1,time)" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>'+
+                            '</td>'+
+                            '</tr>'
+                        )
+                        $("#topline").append(
+                            '<span class="fr" style="line-height:40px">共有数据：'+f.length+' 条</span>'
+                        )
+
+                    }
+
+                }
+            })
+        )})})
 </script>
 <script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 </body>
