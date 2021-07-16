@@ -73,7 +73,10 @@
 						// 获得frame索引
 						var index = parent.layer.getFrameIndex(window.name);
 						//关闭当前frame
-						var timenow = parent.time
+						// var timenow = parent
+						var url = decodeURI(window.location.href);
+						var argsIndex = url .split("?date=");
+						var timenow = argsIndex[1];
 						$.ajax({
 							type:"POST",
 							url:"http://localhost:8081/height_weight/updateheight_weight",
@@ -92,7 +95,9 @@
 							error: function(request) {  //失败的话
 								alert("Connection error");
 							},
-							success: function(data){}
+							success: function(data){
+								window.parent.location.reload();
+							}
 						})
 						parent.layer.close(index);
 					});
