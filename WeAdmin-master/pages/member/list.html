@@ -65,7 +65,7 @@
 			<th lay-data="{field:'gender'}">性别</th>
 			<th lay-data="{field:'height'}">身高</th>
 			<th lay-data="{field:'weight'}">体重</th>
-			<th lay-data="{field:'date', sort: true}">加入时间</th>
+			<th lay-data="{field:'date', sort: true , templet: '#titleTpl'}">加入时间</th>
 			<th  lay-data="{fixed: 'right',align:'left', toolbar: '#barDemo'}">操作</th>
 		 </tr>
 		</thead>
@@ -79,6 +79,15 @@
 	<a title="编辑" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
 	<a title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
 </script>
+<script type="text/html" id="titleTpl">
+	{{#
+	var fn = function(data){
+	return data.substring(0,10);
+	};
+	}}
+	{{ fn(d.date) }}
+</script>
+
 <script>
     layui.use('table', function() {
         var $ = layui.jquery
@@ -130,22 +139,8 @@
                 });
             }
             if (obj.event === 'edit') {
-                var editFrom = layui.layer.open({
-                    title : "编辑个人基本信息",
-                    type : 2,
-                    content : "edit.html",//弹出层页面
-                    area: ['800px', '400px'],
-                    success : function(layero, index){
-                        var body = layui.layer.getChildFrame('body', index);
-                        //获取窗口对象
-                        var iframeWindow = layero.find('iframe')[0].contentWindow;
-                        body.find("#scoreValue").val(data.scoreValue);
-                        body.find("#scoreId").val(data.scoreId);
-                        body.find("#scoreType option[value="+data.scoreType+"]").attr("selected","selected");
-                        body.find("#studentId option[value="+data.studentId+"]").attr("selected","selected");
-                        iframeWindow.layui.form.render();
-                        iframeWindow.layui.form.render('select');
-                    }});
+            	var data = obj.data;
+				WeAdminShow('编辑','./edit.html?date='+data.date,600,400);
             }
         });
 
