@@ -47,6 +47,54 @@ public class User_ExerciseController {
         return user_exercise;
 
     }
+    
+    @RequestMapping(value = "/deleteall",method = {RequestMethod.POST})
+    private JSONObject deleteAllInfo(){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        JSONObject json = new JSONObject();
+
+        json = user_exercise_Service.deleteall(id);
+
+        json.put("code",0);
+        json.put("msg","删除所有成功");
+
+        return json;
+
+    }
+
+    @RequestMapping(value = "/selectbydate",method = {RequestMethod.GET})
+    private JSONObject selectByDate(@RequestBody DateRange dateRange){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        List<User_Exercise> user_date_info = user_exercise_Service.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
+
+
+        JSONObject json = new JSONObject();
+
+        json.put("code",0);
+        json.put("data",user_date_info);
+        json.put("msg","查看部分信息成功");
+
+        return json;
+
+    }
+
+
+    @RequestMapping(value = "/deleteone",method = {RequestMethod.POST})
+    private JSONObject deleteOneInfo(@RequestBody User_Exercise user_exercise){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        JSONObject json = new JSONObject();
+
+        json = user_exercise_Service.deleteOne(user_exercise.getUser_id(),user_exercise.getDate());
+
+        json.put("code",0);
+        json.put("msg","删除所有成功");
+
+        return json;
+
+    }
 
 
 }
