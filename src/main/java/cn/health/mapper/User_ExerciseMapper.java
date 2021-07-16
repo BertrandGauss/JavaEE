@@ -16,7 +16,7 @@ public interface User_ExerciseMapper {
 
     List<User_Exercise> selectTotal(Integer user_id);
     
-    void deleteall(Integer id);
+    void deleteall(Integer user_id);
 
     List<User_Exercise> selectByTwoDate(@Param("user_id") Integer user_id,@Param("startDate") Date startDate,@Param("endDate") Date endDate);
 
