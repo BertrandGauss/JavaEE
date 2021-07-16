@@ -87,12 +87,9 @@ public class User_ExerciseController {
 
     @RequestMapping(value = "/deleteone",method = {RequestMethod.POST})
     private JSONObject deleteOneInfo(@RequestBody User_Exercise user_exercise){
-
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-
         JSONObject json = new JSONObject();
-
-        json = user_exercise_Service.deleteOne(user_exercise.getUser_id(),user_exercise.getDate());
+        json = user_exercise_Service.deleteOne(id,user_exercise.getDate());
 
         json.put("code",0);
         json.put("msg","删除一条信息成功");
