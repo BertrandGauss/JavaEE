@@ -88,17 +88,28 @@
             console.log(obj)
         });
         //监听工具条
-        table.on('tool(demo)', function(obj) {
+        table.on('tool(height_weight)', function(obj) {
             var data = obj.data;
+            console.log(data.date)
             if (obj.event === 'del') {
                 layer.confirm('真的删除成绩信息吗？', function(index) {
                     var data = obj.data;
                     $.ajax({
                         //几个参数需要注意一下
                         type: "POST",//方法类型
-                        dataType: "json",//预期服务器返回的数据类型
-                        url: "http://localhost:8081//",//url
-                        data: data,
+
+                        url: "http://localhost:8081/height_weight/deleteOne",//url
+                        xhrFields: {
+                            withCredentials: true,
+                        },
+                        dataType:"json",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                        "date":data.date,
+                        // "user_id":1,
+                        "height":0,
+                        "weight":0
+                    	}),
                         success: function (result) {
                             if (result.code == "0") {
                                 layer.close(index);
@@ -120,9 +131,9 @@
             }
             if (obj.event === 'edit') {
                 var editFrom = layui.layer.open({
-                    title : "编辑学生成绩信息",
+                    title : "编辑个人基本信息",
                     type : 2,
-                    content : "/score-edit.html",//弹出层页面
+                    content : "edit.html",//弹出层页面
                     area: ['800px', '400px'],
                     success : function(layero, index){
                         var body = layui.layer.getChildFrame('body', index);
