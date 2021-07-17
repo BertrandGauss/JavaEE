@@ -25,7 +25,7 @@ public interface UserMapper {
     
     void updateinfo(User user);
 
-    List<User> selectallinfo(Integer user_id);
+    User selectallinfo(Integer user_id);
     
     List<User_Food> selectALLByID(Integer user_id);
 
