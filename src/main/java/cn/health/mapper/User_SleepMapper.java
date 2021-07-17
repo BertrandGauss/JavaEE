@@ -11,7 +11,7 @@ public interface User_SleepMapper {
 
     List<User_Sleep> select30();
 
-    void update(@Param("date")Date date,@Param("starttime")Time starttime,@Param("sleeptime")Integer sleeptime);
+    void update(User_Sleep user_sleep);
 
     void deleteALL(Integer user_id);
 
