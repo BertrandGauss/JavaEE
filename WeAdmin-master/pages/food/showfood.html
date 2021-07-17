@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>展示具体食物</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/weadmin.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .layui-form-switch {
+            width: 55px;
+        }
+        .layui-form-switch em {
+            width: 40px;
+        }
+        body{overflow-y: scroll;}
+    </style>
+</head>
+<body>
+<div>
+    <table class="layui-table" id="foods">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>食物名称</th>
+            <th>食物份数</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script src="../../lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    var url = decodeURI(window.location.href);
+    var argsIndex = url .split("?date=");
+    var time = argsIndex[1];
+    layui.use([ 'jquery'], function() {
+        var $ = layui.jquery;
+        $(document).ready(
+            $.ajax({
+                type: "POST",   //提交的方法
+                url:"http://localhost:8081/food/showeat",
+                xhrFields: {
+                    withCredentials: true,
+                },
+                dataType:"json",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "date": time
+                }),
+                async: false,
+                error: function(request) {  //失败的话
+                    alert("Connection error");
+                },
+                success: function(data){
+                    var f = data.data
+                    for(var i=0 ; i<f.length ; i++){
+                        var h = i+1
+                        $("#foods").append(
+                            '<tr data-id="' + h + '">' +
+                            '<td>' + h + '</td>' +
+                            '<td>' + f[i]["name"] + '</td>' +
+                            '<td>' + f[i]["number"] + '</td>' +
+                            '</tr>'
+                        )
+                    }
+                }
+            })
+        )
+    })
+</script>
+
+</body>
+</html>
