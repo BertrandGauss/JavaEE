@@ -27,38 +27,39 @@
 	</style>
 </head>
 <body>
-	<div class="winBox" id="winBox">
-		<a class="winClosBtn" href="javascript:;"></a>
-		<div class="winTitle">
-			<h3>登录生活圈-Life</h3>
-		</div>
-		<div class="winMain">
-			<p><span class="textWb">手机/邮箱</span><input type="text" class="text" value="手机/邮箱" /></p>
-			<p><span class="textWb">密码</span><input type="text"  class="text" value="密码" /></p>
-			<p class="p_right"><span ><input  type="checkbox" >下次自动登录</span><a href="#">忘记密码</a></p>
-			<p class="winBtn"><input type="button" value="登录" /></p>
-			<p class="p_text"><a href="#" id="infoBtn">立即注册</a></p>
-		</div>
+
+<div class="winBox wow flipInY" id="infoMain">
+	<a class="winClosBtn" href="javascript:;"></a>
+	<div class="winTitle">
+		<h3>注册healthcare管理系统</h3>
 	</div>
-	<div class="winBox" id="infoMain">
-		<a class="winClosBtn" href="javascript:;"></a>
-		<div class="winTitle">
-			<h3>注册生活圈-Life</h3>
-		</div>
-		<div class="winMain" >
-			<p><span class="textWb">手机/邮箱</span><input type="text" class="text" value="手机/邮箱" /></p>
-			<p><span class="textWb">密码</span><input type="text"  class="text" value="密码" /></p>
-			<p><span class="textWb">验证码</span><input type="text"  class="text2" value="密码" /> <img class="yzm" src="images/yzm.jpg" height="38" width="95" alt="" /><a class="yzmBtn" href="javascript:;">换一张</a></p>
-			<p class="winBtn"><input type="button" value="注册" /></p>
-		</div>
+	<div class="winMain" >
+		<p><span class="textWb">手机</span><input type="text" name="telephone" id="telephone" class="text" placeholder="请输入手机号" onblur ="checkAll()"/></p>
+		<span id="s_phone" class="fa"></span>
+		<p><span class="textWb">用户名</span><input type="text" name="user_name" id="user_name" class="text" placeholder="请输入用户名" onblur ="checkAll()"/></p>
+		<span id="s_username" class="fa"></span>
+		<p><span class="textWb">密码</span><input type="password" name="user_password" id="user_password" class="text" placeholder="请输入密码" onblur ="checkAll()"/></p>
+		<span id="s_password" class="fa"></span>
+		<p><span class="textWb">确认密码</span><input type="password" name="surepassword" id="surepassword" class="text" placeholder="请再次输入密码" onblur ="checkAll()"/></p>
+		<span id="s_surepassword" class="fa"></span>
+		<p><span class="textWb">性别</span>
+			<input type="radio" id="gender" value="male"/>male
+			<input type="radio" id="gender" value="female"/>female
+		<p><span class="textWb">生日</span><input type="text"  name="birthday" id="birthday" class="text" placeholder="请输入生日" /></p>
+		<p><span class="textWb">邮箱</span><input type="text"  name="email" id="email" class="text" placeholder="请输入邮箱" /></p>
+		<span id="s_email" class="fa"></span>
+		<p><span class="textWb">验证码</span><input type="text"  class="text2" placeholder="请输入验证码" /> <img class="yzm" src="images/yzm.jpg" height="38" width="95" alt="" /><a class="yzmBtn" href="javascript:;">换一张</a></p>
+		<span id="RegErrInfo" style="font-size: 16px;color:red;">  </span>
+		<p class="winBtn"><input type="button" name="btn_sub" id="btn_sub" value="注册" /></p>
 	</div>
-	<div id="mark"></div>
-	<div class="box" id="bodyBox">
-	<div class="header">
-		<a href="index.html" class="logo"><img src="images/CompLogo.png" height="96" width="217" alt="" /></a>
+</div>
+<div id="mark"></div>
+<div class="box" id="bodyBox">
+	<div class="header ">
+		<a href="index.html" class="logo"><img src="images/logo.jpg" height="96" width="217" alt="" /></a>
 		<div href="javascript:;" title="用户登录" class="loginBtn" id="loginBtn"><img src="images/indexIcon3.gif" alt="用户登录" />
 			<div class="loginDown">
-				<a href="#" class="loginBtn1">登录</a>
+				<a href="../WeAdmin-master/login.html" class="loginBtn1">登录</a>
 				<a href="#" class="loginBtn2">注册</a>
 			</div>
 		</div>
@@ -67,11 +68,11 @@
 			<li class="menuItem"><a href="Familydoctor.html" class="menuA">操作指南</a></li>
 			<li class="menuItem"><a href="HealthyControl1.html"  class="menuA">功能说明</a>
 				<ul class="gl">
-					<li><a href="HealthyControl1.html" class="menuB">运动管理</a></li>
-					<li><a href="HealthyControl2.html" class="menuB">饮食睡眠管理</a></li>
-					<li><a href="HealthyControl3.html" class="menuB">用户管理</a></li>
-					<li><a href="HealthyControl4.html" class="menuB">问卷评估与分析</a></li>
-					<li><a href="HealthyControl5.html" class="menuB">健康小课堂</a></li>
+					<li><a href="HealthyControl1.html" class="menuB" style="text-align:left;">&nbsp运动管理</a></li>
+					<li><a href="HealthyControl2.html" class="menuB" style="text-align:left;">&nbsp饮食睡眠管理</a></li>
+					<li><a href="HealthyControl3.html" class="menuB" style="text-align:left;">&nbsp用户管理</a></li>
+					<li><a href="HealthyControl4.html" class="menuB" style="text-align:left;">&nbsp问卷评估与分析</a></li>
+					<li><a href="HealthyControl5.html" class="menuB" style="text-align:left;">&nbsp健康小课堂</a></li>
 				</ul>
 			</li>
 			<li class="menuItem"><a href="HealthyVideo.html"  class="menuA">健康课堂</a>

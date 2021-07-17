@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 
 	<head>
 		<meta charset="UTF-8">
@@ -16,7 +17,8 @@
 	</head>
 
 	<body>
-		<!-- 顶部开始 -->
+
+	<!-- 顶部开始 -->
 		<div class="container">
 			<div class="logo">
 				<a href="./index.html">WeAdmin v1.0</a>
@@ -45,8 +47,14 @@
 			</ul>
 			<ul class="layui-nav right" lay-filter="">
 				<li class="layui-nav-item">
-					<a href="javascript:;">Admin</a>
-					<dl class="layui-nav-child">
+					<a href="javascript:;" th:text="1222">
+						<img src="static/images/toux.jpg" class="layui-nav-img">
+
+						<span th:text="${session.LOGIN_NAME}">\${session.LOGIN_NAME}</span>
+
+						<!--<label ></label>-->
+						</a>
+						<dl class="layui-nav-child">
 						<!-- 二级菜单 -->
 						<dd>
 							<a onclick="WeAdminShow('个人信息','http://www.baidu.com')">个人信息</a>
@@ -60,7 +68,7 @@
 					</dl>
 				</li>
 				<li class="layui-nav-item to-index">
-					<a href="../Healthy-master/index.html" target="_blank">前台首页</a>
+					<a href="../Health-care/index.html" target="_blank">前台首页</a>
 				</li>
 			</ul>
 
