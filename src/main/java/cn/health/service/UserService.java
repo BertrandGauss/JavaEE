@@ -1,11 +1,18 @@
 package cn.health.service;
 
+import cn.health.domain.User_Calorie;
+import cn.health.domain.User_Exercise;
+import cn.health.domain.User_Food;
 import cn.health.mapper.UserMapper;
 import cn.health.domain.User;
 import cn.health.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -88,8 +95,8 @@ public class UserService {
 
     }
 
-    public  List<User> showuserinfo(Integer id){
-        List<User> user_info = userMapper.selectallinfo(id);
+    public User showuserinfo(Integer id){
+        User user_info = userMapper.selectallinfo(id);
         return user_info;
 
     }

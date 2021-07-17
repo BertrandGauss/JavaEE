@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.health.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -98,7 +100,7 @@ public class UserController {
 
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
 
-        List<User> userinfo = userService.showuserinfo(id);
+        User userinfo = userService.showuserinfo(id);
 
         JSONObject json = new JSONObject();
         json.put("code",0);

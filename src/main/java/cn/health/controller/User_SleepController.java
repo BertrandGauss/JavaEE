@@ -1,5 +1,6 @@
 package cn.health.controller;
 
+import cn.health.domain.DateRange;
 import cn.health.domain.User_Sleep;
 import cn.health.service.User_SleepService;
 import com.alibaba.fastjson.JSONObject;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/sleep")
@@ -77,8 +79,6 @@ public class User_SleepController {
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
 
         List<User_Sleep> user_date_info = user_sleepService.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
-
-
         JSONObject json = new JSONObject();
 
         json.put("code",0);
@@ -91,4 +91,4 @@ public class User_SleepController {
 
 }
 
-}
+
