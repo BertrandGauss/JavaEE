@@ -157,12 +157,12 @@
 		},
 		{
 			"id": 31,
-			"name": "个性化设置",
+			"name": "闹钟管理",
 			"icon": "&#xe723;",
 			"url": "",
 			"children":[{
 				"id": 32,
-				"name": "闹钟",
+				"name": "设置闹钟提醒",
 				"icon": "",
 				"url": "./pages/alarm/alarm.html"
 			}]

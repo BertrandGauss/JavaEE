@@ -1,8 +1,5 @@
 package cn.health.service;
 
-import cn.health.domain.User_Calorie;
-import cn.health.domain.User_Exercise;
-import cn.health.domain.User_Food;
 import cn.health.mapper.UserMapper;
 import cn.health.domain.User;
 import cn.health.util.MD5Util;
@@ -11,8 +8,11 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import static java.lang.StrictMath.max; 
 
 @Service
 public class UserService {
@@ -148,7 +148,8 @@ public class UserService {
             ucl.add(uc);
 
         }
-
+        
+        Collections.sort(ucl);
         return ucl;
     }
 }
