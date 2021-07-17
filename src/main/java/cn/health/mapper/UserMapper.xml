@@ -34,5 +34,27 @@
     <select id="selectByEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
         SELECT user_id FROM user WHERE email = #{email}
     </select>
+        
+    <update id="updateinfo" parameterType="cn.health.domain.User">
+        UPDATE user
+        SET user_name=#{user_name} , telephone=#{telephone} , email = #{email}
+        WHERE user_id=#{user_id}
+    </update>
+
+    <select id="selectallinfo" resultType="cn.health.domain.User">
+        SELECT *
+        FROM user
+        WHERE user_id = #{user_id}
+    </select>
+        
+    <select id="selectALLByID"  resultType="cn.health.domain.User_Food" >
+        SELECT * From user_food WHERE user_id = #{user_id}
+    </select>
+
+    <select id="selectTotal" resultType="cn.health.domain.User_Exercise">
+        SELECT *
+        FROM user_exercise
+        WHERE user_id = #{user_id}
+    </select>
 
 </mapper>

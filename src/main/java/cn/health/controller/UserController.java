@@ -1,6 +1,7 @@
 package cn.health.controller;
 
 import  cn.health.domain.User;
+import cn.health.domain.User_Calorie;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -74,6 +75,52 @@ public class UserController {
        
         return json;
     }
+    
+    
+    @RequestMapping(value = "/updateinfo",method = {RequestMethod.POST})
+    private JSONObject updateInfo(@RequestBody User user){
+
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        user.setUser_id(id);
+        
+        userService.updateinfo(user);
+
+        JSONObject json = new JSONObject();
+        json.put("code",0);
+        json.put("msg","更新用户信息成功");
+
+
+        return json;
+    }
+
+    @RequestMapping(value = "/showallinfo",method = {RequestMethod.GET})
+    private JSONObject showAllInfo(){
+
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        List<User> userinfo = userService.showuserinfo(id);
+
+        JSONObject json = new JSONObject();
+        json.put("code",0);
+        json.put("data",userinfo);
+        json.put("msg","返回用户信息成功");
+        return json;
+    }
+    
+    @RequestMapping(value = "/showallcalorie",method = {RequestMethod.GET})
+    private JSONObject showAllCalorie(){
+
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        List<User_Calorie> userca = userService.selectCaById(id);
+
+        JSONObject json = new JSONObject();
+        json.put("code",0);
+        json.put("data",userca);
+        json.put("msg","返回卡路里信息成功");
+        return json;
+    }
+    
 
 
 

@@ -22,6 +22,14 @@ public interface UserMapper {
     String findgenderByID(Integer user_id);
 
     String selectEmailByID(Integer user_id);
+    
+    void updateinfo(User user);
+
+    List<User> selectallinfo(Integer user_id);
+    
+    List<User_Food> selectALLByID(Integer user_id);
+
+    List<User_Exercise> selectTotal(Integer user_id);
 
 
 }

@@ -7,6 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import static java.lang.StrictMath.max; 
+
 @Service
 public class UserService {
     @Autowired
@@ -81,5 +88,68 @@ public class UserService {
         String user_name = userMapper.selectnameByID(id);
         return user_name;
 
+    }
+    
+      public void updateinfo(User user){
+        userMapper.updateinfo(user);
+
+    }
+
+    public User showuserinfo(Integer id){
+        User user_info = userMapper.selectallinfo(id);
+        return user_info;
+
+    }
+    
+    public List<User_Calorie> selectCaById(Integer id) {
+
+        List<User_Food> uf = userMapper.selectALLByID(id);
+
+        List<User_Exercise> ue = userMapper.selectTotal(id);
+
+        List<User_Calorie> ucl = new ArrayList<>();
+
+        int s1 = uf.size();
+        int s2 = uf.size();
+
+        for (int i = 0; i < s1; i++) {
+            Date d=uf.get(i).getDate();
+            for (int j = 0; j < s2; j++) {
+
+                int f = d.compareTo(ue.get(j).getDate());
+                if(f==1){
+                    User_Calorie uc=new User_Calorie();
+                    uc.setDate(uf.get(i).getDate());
+                    uc.setFood_calorie(uf.get(i).getTotal_calorie());
+                    uc.setExercise_calorie(ue.get(i).getTotal_calorie());
+                    ucl.add(uc);
+                }
+                uf.remove(i);
+                ue.remove(j);
+                break;
+            }
+        }
+        s1 = uf.size();
+        s2 = uf.size();
+        for(int i=0;i<s1;i++){
+            User_Calorie uc=new User_Calorie();
+            uc.setDate(uf.get(i).getDate());
+            uc.setFood_calorie(uf.get(i).getTotal_calorie());
+            uc.setExercise_calorie(null);
+            ucl.add(uc);
+
+        }
+
+        for(int i=0;i<s2;i++){
+            User_Calorie uc=new User_Calorie();
+            uc.setDate(ue.get(i).getDate());
+            uc.setFood_calorie(null);
+            uc.setExercise_calorie(ue.get(i).getTotal_calorie());
+            ucl.add(uc);
+
+        }
+        
+        Collections.sort(ucl);
+        return ucl;
     }
 }
