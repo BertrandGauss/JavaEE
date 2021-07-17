@@ -46,5 +46,15 @@
         FROM user
         WHERE user_id = #{user_id}
     </select>
+        
+    <select id="selectALLByID"  resultType="cn.health.domain.User_Food" >
+        SELECT * From user_food WHERE user_id = #{user_id}
+    </select>
+
+    <select id="selectTotal" resultType="cn.health.domain.User_Exercise">
+        SELECT *
+        FROM user_exercise
+        WHERE user_id = #{user_id}
+    </select>
 
 </mapper>
