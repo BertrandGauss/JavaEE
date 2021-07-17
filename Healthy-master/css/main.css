@@ -491,10 +491,11 @@ a {
 .winBox {
   display: none;
   width: 570px;
-  height: 700px;
+  height: 900px;
   background: #fff;
-  position: fixed;
-  z-index: 1000; }
+  position: absolute;
+  z-index: 1000;
+}
   .winBox a.winClosBtn {
     display: block;
     width: 16px;
