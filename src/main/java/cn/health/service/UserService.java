@@ -1,5 +1,8 @@
 package cn.health.service;
 
+import cn.health.domain.User_Calorie;
+import cn.health.domain.User_Exercise;
+import cn.health.domain.User_Food;
 import cn.health.mapper.UserMapper;
 import cn.health.domain.User;
 import cn.health.util.MD5Util;
@@ -96,7 +99,7 @@ public class UserService {
     }
 
     public User showuserinfo(Integer id){
-        User user_info = userMapper.selectallinfo(id);
+        User user_info = (User) userMapper.selectallinfo(id);
         return user_info;
 
     }
