@@ -75,5 +75,10 @@ public class AlarmclockService {
         mailSender.send(message);
     }
 
+    public List<Alarmclock> showAllAlarm(Integer id){
+        List<Alarmclock> alarmclocks=alarmclockMapper.selectALLByID(id);
+        return alarmclocks;
+    }
+
 //    public
 }

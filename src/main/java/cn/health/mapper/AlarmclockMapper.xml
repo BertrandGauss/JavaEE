@@ -3,11 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.health.mapper.AlarmclockMapper">
 
-    <insert id="add" parameterType="cn.health.domain.Alarmclock">
-        INSERT INTO alarmclock VALUES (#{id}, #{user_id}, #{name}, #{time}, #{type}, #{date})
+    <insert id="add" parameterType="cn.health.domain.Alarmclock" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO alarmclock(user_id, name, time, type, date) VALUES (#{user_id}, #{name}, #{time}, #{type}, #{date})
     </insert>
 
     <select id="selectByDate" parameterType="java.util.Date" resultType="cn.health.domain.Alarmclock">
         SELECT * FROM alarmclock WHERE type = 'everyday' OR date = #{date}
+    </select>
+
+    <select id="selectALLByID" parameterType="java.lang.Integer" resultType="cn.health.domain.Alarmclock">
+        SELECT * FROM alarmclock WHERE  user_id = #{user_id}
     </select>
 </mapper>
