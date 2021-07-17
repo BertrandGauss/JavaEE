@@ -25,4 +25,10 @@
     <delete id="deleteALL" >
         DELETE FROM user_sleep WHERE user_id=#{user_id}
     </delete>
+    
+     <select id="selectByTwoDate" resultType="cn.health.domain.User_Sleep">
+        SELECT *
+        FROM user_sleep
+        WHERE user_id = #{user_id} AND date BETWEEN #{startDate} and #{endDate}
+    </select>
 </mapper>

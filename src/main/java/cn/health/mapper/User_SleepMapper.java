@@ -16,4 +16,7 @@ public interface User_SleepMapper {
     void deleteALL(Integer user_id);
 
     void deleteOne(@Param("date")Date date,@Param("user_id")Integer user_id );
+    
+    List<User_Sleep> selectByTwoDate(@Param("user_id") Integer user_id, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
 }

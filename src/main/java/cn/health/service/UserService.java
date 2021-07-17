@@ -76,4 +76,10 @@ public class UserService {
         return json;
 
     }
+    
+    public String selectNameById(Integer id){
+        String user_name = userMapper.selectnameByID(id);
+        return user_name;
+
+    }
 }

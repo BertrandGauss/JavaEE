@@ -38,6 +38,7 @@ public class UserController {
         //保存用户id在session
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.phoneisregister(user.getTelephone()));
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        this.httpServletRequest.getSession().setAttribute("LOGIN_NAME", userService.selectNameById(id));
 
         System.out.println("get"+id);
         System.out.println("sessionId"+httpServletRequest.getSession().getId());
