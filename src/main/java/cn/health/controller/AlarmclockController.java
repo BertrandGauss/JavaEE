@@ -1,7 +1,9 @@
 package cn.health.controller;
 
 import cn.health.domain.Alarmclock;
+import cn.health.domain.User_Food;
 import cn.health.service.AlarmclockService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/alarmclock")
@@ -26,7 +29,16 @@ public class AlarmclockController {
         alarmclockService.addAlarmclock(alarmclock);
     }
 
-
+    @RequestMapping(value = "/showallalarm", method = {RequestMethod.GET})
+    private JSONObject showAllAlarm(){
+        JSONObject json = new JSONObject();
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        List<Alarmclock> alarmclocks = alarmclockService.showAllAlarm(id);
+        json.put("code",0);
+        json.put("msg","展示闹钟成功");
+        json.put("data",alarmclocks);
+        return json;
+    }
 //    @RequestMapping(value = "/sentalarmclock",method = {RequestMethod.GET})
 //    public void sent(){
 //        alarmclockService.sendMail();

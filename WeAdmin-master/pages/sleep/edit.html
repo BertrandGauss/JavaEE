@@ -19,28 +19,18 @@
 	<body>
 		<div class="weadmin-body">
 			<form class="layui-form">
-<!--				<div class="layui-form-item">-->
-<!--					<label for="date" class="layui-form-label">加入时间-->
-<!--		            </label>-->
-<!--					<div class="layui-input-inline">-->
-<!--						<input type="text" id="date" name="date" lay-verify="required" class="layui-input">-->
-<!--					</div>-->
-<!--					<div class="layui-form-mid layui-word-aux">-->
-<!--						请设置至少5个字符，将会成为您唯一的登录名-->
-<!--					</div>-->
-<!--				</div>-->
 				<div class="layui-form-item">
-					<label for="height2" class="layui-form-label">身高
+					<label for="height2" class="layui-form-label">入睡时间
 		            </label>
 					<div class="layui-input-inline">
-						<input type="text" id="height2" name="height2" lay-verify="required" autocomplete="" class="layui-input">
+						<input type="text" id="starttime" name="starttime" lay-verify="required" autocomplete="" class="layui-input">
 					</div>
 				</div>
 				<div class="layui-form-item">
-					<label for="weight2" class="layui-form-label">体重
+					<label for="weight2" class="layui-form-label">睡眠长度
 		            </label>
 					<div class="layui-input-inline">
-						<input type="text" id="weight2" name="weight2" lay-verify="required" autocomplete="off" class="layui-input">
+						<input type="text" id="sleeptime" name="sleeptime" lay-verify="required" autocomplete="off" class="layui-input">
 					</div>
 
 				</div>
@@ -79,7 +69,7 @@
 						var timenow = argsIndex[1];
 						$.ajax({
 							type:"POST",
-							url:"http://localhost:8081/height_weight/updateheight_weight",
+							url:"http://localhost:8081/sleep/updatesleepTime",
 							xhrFields: {
 								withCredentials: true,
 							},
@@ -88,8 +78,8 @@
 							//url:"#",
 							data: JSON.stringify({
 								"date": timenow,
-								"height":Number($("#height2").val()),
-								"weight":Number($("#weight2").val())
+								"starttime":$("#starttime").val(),
+								"sleeptime":$("#sleeptime").val()
 							}),
 							async: false,
 							error: function(request) {  //失败的话

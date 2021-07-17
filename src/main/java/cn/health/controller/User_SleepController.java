@@ -70,5 +70,25 @@ public class User_SleepController {
         return json;
 
     }
+    
+    @RequestMapping(value = "/selectbydate",method = {RequestMethod.POST})
+    private JSONObject selectByDate(@RequestBody DateRange dateRange){
+
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        List<User_Sleep> user_date_info = user_sleepService.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
+
+
+        JSONObject json = new JSONObject();
+
+        json.put("code",0);
+        json.put("data",user_date_info);
+        json.put("msg","查看部分信息成功");
+
+        return json;
+
+    }
+
+}
 
 }

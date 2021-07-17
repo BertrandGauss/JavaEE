@@ -3,6 +3,7 @@ package cn.health.controller;
 
 import cn.health.domain.DateRange;
 import cn.health.domain.User_Height_Weight;
+import cn.health.domain.User_Information;
 import cn.health.service.User_Height_Weight_Service;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,18 +64,18 @@ public class User_Height_WeightController {
     private JSONObject showINFO(){
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
         JSONObject user_info=user_height_weight_service.showAllinfo(id);
-
+        System.out.println("sessionId"+httpServletRequest.getSession().getId());
         return user_info;
 
     }
-   @RequestMapping(value = "/updateheight_weight",method = {RequestMethod.POST})    
-   private JSONObject updatehw(@RequestBody User_Height_Weight user_height_weight){
-       Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-       user_height_weight.setUser_id(id);
-       JSONObject json = new JSONObject();
-       json = user_height_weight_service.updateInfor(user_height_weight);
-       json.put("code",0);
-       json.put("msg","更改信息成功");
+   @RequestMapping(value = "/updateheight_weight",method = {RequestMethod.POST})
+       private JSONObject updatehw(@RequestBody User_Height_Weight user_height_weight){
+           Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+           user_height_weight.setUser_id(id);
+           JSONObject json = new JSONObject();
+           json = user_height_weight_service.updateInfor(user_height_weight);
+           json.put("code",0);
+           json.put("msg","更改信息成功");
 
        return json;
 
@@ -111,7 +112,7 @@ public class User_Height_WeightController {
     private JSONObject selectByDate(@RequestBody DateRange dateRange){
         System.out.print("查询");
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-        List<User_Height_Weight> user_date_info = user_height_weight_service.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
+        List<User_Information> user_date_info = user_height_weight_service.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
         JSONObject json = new JSONObject();
         json.put("code",0);
         json.put("data",user_date_info);

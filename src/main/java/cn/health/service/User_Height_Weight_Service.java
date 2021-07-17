@@ -89,7 +89,7 @@ public class User_Height_Weight_Service {
 
         List<User_Information> user_all_info=new ArrayList<User_Information>();
         for (int i=0;i<user_info.size();i++){
-            User_Information ui=new User_Information(user_info.get(i).getDate(),user_info.get(i).getHeight(),user_info.get(i).getWeight(),gender);
+            User_Information ui=new User_Information(i+1,user_info.get(i).getDate(),user_info.get(i).getHeight(),user_info.get(i).getWeight(),gender);
             user_all_info.add(ui);
 
         }
@@ -98,7 +98,9 @@ public class User_Height_Weight_Service {
         JSONObject json=new JSONObject();
         json.put("code",0);
         json.put("msg","所有身高体重信息");
+        json.put("count",user_all_info.size());
         json.put("data",user_all_info);
+
         return json;
 
     }
@@ -129,9 +131,17 @@ public class User_Height_Weight_Service {
         user_height_weightMapper.deleteone(id,date);
     }
     //查找记录
-    public List<User_Height_Weight> selectByDate(Integer id,Date stat,Date end){
+    public List<User_Information> selectByDate(Integer id,Date stat,Date end){
         List<User_Height_Weight> userinfoBydate =user_height_weightMapper.selectByTwoDate(id,stat,end);
-        return userinfoBydate;
+        String gender=user_height_weightMapper.selectgender(id);
+        List<User_Information> user_select_info=new ArrayList<User_Information>();
+        for (int i=0;i<userinfoBydate.size();i++){
+            User_Information ui=new User_Information(i+1,userinfoBydate.get(i).getDate(),userinfoBydate.get(i).getHeight(),userinfoBydate.get(i).getWeight(),gender);
+            user_select_info.add(ui);
+
+        }
+        
+        return user_select_info;
 
     }
 }

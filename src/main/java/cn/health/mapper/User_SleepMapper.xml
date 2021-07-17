@@ -13,7 +13,9 @@
     </select>
 
     <update id="update" parameterType="cn.health.domain.User_Sleep">
-        UPDATE user_sleep SET date=#{date} , sleeptime=#{sleeptime} , starttime = #{starttime}
+        UPDATE user_sleep 
+        SET date=#{date} , sleeptime=#{sleeptime} , starttime = #{starttime}
+        WHERE user_sleep.user_id=#{user_id}
     </update>
 
     <delete id="deleteOne" >
@@ -23,4 +25,10 @@
     <delete id="deleteALL" >
         DELETE FROM user_sleep WHERE user_id=#{user_id}
     </delete>
+    
+     <select id="selectByTwoDate" resultType="cn.health.domain.User_Sleep">
+        SELECT *
+        FROM user_sleep
+        WHERE user_id = #{user_id} AND date BETWEEN #{startDate} and #{endDate}
+    </select>
 </mapper>

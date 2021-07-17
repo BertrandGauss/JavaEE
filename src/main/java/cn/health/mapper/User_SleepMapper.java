@@ -11,9 +11,12 @@ public interface User_SleepMapper {
 
     List<User_Sleep> select30();
 
-    void update(User_Sleep  user_sleep);
+    void update(User_Sleep user_sleep);
 
     void deleteALL(Integer user_id);
 
     void deleteOne(@Param("date")Date date,@Param("user_id")Integer user_id );
+    
+    List<User_Sleep> selectByTwoDate(@Param("user_id") Integer user_id, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
 }

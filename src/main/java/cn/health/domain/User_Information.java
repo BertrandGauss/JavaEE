@@ -3,12 +3,14 @@ import java.util.Date;
 
 public class User_Information {
 
+    private Integer id;
     private Date date;
     private Integer height;
     private Integer weight;
     private String gender;
 
-    public User_Information(Date date,Integer height,Integer weight,String gender){
+    public User_Information(Integer id,Date date,Integer height,Integer weight,String gender){
+        this.id=id;
         this.date=date;
         this.height=height;
         this.weight=weight;
@@ -46,5 +48,13 @@ public class User_Information {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

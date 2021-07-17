@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8" />
-	<title>运动记录-WeAdmin Frame型后台管理系统-WeAdmin 1.0</title>
-	<meta name="renderer" content="webkit" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<link rel="stylesheet" href="../../static/css/font.css" />
-	<link rel="stylesheet" href="../../static/css/weadmin.css" />
-	<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-	<!--[if lt IE 9]>
-	<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-	<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-	<script type="text/javascript" src="../../js/jquery.min.js"></script>
-	<![endif]-->
+    <meta charset="UTF-8" />
+    <title>个人基本情况-WeAdmin Frame型后台管理系统-WeAdmin 1.0</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" href="../../static/css/font.css" />
+    <link rel="stylesheet" href="../../static/css/weadmin.css" />
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
@@ -22,103 +22,214 @@
 				<a href="javascript:window.close(); ">首页</a> <a href="javascript:;">运动管理</a>
 				<a href="javascript:;"> <cite>运动记录</cite></a>
 			</span>
-	<a class="layui-btn layui-btn-sm" style="margin-top:3px;float:right" href="javascript:location.replace(location.href);"
-	   title="刷新">
-		<i class="layui-icon layui-icon-refresh"></i>
-		<!-- <i class="layui-icon" style="line-height:30px">&#x1002;</i> -->
-	</a>
+    <a class="layui-btn layui-btn-sm" style="margin-top:3px;float:right" href="javascript:location.replace(location.href);"
+       title="刷新">
+        <i class="layui-icon layui-icon-refresh"></i>
+        <!-- <i class="layui-icon" style="line-height:30px">&#x1002;</i> -->
+    </a>
 </div>
 
 <div class="weadmin-body">
-	<div class="layui-row">
-		<form class="layui-form layui-col-md12 we-search">
-			信息搜索：
-			<div class="layui-inline">
-				<input class="layui-input" placeholder="开始日" name="start" id="start" />
-			</div>
-			<div class="layui-inline">
-				<input class="layui-input" placeholder="截止日" name="end" id="end" />
-			</div>
-			<button class="layui-btn" lay-submit="" lay-filter="sreach">
-				<i class="layui-icon layui-icon-search"></i>
-			</button>
-		</form>
-	</div>
-	<div class="weadmin-block" id="topline" name="topline">
-		<button class="layui-btn layui-btn-danger" onclick="delAll()">
-			<i class="layui-icon layui-icon-delete"></i>批量删除
-		</button>
-		<button class="layui-btn" onclick="WeAdminShow('添加信息','./add.html',600,400)">
-			<i class="layui-icon layui-icon-add-circle-fine"></i>添加信息
-		</button>
-<!--		<span class="fr" style="line-height:40px">共有数据：88 条</span>-->
-	</div>
-	<table class="layui-table" id="memberList">
-		<thead>
-		<tr>
-			<th>
-				<div class="layui-unselect header layui-form-checkbox" lay-skin="primary">
-					<i class="layui-icon">&#xe605;</i>
-				</div>
-			</th>
-			<th>ID</th>
-			<th>时间</th>
-			<th>消耗卡路里</th>
-		</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 we-search">
+            信息搜索：
+            <div class="layui-inline">
+                <input class="layui-input" placeholder="开始日" name="start" id="start"  />
+            </div>
+            <div class="layui-inline">
+                <input class="layui-input" placeholder="截止日" name="end" id="end"  />
+            </div>
+            <button class="layui-btn" lay-submit="" lay-filter="search">
+                <i class="layui-icon layui-icon-search"></i>
+            </button>
+        </form>
+    </div>
+    <div class="weadmin-block" id="topline" name=""topline>
+        <button class="layui-btn layui-btn-danger" onclick="deleAll()">
+            <i class="layui-icon layui-icon-delete"></i>批量删除
+        </button>
+        <button class="layui-btn" onclick="WeAdminShow('添加信息','./add.html',600,400)">
+            <i class="layui-icon layui-icon-add-circle-fine"></i>添加信息
+        </button>
+    </div>
+    <table class="layui-table"  lay-data="{ url:'http://localhost:8081/exercise/showexercise', page:true, id:'sportst'}" lay-filter="sportst">
+        <thead>
+        <tr>
+            <!--<th>-->
+            <!--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary">-->
+            <!--<i class="layui-icon">&#xe605;</i>-->
+            <!--</div>-->
+            <!--</th>-->
+            <th lay-data="{type:'checkbox', }"></th>
+            <th lay-data="{field:'id' , templet:'#xuhao'}">ID</th>
+            <th lay-data="{field:'total_calorie'}">消耗卡路里</th>
+            <th lay-data="{field:'date', sort: true , templet: '#titleTpl'}">时间</th>
+            <th  lay-data="{fixed: 'right',align:'left', toolbar: '#barDemo'}">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
 </div>
 <script src="../../lib/layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript">
-	layui.use(['form', 'jquery','util','admin', 'layer'], function() {
-		var $ = layui.jquery;
-		$(document).ready(
-				$.ajax({
-					type: "GET",   //提交的方法
-					url:"http://localhost:8081/exercise/showexercise",
-					xhrFields: {
-						withCredentials: true,
-					},
-					dataType:"json",
-					contentType: "application/json",
-					async: false,
-					error: function(request) {  //失败的话
-						alert("Connection error");
-					},
-					success: function(data) {
-						var f = data.data
-						for(var i = 0; i <f.length;i++){
-							var h=i+1
-							time = f[i]["date"].split("T")[0]
-							$("#memberList").append(
-									'<tr data-id="' + h + '">' +
-									'<td>'+
-									'<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="' + h + '"><i class="layui-icon">&#xe605;</i></div>'+
-									'</td>'+
-									'<td>' + h + '</td>'+
-									'<td>'+time+'</td>'+
-									'<td>'+f[i]["total_calorie"]+'</td>'+
-									'<td class="td-manage">'+
-									'<a title="编辑" onclick="WeAdminShow(\'编辑\',\'./edit.html\',600,400)" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
-									'<a title="删除" onclick="member_del(this,\'要删除的id\')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a>'+
-									'</td>'+
-									'</tr>'
-							)
-							$("#topline").append(
-									'<span class="fr" style="line-height:40px">共有数据：'+f.length+' 条</span>'
-							)
-
-						}
-
-					}
-				})
-		)})
-
+<script type="text/html" id="barDemo">
+<!--    <a title="编辑" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>-->
+    <a title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
 </script>
-<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
+<script type="text/html" id="titleTpl">
+    {{#
+    var fn = function(data){
+    return data.substring(0,10);
+    };
+    }}
+    {{ fn(d.date) }}
+</script>
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
+
+<script>
+    layui.use('table', function() {
+        var $ = layui.jquery
+        var table = layui.table;
+        //监听表格复选框选择
+        table.on('checkbox(sportst)', function(obj) {
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(sports)', function(obj) {
+            var data = obj.data;
+            console.log(data.date)
+            if (obj.event === 'del') {
+                layer.confirm('真的删除这条记录吗？', function(index) {
+                    var data = obj.data;
+                    $.ajax({
+                        //几个参数需要注意一下
+                        type: "POST",//方法类型
+
+                        url: "http://localhost:8081/exercise/deleteone",//url
+                        xhrFields: {
+                            withCredentials: true,
+                        },
+                        dataType:"json",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            "date":data.date,
+                        }),
+                        success: function (result) {
+                            if (result.code == "0") {
+                                layer.close(index);
+                                layer.msg('删除成功');
+                                layui.table.reload("sportst",{page:{curr:1}});
+                            }else{
+                                layer.msg('删除失败', {
+                                    icon: 5
+                                });
+                            }
+                        },
+                        error : function() {
+                            layer.msg('服务器错误', {
+                                icon: 5
+                            });
+                        }
+                    });
+                });
+            }
+            // if (obj.event === 'edit') {
+            //     var data = obj.data;
+            //     WeAdminShow('编辑','./edit.html?date='+data.date,600,400);
+            // }
+        });
+
+        //触发事件
+        var active = {
+            tabAdd : function() {
+
+                layer.open({
+                    type: 2,
+                    title: '添加学生成绩信息',
+                    shadeClose: true,
+                    shade: false,
+                    /*    maxmin: true,  *///开启最大化最小化按钮
+                    area: ['800px', '400px'],
+                    content: '/add.html'
+                });
+
+            },search:function(){
+                var name=$("#studentNameSearch").val();
+                table.reload('height_weight',{
+                    method: 'POST'
+                    , where: {
+                        "studentName":name},page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+
+                })
+            }
+        };
+
+        $('#studentSearch .layui-btn').on('click', function() {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+    });
+</script>
+
+
+<script>
+    function deleAll() {
+        layui.use(['form', 'jquery','util','admin', 'layer'], function() {
+            var $ = layui.jquery;
+            $.ajax({
+                type: "POST",   //提交的方法
+                url:"http://localhost:8081/exercise/deleteall",
+                xhrFields: {
+                    withCredentials: true,
+                },
+                dataType:"json",
+
+                contentType: "application/json",
+                async: true,
+                error: function(request) {  //失败的话
+                    alert("Connection error");
+                },
+                success: function(data) {
+
+                }
+            })
+        });
+        window.delAll();
+    }
+</script>
+<script>
+    layui.use(['form', 'jquery','util','admin', 'layer'], function() {
+        var form = layui.form,
+            table = layui.table,
+            $ = layui.jquery,
+            util = layui.util,
+            admin = layui.admin,
+            layer = layui.layer;
+        form.on('submit(search)',function (data){(
+
+            table.reload('sportst', {
+                url:"http://localhost:8081/exercise/selectbydate",
+                method: 'POST',
+                contentType: 'application/json'
+                , where: {
+                    "startdate":data.field.start,
+                    "enddate":data.field.end
+
+                }, page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            })
+
+        )
+            return false;
+        })})
+</script>
 <script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
