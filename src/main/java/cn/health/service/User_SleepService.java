@@ -44,6 +44,12 @@ public class User_SleepService {
     public  void deleteOne(Date date , Integer id ){
         user_sleepMapper.deleteOne(date,id);
     }
+    
+    public List<User_Sleep> selectByDate(Integer id, Date start, Date end){
+        List<User_Sleep> userinfoBydate =user_sleepMapper.selectByTwoDate(id,start,end);
+        return userinfoBydate;
+
+    }
 
 
 }
