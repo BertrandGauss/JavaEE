@@ -50,7 +50,8 @@
 					<a href="javascript:;" th:text="1222">
 						<img src="static/images/toux.jpg" class="layui-nav-img">
 
-						<span th:text="${session.LOGIN_NAME}">\${session.LOGIN_NAME}</span>
+						<!--姓名展示-->
+						<cite class="cite-user-name"></cite>
 
 						<!--<label ></label>-->
 						</a>
@@ -130,6 +131,35 @@
 					// 	return false;
 					// }
 				});
+                function init() {
+                    //显示姓名
+                    $.ajax({
+                        type: "GET",   //提交的方法
+                        url:"http://localhost:8081/user/getusername",
+                        xhrFields: {
+                            withCredentials: true,
+                        },
+                        dataType:"json",
+                        contentType: "application/json",
+                        async: false,
+                        error: function(request) {  //失败的话
+                            alert("Connection error");
+                        },
+                        success: function(data) {
+
+                            if (data.code==0){
+                                $('.cite-user-name').text(data.data);
+                            }
+                            else{
+                                alert(data.msg)
+                            }
+                        }
+
+                    })
+
+                }
+
+                init();
 			});
 
 		</script>

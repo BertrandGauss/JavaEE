@@ -38,7 +38,6 @@ public class UserController {
         //保存用户id在session
         this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.phoneisregister(user.getTelephone()));
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
-        this.httpServletRequest.getSession().setAttribute("LOGIN_NAME", userService.selectNameById(id));
 
         System.out.println("get"+id);
         System.out.println("sessionId"+httpServletRequest.getSession().getId());
@@ -56,6 +55,23 @@ public class UserController {
         //保存用户id在session
         httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.phoneisregister(user.getTelephone()));
 
+        return json;
+    }
+    
+    
+    @RequestMapping(value = "/getusername",method = {RequestMethod.GET})
+    private JSONObject getUserName(){
+
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        String user_name=userService.selectNameById(id);
+
+        JSONObject json = new JSONObject();
+
+        json.put("code",0);
+        json.put("data",user_name);
+        json.put("msg","返回用户名成功");
+        
+       
         return json;
     }
 
