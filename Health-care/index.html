@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="keywords" content="关键字" />
+	<meta name="description" content="网站描述" />
+	<title>Health-Care</title>
+	<link rel="stylesheet" href="css/Normalize_Css_1.0.min.css" />
+	<link rel="stylesheet" href="css/animate.min.css" />
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/idangerous.swiper.css" />
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/idangerous.swiper.min.js"></script>
+	<script type="text/javascript" src="js/wow.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/register.js"></script>
+	<style type="text/css">
+		#BJ{            /*图片居中 */
+			text-align: center;
+		}
+		#img{           /*图片宽度，高度 */
+			width: 1280px;
+			height: 500px;
+		}
+		#ol{
+			position: absolute;    /* 绝对定位 */
+			bottom: 85px;       /* 高度 */
+			width: 80%;        /* 宽度 */
+			text-align: center;  /* 居中*/
+			right: 15px;
+		}
+
+	</style>
+	<style type="text/css">
+		div img{
+			cursor: pointer;
+			transition: all 0.6s;
+		}
+		div img:hover{
+			transform: scale(0.9);
+		}
+	</style>
+
+</head>
+<script type="text/javascript">
+    //图片自动切换部分：
+    var index=0;
+    var imgs=["images/firstpage1.png","images/firstpage2.png","images/firstpage13.png"]; /*图片的地址 */
+    function qiehuan(){
+        document.getElementById("img").src=imgs[index];
+        index++;
+        if(index > 2){
+            index=0;    //只有三张图片，当为3的时候重置为0
+        }
+    }
+    setInterval("qiehuan()",1500);  //每3秒重新运行函数qiehuan()
+
+</script>
+<body>
+	<div class="winBox wow flipInY" id="infoMain">
+		<a class="winClosBtn" href="javascript:;"></a>
+		<div class="winTitle">
+			<h3>注册healthcare管理系统</h3>
+		</div>
+		<div class="winMain" >
+			<p><span class="textWb">手机</span><input type="text" name="telephone" id="telephone" class="text" placeholder="请输入手机号" onblur ="checkAll()"/></p>
+			<span id="s_phone" class="fa"></span>
+			<p><span class="textWb">用户名</span><input type="text" name="user_name" id="user_name" class="text" placeholder="请输入用户名" onblur ="checkAll()"/></p>
+			<span id="s_username" class="fa"></span>
+			<p><span class="textWb">密码</span><input type="password" name="user_password" id="user_password" class="text" placeholder="请输入密码" onblur ="checkAll()"/></p>
+			<span id="s_password" class="fa"></span>
+			<p><span class="textWb">确认密码</span><input type="password" name="surepassword" id="surepassword" class="text" placeholder="请再次输入密码" onblur ="checkAll()"/></p>
+			<span id="s_surepassword" class="fa"></span>
+			<p><span class="textWb">性别</span>
+			<input type="radio" id="gender" value="male"/>male
+				<input type="radio" id="gender" value="female"/>female
+			<p><span class="textWb">生日</span><input type="text"  name="birthday" id="birthday" class="text" placeholder="请输入生日" /></p>
+			<p><span class="textWb">邮箱</span><input type="text"  name="email" id="email" class="text" placeholder="请输入邮箱" /></p>
+			<span id="s_email" class="fa"></span>
+			<p><span class="textWb">验证码</span><input type="text"  class="text2" placeholder="请输入验证码" /> <img class="yzm" src="images/yzm.jpg" height="38" width="95" alt="" /><a class="yzmBtn" href="javascript:;">换一张</a></p>
+			<span id="RegErrInfo" style="font-size: 16px;color:red;">  </span>
+			<p class="winBtn"><input type="button" name="btn_sub" id="btn_sub" value="注册" /></p>
+		</div>
+	</div>
+	<div id="mark"></div>
+	<div class="box" id="bodyBox">
+	<div class="header ">
+		<div class="header ">
+			<a href="index.html" class="logo"><img src="images/logo.jpg" height="96" width="217" alt="" /></a>
+			<div href="javascript:;" title="用户登录" class="loginBtn" id="loginBtn"><img src="images/indexIcon3.gif" alt="用户登录" />
+				<div class="loginDown">
+					<a href="../WeAdmin-master/login.html" class="loginBtn1">登录</a>
+					<a href="#" class="loginBtn2">注册</a>
+				</div>
+			</div>
+		<ul class="nav " id="nav">
+			<li class="menuItem"><a href="index.html" class="active menuA">首页</a></li>
+			<li class="menuItem"><a href="Familydoctor.html" class="menuA">操作指南</a></li>
+			<li class="menuItem"><a href="HealthyControl1.html"  class="menuA">功能说明</a>
+				<ul class="gl">
+					<li><a href="HealthyControl1.html" class="menuB" style="text-align:left;">&nbsp运动管理</a></li>
+					<li><a href="HealthyControl2.html" class="menuB" style="text-align:left;">&nbsp饮食睡眠管理</a></li>
+					<li><a href="HealthyControl3.html" class="menuB" style="text-align:left;">&nbsp用户管理</a></li>
+					<li><a href="HealthyControl4.html" class="menuB" style="text-align:left;">&nbsp问卷评估与分析</a></li>
+					<li><a href="HealthyControl5.html" class="menuB" style="text-align:left;">&nbsp健康小课堂</a></li>
+				</ul>
+			</li>
+			<li class="menuItem"><a href="HealthyVideo.html"  class="menuA">健康课堂</a>
+				<ul>
+					<li><a href="HealthyVideo.html" class="menuB">饮食健康有关</a></li>
+					<li><a href="HealthyActivity.html" class="menuB">运动健康有关</a></li>
+					<li><a href="HealthyActivity.html" class="menuB">心理健康有关</a></li>
+				</ul>
+			</li>
+			<li class="menuItem"><a href="Member.html"  class="menuA">个人中心</a>
+				<ul>
+					<li><a href="#" class="menuB">意见与反馈</a></li>
+				</ul>
+			</li>
+			<li class="menuItem"><a href="aboutUs1.html"  class="menuA">关于我们</a>
+				<ul>
+					<li><a href="aboutUs1.html" class="menuB">关于我们</a></li>
+					<li><a href="aboutUs2.html" class="menuB">加入我们</a></li>
+					<li><a href="aboutUs3.html" class="menuB">联系方式</a></li>
+				</ul>
+			</li>
+		</ul>
+		<a href="javascript:;" class="phoneMenu" id="phoneMenu"><img src="images/phoneMenu.jpg" alt="" />
+			
+		</a>
+	</div>
+	<<div>
+		<div id="BJ">
+			<img src="images" id="img" />
+		</div>
+		<ul id="ol">
+			<!--设置图片为一行 ；设置图片间隔 -->
+			<li style="display: inline-block;margin: 0 5px;"></li>
+			<li style="display: inline-block;margin: 0 5px;"></li>
+			<li style="display: inline-block;margin: 0 5px;"></li>
+
+		</ul>
+	</div>
+	<div class="indexPage">
+		<div class="indexTop wow pulse">
+			<a class="tel"><img src="images/indexIcon1.gif" alt="" />400 202 713</a>
+			<a href="http://p1.qiao.baidu.com/im/index?siteid=3242464&ucid=5688585&lastsubid=&from=%E5%8C%97%E4%BA%AC%E6%9C%9D%E9%98%B3&bid=9f1d145fdec7b9173871c553&chattype=1&groupid=&groupname=&subid=&subname=&ref=http%3A%2F%2Fqiao.baidu.com%2Fhome%2F" target="_blank" class="Consultation"><img src="images/indexIcon2.gif" alt="https://dxy.com/" />在线咨询</a>
+		</div>
+		<div class="indexPageTab">
+			<div class="left wow fadeInLeft">
+				<a href="indexTab.html?0" class="indexTabicon1">
+					<img src="images/indexBannerIcon1.gif"alt="" />
+					<img src="images/indexBannerIcon1_hover.gif" class="hover" alt="" />
+					<br class="br" />
+					<span><b>1.</b>多方面的健康小知识</span>
+				</a>
+				<a href="indexTab.html?2" class="indexTabicon3">
+					<img src="images/indexBannerIcon3.gif" alt="" />
+					<img src="images/indexBannerIcon3_hover.gif"  class="hover" alt="" />
+					<br class="br" />
+					<span><b>3.</b>健康评估与分析</span>
+				</a>
+			</div>
+			<div class="center wow fadeInDownBig">
+				<a href="HealthyControl1.html">我们为您提供的<br />不仅仅是<br />健康管理<br />......</a>
+			</div>
+			<div class="right wow fadeInRight">
+				<a href="indexTab.html?1" class="indexTabicon2">
+					<img src="images/indexBannerIcon2.gif" alt="" />
+					<img src="images/indexBannerIcon2_hover.gif" class="hover"  alt="" />
+					<br class="br" />
+					<span><b>2.</b>量身打造健康运动与饮食推荐</span>
+				</a>
+				<a href="indexTab.html?3" class="indexTabicon4">
+					<img src="images/indexBannerIcon4.gif" alt="" />
+					<img src="images/indexBannerIcon4_hover.gif" class="hover"  alt="" />
+					<br class="br" />
+					<span><b>4.</b>短信提醒按时吃药及睡眠</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="adPanel">
+		<div class="adPanelMain">
+			<div class="left wow rotateInDownLeft">
+				<a href="HealthyVideo.html">
+					<img src="images/adImg1.jpg" alt="" />
+					<span>
+						<b>我们为什么需要进行健康管理？</b><br />
+						健康不是一切,没有健康没有一切！
+					</span>
+				</a>
+			</div>
+			<div class="right wow rotateInDownRight">
+				<a href="HealthyControl1.html" class="title">我们都有哪些健康管理？</a>
+				<div class="all">
+				<a href="HealthyControl1.html">运动管理></a>
+				<a href="HealthyControl2.html">饮食管理></a>
+				<a href="HealthyControl2.html">睡眠管理></a>
+				<a href="HealthyControl3.html">用户管理></a>
+				<a href="HealthyControl4.html">问卷评估与分析></a>
+				<a href="HealthyVideo.html">健康课堂></a>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="commentsPanel">
+		<div class="title">小组成员</div>
+		<ul id="comments">
+			<li class="left wow pulse">
+				<div class="commentsTop">
+					<img src="images/kawuli.jpg" alt="" />
+					<span>
+						<b>卡吾力</b>界面设计员
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" /> 
+				</div>
+			</li>
+			<li class=" wow pulse">
+				<div class="commentsTop">
+					<img src="images/yangxingyu.jpg" alt="" />
+					<span>
+						<b>杨兴宇</b>界面设计员
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+				</div>
+			</li>
+			<li class="right wow pulse">
+				<div class="commentsTop">
+					<img src="images/pengchao.jpg" alt="" />
+					<span>
+						<b>彭超</b>项目经理&架构设计师
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+				</div>
+			</li>
+			<li class="clear"></li>
+			<li class="left wow pulse">
+				<div class="commentsTop">
+					<img src="images/huangruixue.jpg "alt="" />
+					<span>
+						<b>黄瑞雪</b>后端开发
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+				</div>
+			</li>
+			<li class=" wow pulse">
+				<div class="commentsTop">
+					<img src="images/hecancan.jpg" alt="" />
+					<span>
+						<b>何灿灿</b>数据库设计员
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+				</div>
+			</li>
+			<li class="right wow pulse">
+				<div class="commentsTop">
+					<img src="images/pengyuping.jpg" alt="" />
+					<span>
+						<b>彭钰萍</b>数据库设计员
+					</span>
+				</div>
+				<div class="commentsText">
+					<img src="images/indexPlan.jpg" alt="" />
+				</div>
+			</li>
+		</ul>
+	
+	</div>
+	<div class="cooperationPanel wow fadeInUp">
+		<div class="title">合作伙伴</div>
+		<div class="cooperationBtn">
+			<a href="javascript:;" class="right" id="rollRight"></a><a href="javascript:;" id="rollLeft" class="left"></a>
+		</div>
+
+		<div class="swiper-container cooperationMain">
+			  <div class="swiper-wrapper">
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/logo1.jpg" alt="" /></a>
+			      </div>
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/huadi.png" alt="" /></a>
+			      </div>
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/logo2.png" alt="" /></a>
+			      </div>
+			      <div class="swiper-slide" >
+			      	<a href="#"><img src="images/CompLogo.png" alt="" /></a>
+			      </div>
+
+			      
+			      
+			  </div>
+			  <div class="pagination"></div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="footerMain  wow pulse">
+			<div class="left"><a href="#"><img src="images/CompLogo.png" alt="" /></a></div>
+			<div class="center">
+				<div class="title">联系我们</div>
+				<a href="#"><img src="images/indexIcon6.gif" alt="" class="footerPc" /><img src="images/phone_icon5.png" class="phone_icon" alt="" />400 202 713 </a>
+				<a href="#"  class="mail"><img src="images/indexIcon7.gif" alt="" class="footerPc" /><img src="images/phone_icon4.png" class="phone_icon" alt="" />healthcare0713@163.com </a>
+			</div>
+			<div class="right">
+				<div class="bottom">
+					<a href="#"><img src="images/indexIcon8.gif" alt=""  class="footerPc" /><img class="phone_icon" src="images/phone_icon3.png" alt="" />成都市郫都区德源镇大禹东路66号</a>
+				</div>
+				<div class="top topMa">
+					<a href="#"><img src="images/indexIcon4.gif" class="int" alt="" /><img class="hover" src="images/indexIcon4_hover.gif" alt="" /></a>
+					<a href="#"><img src="images/indexIcon5.gif" class="int" alt="" /><img class="hover" src="images/indexIcon5_hover.gif" alt="" /></a>
+
+					<div>
+						<img src="images/qm.jpg" alt="微信" />
+						<img src="images/qm.jpg" alt="微博" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="phoneMenumain" id="phoneMenu2">
+		<div href="javascript:;" title="用户登录" class="loginBtn" id="loginBtn"><img src="images/indexIcon3.gif" alt="用户登录" />
+			<div class="loginDown">
+				<a href="../WeAdmin-master/login.html" class="loginBtn1">登录</a>
+				<a href="#" class="loginBtn2">注册</a>
+			</div>
+		</div>
+		 <ul class="phoneUL">
+				<li class="menuItem"><a href="index.html" class="active menuA">首页</a></li>
+			 <li class="menuItem"><a href="Familydoctor.html" class="menuA">操作指南</a></li>
+			 <li class="menuItem"><a href="HealthyControl1.html"  class="menuA">功能说明</a>
+				 <ul class="gl">
+					 <li><a href="HealthyControl1.html" class="menuB" text-align ="left" >运动管理</a></li>
+					 <li><a href="HealthyControl2.html" class="menuB" text-align ="left">饮食睡眠管理</a></li>
+					 <li><a href="HealthyControl3.html" class="menuB" text-align ="left">用户管理</a></li>
+					 <li><a href="HealthyControl4.html" class="menuB" text-align ="left">问卷评估与分析</a></li>
+					 <li><a href="HealthyControl5.html" class="menuB" text-align ="left">健康小课堂</a></li>
+				 </ul>
+			 </li>
+			 <li class="menuItem"><a href="HealthyVideo.html"  class="menuA">健康课堂</a>
+				 <ul>
+					 <li><a href="HealthyVideo.html" class="menuB">饮食健康有关</a></li>
+					 <li><a href="HealthyActivity.html" class="menuB">运动健康有关</a></li>
+					 <li><a href="HealthyActivity.html" class="menuB">心理健康有关</a></li>
+				 </ul>
+			 </li>
+			 <li class="menuItem"><a href="Member.html"  class="menuA">个人中心</a>
+				 <ul>
+					 <li><a href="#" class="menuB">意见与反馈</a></li>
+				 </ul>
+			 </li>
+						<li><a href="aboutUs1.html" class="menuB">关于我们</a></li>
+						<li><a href="aboutUs2.html" class="menuB">加入我们</a></li>
+						 
+						<li><a href="aboutUs3.html" class="menuB">联系方式</a></li>
+					</ul>
+				</li>
+			</ul>
+		<div class="phoneMenuBottom">
+			<a href="#"><img src="images/phoneIcon1.png" alt="https://dxy.com/" />在线咨询</a>
+			<a href="#"><img src="images/phoneIcon2.png" alt="" />400 202 713</a>
+			<!-- <img src="images/menu_logo.png" alt="" class="logo" /> -->
+		</div>
+	</div>
+</body>
+
+</html>
