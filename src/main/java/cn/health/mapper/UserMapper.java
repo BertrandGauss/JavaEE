@@ -1,8 +1,11 @@
 package cn.health.mapper;
 
 import cn.health.domain.User;
+import cn.health.domain.User_Exercise; 
+import cn.health.domain.User_Food; 
 
 import java.util.Date;
+import java.util.List;   
 
 public interface UserMapper {
 
