@@ -33,7 +33,7 @@ public class User_SleepService {
     }
 
     public void updateSleepTime(User_Sleep user_sleep){
-        user_sleepMapper.update(user_sleep.getDate(),user_sleep.getStarttime(),user_sleep.getSleeptime());
+        user_sleepMapper.update(user_sleep);
 
     }
 
