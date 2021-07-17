@@ -7,6 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import static java.lang.StrictMath.max; 
+
 @Service
 public class UserService {
     @Autowired
@@ -88,8 +95,8 @@ public class UserService {
 
     }
 
-    public  List<User> showuserinfo(Integer id){
-        List<User> user_info = userMapper.selectallinfo(id);
+    public User showuserinfo(Integer id){
+        User user_info = userMapper.selectallinfo(id);
         return user_info;
 
     }
@@ -141,7 +148,8 @@ public class UserService {
             ucl.add(uc);
 
         }
-
+        
+        Collections.sort(ucl);
         return ucl;
     }
 }
