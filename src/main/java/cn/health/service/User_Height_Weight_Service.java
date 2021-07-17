@@ -131,9 +131,17 @@ public class User_Height_Weight_Service {
         user_height_weightMapper.deleteone(id,date);
     }
     //查找记录
-    public List<User_Height_Weight> selectByDate(Integer id,Date stat,Date end){
+    public List<User_Information> selectByDate(Integer id,Date stat,Date end){
         List<User_Height_Weight> userinfoBydate =user_height_weightMapper.selectByTwoDate(id,stat,end);
-        return userinfoBydate;
+        String gender=user_height_weightMapper.selectgender(id);
+        List<User_Information> user_select_info=new ArrayList<User_Information>();
+        for (int i=0;i<userinfoBydate.size();i++){
+            User_Information ui=new User_Information(i+1,userinfoBydate.get(i).getDate(),userinfoBydate.get(i).getHeight(),userinfoBydate.get(i).getWeight(),gender);
+            user_select_info.add(ui);
+
+        }
+        
+        return user_select_info;
 
     }
 }
