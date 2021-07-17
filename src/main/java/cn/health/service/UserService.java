@@ -82,4 +82,15 @@ public class UserService {
         return user_name;
 
     }
+    
+      public void updateinfo(User user){
+        userMapper.updateinfo(user);
+
+    }
+
+    public  List<User> showuserinfo(Integer id){
+        List<User> user_info = userMapper.selectallinfo(id);
+        return user_info;
+
+    }
 }
