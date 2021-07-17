@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import cn.health.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
 import java.util.List;
 
 @RestController

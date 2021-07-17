@@ -1,11 +1,11 @@
 package cn.health.mapper;
 
 import cn.health.domain.User;
-import cn.health.domain.User_Exercise;
-import cn.health.domain.User_Food;
+import cn.health.domain.User_Exercise; 
+import cn.health.domain.User_Food; 
 
 import java.util.Date;
-import java.util.List;
+import java.util.List;   
 
 public interface UserMapper {
 
@@ -28,13 +28,11 @@ public interface UserMapper {
     
     void updateinfo(User user);
 
+    User selectallinfo(Integer user_id);
     
     List<User_Food> selectALLByID(Integer user_id);
 
     List<User_Exercise> selectTotal(Integer user_id);
-
-    User selectallinfo(Integer user_id);
-
 
 
 }
