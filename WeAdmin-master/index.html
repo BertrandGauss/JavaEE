@@ -58,7 +58,7 @@
 						<dl class="layui-nav-child">
 						<!-- 二级菜单 -->
 						<dd>
-							<a onclick="WeAdminShow('','./setting.html',450,250)">个人信息</a>
+							<a onclick="setting()">个人信息</a>
 						</dd>
 						<dd>
 							<a onclick="WeAdminShow('切换帐号','./login.html')">切换帐号</a>
@@ -161,7 +161,10 @@
 
                 init();
 			});
+			function setting() {
+                WeAdminShow('','./setting.html',450,250);
 
+            }
 		</script>
 	</body>
 	<!--Tab菜单右键弹出菜单-->
