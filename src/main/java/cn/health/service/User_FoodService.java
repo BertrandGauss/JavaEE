@@ -86,6 +86,8 @@ public class User_FoodService {
     //用户删除某天的饮食记录
      public  void deleteFood(User_Food user_food){
         user_foodMapper.delete(user_food);
+        System.out.print(user_food.getUser_id());
+        System.out.print(user_food.getDate());
         userEatMapper.delete(user_food.getUser_id(),user_food.getDate());
 
      }

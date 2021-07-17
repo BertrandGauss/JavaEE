@@ -28,7 +28,7 @@
     <select id="selectRangeByID" resultType="cn.health.domain.User_Food">
         SELECT *
         FROM user_food
-        WHERE user_id = #{user_id} AND date BETWEEN #{startDate} and #{endDate}
+        WHERE user_id = #{user_id} AND date BETWEEN #{startdate} and #{enddate}
     </select>
 
     <delete id="delete" parameterType="cn.health.domain.User_Food">

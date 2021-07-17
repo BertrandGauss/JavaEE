@@ -3,6 +3,7 @@ package cn.health.controller;
 
 import cn.health.domain.DateRange;
 import cn.health.domain.User_Height_Weight;
+import cn.health.domain.User_Information;
 import cn.health.service.User_Height_Weight_Service;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +112,7 @@ public class User_Height_WeightController {
     private JSONObject selectByDate(@RequestBody DateRange dateRange){
         System.out.print("查询");
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-        List<User_Height_Weight> user_date_info = user_height_weight_service.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
+        List<User_Information> user_date_info = user_height_weight_service.selectByDate(id,dateRange.getStartdate(),dateRange.getEnddate());
         JSONObject json = new JSONObject();
         json.put("code",0);
         json.put("data",user_date_info);
