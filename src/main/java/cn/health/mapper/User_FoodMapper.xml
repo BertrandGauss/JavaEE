@@ -31,7 +31,7 @@
         WHERE user_id = #{user_id} AND date BETWEEN #{startDate} and #{endDate}
     </select>
 
-    <delete id="delete">
+    <delete id="delete" parameterType="cn.health.domain.User_Food">
         DELETE FROM user_food WHERE user_id=#{user_id} AND date = #{date}
     </delete>
 

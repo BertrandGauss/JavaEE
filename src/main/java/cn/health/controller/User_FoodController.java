@@ -55,7 +55,8 @@ public class User_FoodController {
 
     //删除一条饮食记录
     @RequestMapping(value = "/deletefood",method = {RequestMethod.POST})
-    private JSONObject deleteInfor(User_Food user_food) {
+    private JSONObject deleteInfor(@RequestBody  User_Food user_food) {
+        System.out.println("删除 "+user_food.getDate());
         JSONObject json = new JSONObject();
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         user_food.setUser_id(id);
@@ -104,7 +105,7 @@ public class User_FoodController {
 
     //展示用户一段时间的饮食
     @RequestMapping(value = "/searchFood",method = {RequestMethod.POST})
-    private JSONObject searchFood(DateRange dateRange){
+    private JSONObject searchFood(@RequestBody  DateRange dateRange){
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         List<User_Food> user_foods= user_foodService.showRangeEat(id,dateRange.getStartdate(),dateRange.getEnddate());
         JSONObject json = new JSONObject();

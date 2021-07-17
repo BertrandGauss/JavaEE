@@ -67,14 +67,14 @@ public class User_Height_WeightController {
         return user_info;
 
     }
-   @RequestMapping(value = "/updateheight_weight",method = {RequestMethod.POST})    
-   private JSONObject updatehw(@RequestBody User_Height_Weight user_height_weight){
-       Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-       user_height_weight.setUser_id(id);
-       JSONObject json = new JSONObject();
-       json = user_height_weight_service.updateInfor(user_height_weight);
-       json.put("code",0);
-       json.put("msg","更改信息成功");
+   @RequestMapping(value = "/updateheight_weight",method = {RequestMethod.POST})
+       private JSONObject updatehw(@RequestBody User_Height_Weight user_height_weight){
+           Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+           user_height_weight.setUser_id(id);
+           JSONObject json = new JSONObject();
+           json = user_height_weight_service.updateInfor(user_height_weight);
+           json.put("code",0);
+           json.put("msg","更改信息成功");
 
        return json;
 
