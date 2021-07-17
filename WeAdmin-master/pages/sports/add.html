@@ -118,6 +118,7 @@
 
 						if (data.code==0){
 							parent.layer.close(index);
+							window.parent.location.reload();
 						}
 						else{
 							alert(data.msg)

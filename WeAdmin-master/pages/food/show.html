@@ -50,6 +50,7 @@
 						alert("Connection error");
 					},
 					success: function (data) {
+						// window.location.reload();
 						var f = data.data;
 						var actual = new Array();
 						var cap = f["total_calorie"] / 1400;
