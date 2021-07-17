@@ -2,7 +2,7 @@ package cn.health.domain;
 
 import java.util.Date;
 
-public class User_Calorie {
+public class User_Calorie implements Comparable<User_Calorie>{
 
     private Date date;
 
@@ -32,5 +32,9 @@ public class User_Calorie {
 
     public void setFood_calorie(Integer food_calorie) {
         this.food_calorie = food_calorie;
+    }
+    
+    public int compareTo(User_Calorie user_calorie) {
+        return this.getDate().compareTo(user_calorie.getDate());
     }
 }
