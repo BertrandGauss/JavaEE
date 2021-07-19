@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.health.mapper.QuestionnaireMapper">
+
+    <select id="selectByqID" resultType="cn.health.domain.Questionnaire" >
+        SELECT problemNum FROM questionnaire WHERE questionnaire_id = #{questionnaire_id}
+    </select>
+
+
+    <insert id="add" parameterType="cn.health.domain.Questionnaire" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO questionnaire(questionnaire_id,administrator_id,name,problemNum) VALUES (#{questionnaire_id}, #{administrator_id}, #{name}, #{problemNum})
+    </insert>
+
+    <update id="update">
+        UPDATE questionnaire SET problemNum=#{problemNum} WHERE questionnaire_id=#{questionnaire_id}
+    </update>
+</mapper>
