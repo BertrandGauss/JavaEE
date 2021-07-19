@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="../lib/layui-v2.6.3/css/layui.css" media="all">
   <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
   <link rel="stylesheet" href="../lib/layui/css/public.css" media="all">
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
   <style>
     .layui-card {border:1px solid #f2f2f2;border-radius:5px;}
     .icon {margin-right:10px;color:#1aa094;}
@@ -173,7 +175,7 @@
             <div class="layui-card">
               <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>报表统计</div>
               <div class="layui-card-body">
-                <div id="echarts-records" style="width: 100%;min-height:500px"></div>
+                <div id="main" style="width: 100%;min-height:500px"></div>
               </div>
             </div>
           </div>
@@ -348,11 +350,10 @@
 <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
 <!--<script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>-->
 <script>
-  layui.use(['layer', 'miniTab','echarts'], function () {
+  layui.use(['layer', 'miniTab'], function () {
     var $ = layui.jquery,
             layer = layui.layer,
-            miniTab = layui.miniTab,
-            echarts = layui.echarts;
+            miniTab = layui.miniTab
 
     miniTab.listen();
 
@@ -385,74 +386,125 @@
           });
         }
       });
-    });
-
+    })});
+</script>
+<script src="//cdn.bootcss.com/echarts/4.0.2/echarts.min.js"></script>
+<script type="text/javascript">
     /**
      * 报表功能
      */
-    var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
-    var optionRecords = {
-      tooltip: {
-        trigger: 'axis'
-      },
-      legend: {
-        data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-      },
-      toolbox: {
-        feature: {
-          saveAsImage: {}
-        }
-      },
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: ['周一','周二','周三','周四','周五','周六','周日']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          name:'邮件营销',
-          type:'line',
-          data:[120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-          name:'联盟广告',
-          type:'line',
-          data:[220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-          name:'视频广告',
-          type:'line',
-          data:[150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-          name:'直接访问',
-          type:'line',
-          data:[320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-          name:'搜索引擎',
-          type:'line',
-          data:[820, 932, 901, 934, 1290, 1330, 1320]
-        }
-      ]
-    };
-    echartsRecords.setOption(optionRecords);
+    // 基于准备好的dom，初始化echarts实例
+    layui.use(['layer'], function () {
+      var $ = layui.jquery
+      var myChart = echarts.init(document.getElementById('main'));
+      $(document).ready(
+              $.ajax({
+                type: "GET",
+                url: "http://localhost:8081/user/showallcalorie",
+                xhrFields: {
+                  withCredentials: true,
+                },
+                dataType: "json",
+                contentType: "application/json",
+                async: false,
+                error: function (request) {  //失败的话
+                  alert("Connection error");
+                },
+                success: function (data) {
+                  // window.location.reload();
+                  var fca = new Array();
+                  var eca = new Array();
+                  var chazhi = new Array();
+                  var dates = new Array();
+                  var f = data.data;
+                  for (var i = 0; i < f.length; i++) {
+                    json1 = f[i];
+                    fca.unshift(json1["food_calorie"]);
+                    temp = -json1["exercise_calorie"]
+                    eca.unshift(temp)
+                    chazhi.unshift(json1["food_calorie"] - json1["exercise_calorie"])
+                    temp_date = json1["date"].split("T")[0]
+                    dates.unshift(temp_date);
 
-    // echarts 窗口缩放自适应
-    window.onresize = function(){
-      echartsRecords.resize();
-    }
+                  }
+                  option = {
+                    tooltip: {
+                      trigger: 'axis',
+                      axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                      }
+                    },
+                    legend: {
+                      data: ['总变化', '消耗卡路里', '摄入卡路里']
+                    },
+                    grid: {
+                      left: '3%',
+                      right: '4%',
+                      bottom: '3%',
+                      containLabel: true
+                    },
+                    xAxis: [
+                      {
+                        type: 'value'
+                      }
+                    ],
+                    yAxis: [
+                      {
+                        type: 'category',
+                        axisTick: {
+                          show: false
+                        },
+                        data: dates
+                      }
+                    ],
+                    series: [
+                      {
+                        name: '总变化',
+                        type: 'bar',
+                        label: {
+                          show: true,
+                          position: 'inside'
+                        },
+                        emphasis: {
+                          focus: 'series'
+                        },
+                        data: chazhi
+                      },
+                      {
+                        name: '消耗卡路里',
+                        type: 'bar',
+                        stack: '总量',
+                        label: {
+                          show: true
+                        },
+                        emphasis: {
+                          focus: 'series'
+                        },
+                        data: eca
+                      },
+                      {
+                        name: '摄入卡路里',
+                        type: 'bar',
+                        stack: '总量',
+                        label: {
+                          show: true,
+                          position: 'left'
+                        },
+                        emphasis: {
+                          focus: 'series'
+                        },
+                        data: fca
+                      }
+                    ]
+                  };
 
-  });
+
+                  // 使用刚指定的配置项和数据显示图表。
+                  myChart.setOption(option);
+                }
+              })
+      )
+    });
 </script>
 </body>
 </html>
