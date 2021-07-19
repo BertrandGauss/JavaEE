@@ -47,7 +47,7 @@ public class User_Height_Weight_Service {
         for(int i=0;i<user_H_W.size();i++){
             Integer height=user_H_W.get(i).getHeight();
             Integer weight=user_H_W.get(i).getWeight();
-            Double bmi=(double)weight/((height/1000)^2);
+            Double bmi=(double)weight/((height/100)^2);
             int mark=0;
             if(userMapper.findgenderByID(id).equals("male")){
                 mark=1;

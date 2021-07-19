@@ -8,7 +8,7 @@
     </insert>
 
     <select id="selectByDate" parameterType="java.util.Date" resultType="cn.health.domain.Alarmclock">
-        SELECT * FROM alarmclock WHERE type = 'everyday' OR date = #{date}
+        SELECT * FROM alarmclock WHERE type = '每天提醒' OR date = #{date} AND (type='每周提醒' AND  DATEDIFF(#{date},date)>=0 AND DATEDIFF(#{date},date)%7=0)
     </select>
 
     <select id="selectALLByID" parameterType="java.lang.Integer" resultType="cn.health.domain.Alarmclock">

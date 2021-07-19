@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 80025
+Source Server         : health_care
+Source Server Version : 80018
 Source Host           : localhost:3306
 Source Database       : health_management
 
 Target Server Type    : MYSQL
-Target Server Version : 80025
+Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2021-07-14 20:39:07
+Date: 2021-07-19 17:43:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `administrator`;
 CREATE TABLE `administrator` (
-  `administrator_id` int NOT NULL AUTO_INCREMENT,
+  `administrator_id` int(11) NOT NULL AUTO_INCREMENT,
   `administrator_name` varchar(1024) NOT NULL,
   `password` varchar(1024) NOT NULL,
   PRIMARY KEY (`administrator_id`)
@@ -29,14 +29,15 @@ CREATE TABLE `administrator` (
 -- ----------------------------
 -- Records of administrator
 -- ----------------------------
+INSERT INTO `administrator` VALUES ('1', 'admin', '000000');
 
 -- ----------------------------
 -- Table structure for alarmclock
 -- ----------------------------
 DROP TABLE IF EXISTS `alarmclock`;
 CREATE TABLE `alarmclock` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `name` varchar(1024) DEFAULT NULL,
   `time` time DEFAULT NULL,
   `type` varchar(1024) DEFAULT NULL COMMENT '0-每日提醒\r\n            1-仅一次提醒\r\n            ',
@@ -55,9 +56,9 @@ CREATE TABLE `alarmclock` (
 -- ----------------------------
 DROP TABLE IF EXISTS `exerciseinf`;
 CREATE TABLE `exerciseinf` (
-  `exercise_id` int NOT NULL AUTO_INCREMENT,
+  `exercise_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(1024) NOT NULL,
-  `caloriePerHour` int NOT NULL,
+  `caloriePerHour` int(11) NOT NULL,
   PRIMARY KEY (`exercise_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='exerciseInf';
 
@@ -77,10 +78,10 @@ INSERT INTO `exerciseinf` VALUES ('7', '健美操', '500');
 -- ----------------------------
 DROP TABLE IF EXISTS `foodinf`;
 CREATE TABLE `foodinf` (
-  `food_id` int NOT NULL AUTO_INCREMENT,
+  `food_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(1024) NOT NULL,
   `weightPerOne` double NOT NULL,
-  `caloriePer100g` int NOT NULL,
+  `caloriePer100g` int(11) NOT NULL,
   `vAPer100g` double DEFAULT NULL,
   `vBper100g` double DEFAULT NULL,
   `vCper100g` double DEFAULT NULL,
@@ -166,12 +167,12 @@ INSERT INTO `foodinf` VALUES ('65', '冰淇淋', '50', '127', '0.048', '0.42', '
 -- ----------------------------
 DROP TABLE IF EXISTS `healthclassroom`;
 CREATE TABLE `healthclassroom` (
-  `class_id` int NOT NULL AUTO_INCREMENT,
-  `administrator_id` int NOT NULL,
+  `class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `administrator_id` int(11) NOT NULL,
   `title` varchar(30) NOT NULL,
   `link` varchar(50) NOT NULL,
   `tags` varchar(50) NOT NULL,
-  `viewers` int DEFAULT NULL,
+  `viewers` int(11) DEFAULT NULL,
   PRIMARY KEY (`class_id`),
   KEY `FK_Relationship_7` (`administrator_id`),
   CONSTRAINT `FK_Relationship_7` FOREIGN KEY (`administrator_id`) REFERENCES `administrator` (`administrator_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -186,47 +187,72 @@ CREATE TABLE `healthclassroom` (
 -- ----------------------------
 DROP TABLE IF EXISTS `questionnaire`;
 CREATE TABLE `questionnaire` (
-  `questionnaire_id` int NOT NULL AUTO_INCREMENT,
-  `administrator_id` int NOT NULL,
+  `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT,
+  `administrator_id` int(11) NOT NULL,
   `name` varchar(1024) DEFAULT NULL,
-  `problemNum` int DEFAULT NULL,
+  `problemNum` int(11) DEFAULT NULL,
   PRIMARY KEY (`questionnaire_id`),
   KEY `FK_Relationship_8` (`administrator_id`),
   CONSTRAINT `FK_Relationship_8` FOREIGN KEY (`administrator_id`) REFERENCES `administrator` (`administrator_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='调查问卷';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='调查问卷';
 
 -- ----------------------------
 -- Records of questionnaire
 -- ----------------------------
+INSERT INTO `questionnaire` VALUES ('1', '1', '心理调查问卷', '13');
+INSERT INTO `questionnaire` VALUES ('2', '1', '身体健康状况调查问卷', '10');
 
 -- ----------------------------
 -- Table structure for subject
 -- ----------------------------
 DROP TABLE IF EXISTS `subject`;
 CREATE TABLE `subject` (
-  `subject_id` int NOT NULL AUTO_INCREMENT,
-  `questionnaire_id` int NOT NULL,
+  `subject_id` int(11) NOT NULL AUTO_INCREMENT,
+  `questionnaire_id` int(11) NOT NULL,
   `Q` varchar(50) DEFAULT NULL,
   `A1` varchar(20) DEFAULT NULL,
   `A2` varchar(20) DEFAULT NULL,
   `A3` varchar(20) DEFAULT NULL,
   `A4` varchar(20) DEFAULT NULL,
-  `point` int DEFAULT NULL,
-  PRIMARY KEY (`subject_id`),
+  `point` int(11) DEFAULT NULL,
+  PRIMARY KEY (`subject_id`,`questionnaire_id`),
   KEY `FK_Relationship_5` (`questionnaire_id`),
   CONSTRAINT `FK_Relationship_5` FOREIGN KEY (`questionnaire_id`) REFERENCES `questionnaire` (`questionnaire_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='问卷中的题目';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='问卷中的题目';
 
 -- ----------------------------
 -- Records of subject
 -- ----------------------------
+INSERT INTO `subject` VALUES ('1', '1', '以下情况最符合你的是：', '我不感到忧郁', '我感到忧郁或沮丧', '我整天忧郁，无法摆脱', '我十分忧郁，已经承受不住', '3');
+INSERT INTO `subject` VALUES ('1', '2', '你的身体成分达标吗？（脂肪率和去脂体重指数）', '是', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('2', '1', '你对未来抱有什么态度？', '我对未来并不感到悲观失望', '我感到前途不太乐观', '我感到我对前途不抱希望', '我感到今后毫无希望，不可能有所好转', '3');
+INSERT INTO `subject` VALUES ('2', '2', '膝盖不弯曲能摸到脚趾吗？', '是', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('3', '1', '你是如何看待失败的感觉？', '我并无失败的感觉', '我觉得和大多数人相比我是失败的', '回顾我的一生，我觉得那是一连串的失败', '我觉得我是个彻底失败的人', '3');
+INSERT INTO `subject` VALUES ('3', '2', '你是否偶尔才会喘不上气？', '是', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('4', '1', '你对生活的满意度如何？', '我并不觉得我有什么不满意', '我觉得我不能像平时那样享受生活', '任何事情都不能使我感到满意一些 ', '我对所有的事情都不满意', '3');
+INSERT INTO `subject` VALUES ('4', '2', '你能在12分钟内跑完两公里吗？', '是', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('5', '1', '你的内疚感有多深？', '我没有特殊的内疚感', '我有时感到内疚或觉得自己没价值', '我感到非常内疚', '我觉得自己非常坏，一钱不值', '3');
+INSERT INTO `subject` VALUES ('5', '2', '活动完是否一会儿就能恢复？', '是', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('6', '1', '你是否会对自己感到失望？', '我没有对自己感到失望', '我对自己感到失望', '我讨厌自己', '我憎恨自己', '3');
+INSERT INTO `subject` VALUES ('6', '2', '你能举木板保持1分钟吗？', '是', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('7', '1', '你会有想要伤害自己的想法吗？', '我没有要伤害自己的想法 ', '我感到还是死掉的好', '我考虑过自杀', '如果有机会，我还会杀了自己 ', '3');
+INSERT INTO `subject` VALUES ('7', '2', '你中午经常休息吗？', '是 ', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('8', '1', '你是否失去与他人交往的兴趣？', '我没失去和他人交往的兴趣', '和平时相比，我和他人交往的兴趣有所减退 ', '我已失去大部分和人交往的兴趣，我对他们没', '我对他人全无兴趣，也完全不理睬别人', '3');
+INSERT INTO `subject` VALUES ('8', '2', '你是否不容易紧张？', '是', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('9', '1', '做决定对你来说，是否感到困难？', '我能像平时一样做出决断', '我尝试避免做决定', '对我而言，做出决断十分困难 ', '我无法做出任何决断 ', '3');
+INSERT INTO `subject` VALUES ('9', '2', '你记性好吗？', '是', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('10', '1', '与过去相比，你是否对你的形象不自信？', '我觉得我的形象一点也不比过去糟', '我担心我看起来老了，不吸引人了', '我觉得我的外表肯定变了，变得不具吸引力', '我觉得我的形象丑陋不堪且讨人厌 ', '3');
+INSERT INTO `subject` VALUES ('10', '2', '你的睡眠好吗？', '是', '否', null, null, '1');
+INSERT INTO `subject` VALUES ('11', '1', '你对工作抱有何种态度？', '我能像平时那样工作', '我做事时，要额外地努力才能开始', '我必须努力迫使自己，方能干事 ', '我完全不能做事情', '3');
+INSERT INTO `subject` VALUES ('12', '1', '和以往相比，你是否会很容易就感到疲倦？', '和以往相比，我并不容易疲倦', '我比过去容易觉得疲倦', '我做任何事都感到疲倦', '我太易疲倦了，不能干任何事', '3');
+INSERT INTO `subject` VALUES ('13', '1', '与过去相比，你的胃口如何？', '我的胃口不比过去差 ', '我的胃口没有过去那样好', '现在我的胃口比过去差多了', '我一点食欲都没有', '3');
 
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `user_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(1024) NOT NULL,
   `user_password` varchar(1024) NOT NULL,
   `telephone` varchar(11) NOT NULL,
@@ -245,9 +271,9 @@ CREATE TABLE `user` (
 -- ----------------------------
 DROP TABLE IF EXISTS `usereat`;
 CREATE TABLE `usereat` (
-  `user_id` int NOT NULL,
+  `user_id` int(11) NOT NULL,
   `name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `number` int NOT NULL,
+  `number` int(11) NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`user_id`,`name`,`date`),
   CONSTRAINT `FK_Relationship12` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -263,8 +289,8 @@ CREATE TABLE `usereat` (
 DROP TABLE IF EXISTS `user_evaluation`;
 CREATE TABLE `user_evaluation` (
   `date` date NOT NULL,
-  `user_id` int NOT NULL,
-  `grade` int NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `grade` int(11) NOT NULL,
   PRIMARY KEY (`date`,`user_id`),
   KEY `FK_Relationship_4` (`user_id`),
   CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -280,8 +306,8 @@ CREATE TABLE `user_evaluation` (
 DROP TABLE IF EXISTS `user_exercise`;
 CREATE TABLE `user_exercise` (
   `date` date NOT NULL,
-  `user_id` int NOT NULL,
-  `total_calorie` int NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `total_calorie` int(11) NOT NULL,
   PRIMARY KEY (`date`,`user_id`),
   KEY `FK_Relationship_2` (`user_id`),
   CONSTRAINT `FK_Relationship_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -297,8 +323,8 @@ CREATE TABLE `user_exercise` (
 DROP TABLE IF EXISTS `user_food`;
 CREATE TABLE `user_food` (
   `date` date NOT NULL,
-  `user_id` int NOT NULL,
-  `total_calorie` int NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `total_calorie` int(11) NOT NULL,
   `total_vitaminA` double DEFAULT NULL,
   `total_vitaminB` double DEFAULT NULL,
   `total_vitaminC` double DEFAULT NULL,
@@ -322,9 +348,9 @@ CREATE TABLE `user_food` (
 DROP TABLE IF EXISTS `user_height_weight`;
 CREATE TABLE `user_height_weight` (
   `date` date NOT NULL,
-  `user_id` int NOT NULL,
-  `height` int DEFAULT NULL,
-  `weight` int DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `height` int(11) DEFAULT NULL,
+  `weight` int(11) DEFAULT NULL,
   PRIMARY KEY (`date`,`user_id`),
   KEY `FK_Relationship_10` (`user_id`),
   CONSTRAINT `FK_Relationship_10` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -339,10 +365,10 @@ CREATE TABLE `user_height_weight` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_questionnaire_grade`;
 CREATE TABLE `user_questionnaire_grade` (
-  `questionnaire_id` int NOT NULL,
+  `questionnaire_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `user_id` int NOT NULL,
-  `grade` int NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `grade` int(11) NOT NULL,
   PRIMARY KEY (`questionnaire_id`,`date`,`user_id`),
   KEY `FK_Relationship_6` (`user_id`),
   CONSTRAINT `FK_Relationship_6` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -359,8 +385,8 @@ CREATE TABLE `user_questionnaire_grade` (
 DROP TABLE IF EXISTS `user_sleep`;
 CREATE TABLE `user_sleep` (
   `date` date NOT NULL,
-  `user_id` int NOT NULL,
-  `sleeptime` int NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `sleeptime` int(11) NOT NULL,
   `starttime` time NOT NULL,
   PRIMARY KEY (`date`,`user_id`),
   KEY `FK_Relationship_3` (`user_id`),
