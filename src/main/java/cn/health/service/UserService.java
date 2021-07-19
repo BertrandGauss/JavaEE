@@ -112,29 +112,37 @@ public class UserService {
 
         List<User_Calorie> ucl = new ArrayList<>();
 
-        int s1 = uf.size();
-        int s2 = uf.size();
 
-        for (int i = 0; i < s1; i++) {
+
+        for (int i=uf.size()-1;i>=0;i--) {
+
             Date d=uf.get(i).getDate();
-            for (int j = 0; j < s2; j++) {
+            System.out.println("111"+d+"111");
+            for (int j = 0; j < ue.size(); j++) {
 
                 int f = d.compareTo(ue.get(j).getDate());
-                if(f==1){
+                System.out.println("222"+ue.get(j).getDate()+"222");
+                System.out.println(f);
+                if(f==0){
                     User_Calorie uc=new User_Calorie();
                     uc.setDate(uf.get(i).getDate());
                     uc.setFood_calorie(uf.get(i).getTotal_calorie());
                     uc.setExercise_calorie(ue.get(i).getTotal_calorie());
                     ucl.add(uc);
+                    uf.remove(i);
+                    ue.remove(j);
+                    break;
                 }
-                uf.remove(i);
-                ue.remove(j);
-                break;
+
+
             }
+            System.out.println(uf.size());
+            System.out.println(ue.size());
         }
-        s1 = uf.size();
-        s2 = uf.size();
-        for(int i=0;i<s1;i++){
+
+
+
+        for(int i=0;i<uf.size();i++){
             User_Calorie uc=new User_Calorie();
             uc.setDate(uf.get(i).getDate());
             uc.setFood_calorie(uf.get(i).getTotal_calorie());
@@ -143,7 +151,7 @@ public class UserService {
 
         }
 
-        for(int i=0;i<s2;i++){
+        for(int i=0;i<ue.size();i++){
             User_Calorie uc=new User_Calorie();
             uc.setDate(ue.get(i).getDate());
             uc.setFood_calorie(null);
