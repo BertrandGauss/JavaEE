@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : health_care
-Source Server Version : 80018
+Source Server         : demo
+Source Server Version : 80023
 Source Host           : localhost:3306
 Source Database       : health_management
 
 Target Server Type    : MYSQL
-Target Server Version : 80018
+Target Server Version : 80023
 File Encoding         : 65001
 
-Date: 2021-07-19 17:43:58
+Date: 2021-07-19 19:18:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `administrator`;
 CREATE TABLE `administrator` (
-  `administrator_id` int(11) NOT NULL AUTO_INCREMENT,
+  `administrator_id` int NOT NULL AUTO_INCREMENT,
   `administrator_name` varchar(1024) NOT NULL,
   `password` varchar(1024) NOT NULL,
   PRIMARY KEY (`administrator_id`)
@@ -36,8 +36,8 @@ INSERT INTO `administrator` VALUES ('1', 'admin', '000000');
 -- ----------------------------
 DROP TABLE IF EXISTS `alarmclock`;
 CREATE TABLE `alarmclock` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
   `name` varchar(1024) DEFAULT NULL,
   `time` time DEFAULT NULL,
   `type` varchar(1024) DEFAULT NULL COMMENT '0-每日提醒\r\n            1-仅一次提醒\r\n            ',
@@ -56,9 +56,9 @@ CREATE TABLE `alarmclock` (
 -- ----------------------------
 DROP TABLE IF EXISTS `exerciseinf`;
 CREATE TABLE `exerciseinf` (
-  `exercise_id` int(11) NOT NULL AUTO_INCREMENT,
+  `exercise_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(1024) NOT NULL,
-  `caloriePerHour` int(11) NOT NULL,
+  `caloriePerHour` int NOT NULL,
   PRIMARY KEY (`exercise_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='exerciseInf';
 
@@ -78,10 +78,10 @@ INSERT INTO `exerciseinf` VALUES ('7', '健美操', '500');
 -- ----------------------------
 DROP TABLE IF EXISTS `foodinf`;
 CREATE TABLE `foodinf` (
-  `food_id` int(11) NOT NULL AUTO_INCREMENT,
+  `food_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(1024) NOT NULL,
   `weightPerOne` double NOT NULL,
-  `caloriePer100g` int(11) NOT NULL,
+  `caloriePer100g` int NOT NULL,
   `vAPer100g` double DEFAULT NULL,
   `vBper100g` double DEFAULT NULL,
   `vCper100g` double DEFAULT NULL,
@@ -167,12 +167,12 @@ INSERT INTO `foodinf` VALUES ('65', '冰淇淋', '50', '127', '0.048', '0.42', '
 -- ----------------------------
 DROP TABLE IF EXISTS `healthclassroom`;
 CREATE TABLE `healthclassroom` (
-  `class_id` int(11) NOT NULL AUTO_INCREMENT,
-  `administrator_id` int(11) NOT NULL,
+  `class_id` int NOT NULL AUTO_INCREMENT,
+  `administrator_id` int NOT NULL,
   `title` varchar(30) NOT NULL,
   `link` varchar(50) NOT NULL,
   `tags` varchar(50) NOT NULL,
-  `viewers` int(11) DEFAULT NULL,
+  `viewers` int DEFAULT NULL,
   PRIMARY KEY (`class_id`),
   KEY `FK_Relationship_7` (`administrator_id`),
   CONSTRAINT `FK_Relationship_7` FOREIGN KEY (`administrator_id`) REFERENCES `administrator` (`administrator_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -183,14 +183,32 @@ CREATE TABLE `healthclassroom` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for notice
+-- ----------------------------
+DROP TABLE IF EXISTS `notice`;
+CREATE TABLE `notice` (
+  `notice_id` int NOT NULL AUTO_INCREMENT,
+  `administrator_id` int NOT NULL,
+  `content` varchar(1024) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`notice_id`),
+  KEY `relationship_1` (`administrator_id`),
+  CONSTRAINT `relationship_1` FOREIGN KEY (`administrator_id`) REFERENCES `administrator` (`administrator_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of notice
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for questionnaire
 -- ----------------------------
 DROP TABLE IF EXISTS `questionnaire`;
 CREATE TABLE `questionnaire` (
-  `questionnaire_id` int(11) NOT NULL AUTO_INCREMENT,
-  `administrator_id` int(11) NOT NULL,
+  `questionnaire_id` int NOT NULL AUTO_INCREMENT,
+  `administrator_id` int NOT NULL,
   `name` varchar(1024) DEFAULT NULL,
-  `problemNum` int(11) DEFAULT NULL,
+  `problemNum` int DEFAULT NULL,
   PRIMARY KEY (`questionnaire_id`),
   KEY `FK_Relationship_8` (`administrator_id`),
   CONSTRAINT `FK_Relationship_8` FOREIGN KEY (`administrator_id`) REFERENCES `administrator` (`administrator_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -207,14 +225,14 @@ INSERT INTO `questionnaire` VALUES ('2', '1', '身体健康状况调查问卷', 
 -- ----------------------------
 DROP TABLE IF EXISTS `subject`;
 CREATE TABLE `subject` (
-  `subject_id` int(11) NOT NULL AUTO_INCREMENT,
-  `questionnaire_id` int(11) NOT NULL,
+  `subject_id` int NOT NULL AUTO_INCREMENT,
+  `questionnaire_id` int NOT NULL,
   `Q` varchar(50) DEFAULT NULL,
   `A1` varchar(20) DEFAULT NULL,
   `A2` varchar(20) DEFAULT NULL,
   `A3` varchar(20) DEFAULT NULL,
   `A4` varchar(20) DEFAULT NULL,
-  `point` int(11) DEFAULT NULL,
+  `point` int DEFAULT NULL,
   PRIMARY KEY (`subject_id`,`questionnaire_id`),
   KEY `FK_Relationship_5` (`questionnaire_id`),
   CONSTRAINT `FK_Relationship_5` FOREIGN KEY (`questionnaire_id`) REFERENCES `questionnaire` (`questionnaire_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -252,7 +270,7 @@ INSERT INTO `subject` VALUES ('13', '1', '与过去相比，你的胃口如何�
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL AUTO_INCREMENT,
   `user_name` varchar(1024) NOT NULL,
   `user_password` varchar(1024) NOT NULL,
   `telephone` varchar(11) NOT NULL,
@@ -271,9 +289,9 @@ CREATE TABLE `user` (
 -- ----------------------------
 DROP TABLE IF EXISTS `usereat`;
 CREATE TABLE `usereat` (
-  `user_id` int(11) NOT NULL,
+  `user_id` int NOT NULL,
   `name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `number` int(11) NOT NULL,
+  `number` int NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`user_id`,`name`,`date`),
   CONSTRAINT `FK_Relationship12` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -289,8 +307,8 @@ CREATE TABLE `usereat` (
 DROP TABLE IF EXISTS `user_evaluation`;
 CREATE TABLE `user_evaluation` (
   `date` date NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `grade` int(11) NOT NULL,
+  `user_id` int NOT NULL,
+  `grade` int NOT NULL,
   PRIMARY KEY (`date`,`user_id`),
   KEY `FK_Relationship_4` (`user_id`),
   CONSTRAINT `FK_Relationship_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -306,8 +324,8 @@ CREATE TABLE `user_evaluation` (
 DROP TABLE IF EXISTS `user_exercise`;
 CREATE TABLE `user_exercise` (
   `date` date NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `total_calorie` int(11) NOT NULL,
+  `user_id` int NOT NULL,
+  `total_calorie` int NOT NULL,
   PRIMARY KEY (`date`,`user_id`),
   KEY `FK_Relationship_2` (`user_id`),
   CONSTRAINT `FK_Relationship_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -323,8 +341,8 @@ CREATE TABLE `user_exercise` (
 DROP TABLE IF EXISTS `user_food`;
 CREATE TABLE `user_food` (
   `date` date NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `total_calorie` int(11) NOT NULL,
+  `user_id` int NOT NULL,
+  `total_calorie` int NOT NULL,
   `total_vitaminA` double DEFAULT NULL,
   `total_vitaminB` double DEFAULT NULL,
   `total_vitaminC` double DEFAULT NULL,
@@ -348,9 +366,9 @@ CREATE TABLE `user_food` (
 DROP TABLE IF EXISTS `user_height_weight`;
 CREATE TABLE `user_height_weight` (
   `date` date NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `height` int(11) DEFAULT NULL,
-  `weight` int(11) DEFAULT NULL,
+  `user_id` int NOT NULL,
+  `height` int DEFAULT NULL,
+  `weight` int DEFAULT NULL,
   PRIMARY KEY (`date`,`user_id`),
   KEY `FK_Relationship_10` (`user_id`),
   CONSTRAINT `FK_Relationship_10` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -365,10 +383,10 @@ CREATE TABLE `user_height_weight` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_questionnaire_grade`;
 CREATE TABLE `user_questionnaire_grade` (
-  `questionnaire_id` int(11) NOT NULL,
+  `questionnaire_id` int NOT NULL,
   `date` date NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `grade` int(11) NOT NULL,
+  `user_id` int NOT NULL,
+  `grade` int NOT NULL,
   PRIMARY KEY (`questionnaire_id`,`date`,`user_id`),
   KEY `FK_Relationship_6` (`user_id`),
   CONSTRAINT `FK_Relationship_6` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -385,8 +403,8 @@ CREATE TABLE `user_questionnaire_grade` (
 DROP TABLE IF EXISTS `user_sleep`;
 CREATE TABLE `user_sleep` (
   `date` date NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `sleeptime` int(11) NOT NULL,
+  `user_id` int NOT NULL,
+  `sleeptime` int NOT NULL,
   `starttime` time NOT NULL,
   PRIMARY KEY (`date`,`user_id`),
   KEY `FK_Relationship_3` (`user_id`),
