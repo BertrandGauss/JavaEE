@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>心理健康问卷</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/weadmin.css">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../lib/layui/layui.js" charset="utf-8"></script>
+
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+
+</head>
+
+<body>
+<div>
+    <h1 id="headline"  ><center>心理健康问卷</center></h1>
+    <br/>
+    <div class="fr">
+        <button type="button" class="layui-btn" id="reset"><i class="layui-icon">&#xe666;</i>重置</button>
+        <button type="submit" class="layui-btn" id="submit" lay-submit=""><i class="layui-icon">&#xe61f;</i>提交
+        </button>
+    </div>
+    <!--    用了layui的tpl模板引擎-->
+    <div id="view"></div>
+</div>
+</body>
+
+<script id="questionInfo" type="text/html">
+    <div class="layui-row">
+        <form class="layui-form">
+            <ul>
+                <!--                对后台传过来的json数据进行遍历-->
+                {{# layui.each(d.data, function(index, item){ }}
+                <!--                遍历每二级标题下对应的问题-->
+
+                <label style="font-size: 16px;font-weight: normal"> <span>{{index+1}}.&nbsp;&nbsp;{{item.q}} </span></label>
+
+                <div class="layui-input-block">
+                    <!--                根据我的客户需求，需要在渲染页面的时候，如果之前有过问卷提交记录，则radio自动渲染出上次所选的选项-->
+                    <input  type="radio" name="{{item.q}}" value="1" title="{{item.a1}}" checked=""/>
+                    <input  type="radio" name="{{item.q}}" value="2" title="{{item.a2}}"/>
+                    <input  type="radio" name="{{item.q}}" value="3" title="{{item.a3}}"/>
+                    <input  type="radio" name="{{item.q}}" value="4" title="{{item.a4}}"/>
+                </div>
+                {{# }); }}
+
+            </ul>
+        </form>
+    </div>
+</script>
+
+<script src="../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script>
+    layui.use(['form', 'laytpl', 'layer'], function () {
+        var  $ = layui.jquery
+            , form = layui.form
+            , layer = layui.layer
+            , laytpl = layui.laytpl;
+        form.render();
+
+        var questionNumber = 0;
+
+        //获取后台数据
+        $.ajax({
+            url: "http://localhost:8081/question/showallquestion",
+            datatype: "json",
+            type: "POST",
+
+            xhrFields: {
+                withCredentials: true,
+            },
+            dataType:"json",
+            contentType: "application/json",
+            //url:"#",
+            data: JSON.stringify({
+                "questionnaire_id":1
+            }),
+            async: false,
+            success: function (data) {
+                questionNumber=data.count
+                var getTpl = questionInfo.innerHTML
+                    , view = document.getElementById('view');
+                laytpl(getTpl).render(data, function (html) {
+                    view.innerHTML = html;
+                });
+                form.render();
+            }
+        })
+
+        var TbQustionTechnologyInfo = {};
+        //按钮操作
+        TbQustionTechnologyInfo.initButton = function () {
+            //提交信息
+            $("#submit").click(function () {
+                // 在提交之前需要遍历一遍所有的radio选项，并把所选对应值存入map，如果有漏选的，则提交不成功
+                var dataList = $('.layui-input-block').find('input');
+                console.log(dataList)
+                for (var b = 0; b < dataList.length; b++) {
+                    if ($(dataList[b]).prop('checked')) {
+                        console.log($(dataList[b]).prop('checked'));
+                        map1.set($(dataList[b])[0].name, $(dataList[b])[0].defaultValue);
+                    }
+                }
+                if (questionNumber == map1.size) {
+
+                } else {
+                    layer.msg("请填写完所有选项");
+                    return false;
+                }
+                $.ajax({
+                    url:"/tbQuestionRecord/saveAnswer",
+                    contentType:"application/json",
+                    data:{
+                        map: MapToJson(map1),
+                        treeId: 1,
+                    },
+                    success:function (data) {
+                        if (data.code == "0") {
+                            alert(data.message);
+                        } else  {
+                            alert(data.message);
+                        }
+                    }
+                })
+            });
+
+            //重置
+            $("#reset").click(function () {
+                window.location.reload();
+            });
+        }
+
+        $(function () {
+            TbQustionTechnologyInfo.initButton();   //初始化按钮操作
+            form.render();
+        });
+    });
+</script>
+</html>

@@ -83,6 +83,29 @@
 				"icon": "",
 				"url": "./pages/alarm/alarm.html"
 			}]
+		},
+		{
+			"id": 33,
+			"name": "健康问卷",
+			"icon": "&#xe723;",
+			"url": "",
+			"children":[{
+				"id": 34,
+				"name": "身体健康问卷",
+				"icon": "",
+				"url": "./pages/question/body.html"
+			}, {
+					"id": 35,
+					"name": "心理健康问卷",
+					"icon": "",
+					"url": "./pages/question/mind.html"
+			}, {
+					"id": 36,
+					"name": "更多问卷",
+					"icon": "",
+					"url": "http://www.by-health.com/health-test"
+			}
+			]
 		}
 	]
 }

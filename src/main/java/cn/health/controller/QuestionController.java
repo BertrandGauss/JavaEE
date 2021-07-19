@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -20,8 +21,11 @@ public class QuestionController {
 
     @Autowired
     private QuestionSercvice questionSercvice;
+    @Autowired
+    private HttpServletRequest httpServletRequest;
 
-    @RequestMapping(value = "/showallquestion", method = {RequestMethod.GET})
+
+    @RequestMapping(value = "/showallquestion", method = {RequestMethod.POST})
     private JSONObject showAllques(@RequestBody Subject subject){
 
         List<Subject> quse= questionSercvice.showQuestion(subject.getQuestionnaire_id());
@@ -29,15 +33,20 @@ public class QuestionController {
         json.put("code",0);
         json.put("msg","展示所有问卷题目成功");
         json.put("data",quse);
+        json.put("count",quse.size());
         return json;
     }
 
     @RequestMapping(value ="/score",method = {RequestMethod.POST})
     private  JSONObject Score(@RequestBody Answer answer){
-        String res=questionSercvice.countScore(answer.getAnswer(),answer.getQuestionaire_id(),answer.getUser_id(),answer.getDate());
+        System.out.print(answer.getAnswer());
+        System.out.print(answer.getAnswer().size());
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+
+        String res=questionSercvice.countScore(answer.getAnswer(),answer.getQuestionnaire_id(),id,answer.getDate());
         JSONObject json = new JSONObject();
         json.put("code",0);
-        json.put("msg","展示所有问卷题目成功");
+        json.put("msg","展示所有问卷结果成功");
         json.put("data",res);
         return json;
     }

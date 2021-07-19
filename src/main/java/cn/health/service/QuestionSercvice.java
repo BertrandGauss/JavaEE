@@ -2,10 +2,11 @@ package cn.health.service;
 
 import cn.health.domain.Questionnaire;
 import cn.health.domain.Subject;
-import cn.health.domain.User_questionaire_Grade;
+import cn.health.domain.User_questionnaire_Grade;
 import cn.health.mapper.QuestionnaireMapper;
-import cn.health.mapper.SubjectMapper;
-import cn.health.mapper.User_questionaire_GradeMapper;
+import cn.health.mapper.Subject_Mapper;
+
+import cn.health.mapper.User_questionnaire_GradeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,9 @@ import java.util.List;
 public class QuestionSercvice {
 
     @Autowired
-    private SubjectMapper subjectMapper;
+    private Subject_Mapper subjectMapper;
     @Autowired
-    private User_questionaire_GradeMapper user_questionaire_gradeMapper;
+    private User_questionnaire_GradeMapper user_questionnaire_gradeMapper;
     @Autowired
     private QuestionnaireMapper questionnaireMapper;
 
@@ -32,15 +33,21 @@ public class QuestionSercvice {
 
         Integer score=0;
         List<Integer> point= subjectMapper.getScore(questionnaire_id);
+        System.out.println(questionnaire_id);
+        System.out.println("答案"+point.size());
         for(int i=0;i<Answer.size();i++){
-            score+=point.get(i)*(Answer.get(i)-1)/3;
+            score+=point.get(i)*(Answer.get(i)-1);
         }
-        User_questionaire_Grade user_questionaire_grade=new User_questionaire_Grade();
-        user_questionaire_grade.setDate(date);
-        user_questionaire_grade.setUser_id(user_id);
-        user_questionaire_grade.setQuestionnaire_id(questionnaire_id);
-        user_questionaire_grade.setGrade(score);
-        user_questionaire_gradeMapper.add(user_questionaire_grade);
+
+        User_questionnaire_Grade user_questionnaire_grade=new User_questionnaire_Grade();
+        user_questionnaire_grade.setDate(date);
+        user_questionnaire_grade.setUser_id(user_id);
+        user_questionnaire_grade.setQuestionnaire_id(questionnaire_id);
+        user_questionnaire_grade.setGrade(score);
+        if(user_questionnaire_gradeMapper.findEist(questionnaire_id,user_id,date)==null)
+            user_questionnaire_gradeMapper.add(user_questionnaire_grade);
+        else
+            user_questionnaire_gradeMapper.update(user_questionnaire_grade);
         String res="";
         if(questionnaire_id==1){
             if(score<=4){

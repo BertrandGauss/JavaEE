@@ -4,7 +4,7 @@ import cn.health.domain.Subject;
 
 import java.util.List;
 
-public interface SubjectMapper {
+public interface Subject_Mapper {
 
     List<Subject> getALL(Integer questionnarie_id);
 

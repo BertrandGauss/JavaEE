@@ -3,14 +3,14 @@ package cn.health.domain;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-public class User_questionaire_Grade {
+public class User_questionnaire_Grade {
     private Integer user_id;
     private Integer questionnaire_id;
 
     @NotBlank(message = "评估时间不能为空")
     private Date date;
     @NotBlank(message = "评估得分不能为空")
-    private int grade;
+    private Integer grade;
 
     public Integer getUser_id() {
         return user_id;
@@ -36,11 +36,11 @@ public class User_questionaire_Grade {
         this.date = date;
     }
 
-    public int getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 }

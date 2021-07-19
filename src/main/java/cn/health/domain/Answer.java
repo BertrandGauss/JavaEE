@@ -4,18 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 public class Answer {
-    private Integer questionaire_id;
+    private Integer questionnaire_id;
     private Integer user_id;
     private List<Integer> answer;
     private Date date;
 
 
-    public Integer getQuestionaire_id() {
-        return questionaire_id;
+    public Integer getQuestionnaire_id() {
+        return questionnaire_id;
     }
 
-    public void setQuestionaire_id(Integer questionaire_id) {
-        this.questionaire_id = questionaire_id;
+    public void setQuestionnaire_id(Integer questionnaire_id) {
+        this.questionnaire_id = questionnaire_id;
     }
 
     public Integer getUser_id() {

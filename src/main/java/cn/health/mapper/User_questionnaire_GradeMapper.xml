@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.health.mapper.User_questionnaire_GradeMapper">
+
+    <insert id="add" parameterType="cn.health.domain.User_questionnaire_Grade">
+        INSERT INTO user_questionnaire_grade(questionnaire_id,date,user_id, grade) VALUES (#{questionnaire_id}, #{date}, #{user_id}, #{grade})
+    </insert>
+
+    <select id="getGrade" resultType="cn.health.domain.User_questionnaire_Grade" >
+        SELECT * FROM user_questionnaire_grade WHERE questionnaire_id = #{questionnarie_id} AND user_id = #{user_id}
+    </select>
+
+    <update id="update"  parameterType="cn.health.domain.User_questionnaire_Grade">
+        UPDATE user_questionnaire_grade SET grade=#{grade} WHERE user_questionnaire_grade.questionnaire_id = #{questionnaire_id} AND user_questionnaire_grade.user_id = #{user_id} AND user_questionnaire_grade.date=#{date}
+    </update>
+
+    <select id="findEist" parameterType="cn.health.domain.User_questionnaire_Grade" resultType="java.lang.Integer">
+        SELECT grade FROM user_questionnaire_grade WHERE questionnaire_id = #{questionnaire_id} AND user_id = #{user_id} AND date=#{date}
+    </select>
+</mapper>
