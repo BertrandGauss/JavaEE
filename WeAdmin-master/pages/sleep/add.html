@@ -27,10 +27,7 @@
                 <span class="we-red">*</span>入睡时间
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="start_time" name="start_time" lay-verify="required" autocomplete="off" class="layui-input">
-            </div>
-            <div class="layui-form-mid layui-word-aux">
-                形如小时:分钟:秒
+                <input type="text" id="starttime" name="starttime" lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -57,12 +54,16 @@
     layui.extend({
         admin: '{/}../../static/js/admin'
     });
-    layui.use(['form', 'jquery','util','admin', 'layer'], function() {
+    layui.use(['form', 'jquery','laydate', 'layer'], function() {
         var form = layui.form,
             $ = layui.jquery,
-            util = layui.util,
-            admin = layui.admin,
+            laydate = layui.laydate,
             layer = layui.layer;
+        laydate.render({
+            elem:'#starttime'
+            ,type: 'time',
+            trigger: 'click'
+        })
 
 
         //监听提交
@@ -101,7 +102,7 @@
                     //url:"#",
                     data: JSON.stringify({
                         "date":timeNow,
-                        "starttime":$("#start_time").val(),
+                        "starttime":$("#starttime").val(),
                         "sleeptime":$("#sleep_time").val()
                     }),
                     async: false,
