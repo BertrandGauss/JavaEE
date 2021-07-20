@@ -22,14 +22,14 @@
 <div class="weadmin-body">
 
     <div class="weadmin-block" id="topline" name=""topline>
-        <button class="layui-btn layui-btn-danger" onclick="deleAll()">
-            <i class="layui-icon layui-icon-delete"></i>添加问卷
-        </button>
-        <button class="layui-btn" onclick="WeAdminShow('添加信息','./add.html',600,400)">
-            <i class="layui-icon layui-icon-add-circle-fine"></i>修改问卷
+<!--        <button class="layui-btn layui-btn-danger" onclick="deleAll()">-->
+<!--            <i class="layui-icon layui-icon-delete"></i>添加问卷-->
+<!--        </button>-->
+        <button class="layui-btn" onclick="WeAdminShow('新建问卷','./add.html',600,400)">
+            <i class="layui-icon layui-icon-add-circle-fine"></i>发布新问卷
         </button>
     </div>
-    <table class="layui-table"  lay-data="{ url:'http://localhost:8081/height_weight/showinformation', page:true, id:'height_weight'}" lay-filter="height_weight">
+    <table class="layui-table"  lay-data="{ url:'http://localhost:8081/question/showQ', page:true, id:'question'}" lay-filter="question">
         <thead>
         <tr>
             <!--<th>-->
@@ -38,11 +38,11 @@
             <!--</div>-->
             <!--</th>-->
             <th lay-data="{type:'checkbox', }"></th>
-            <th lay-data="{field:'id'}">ID</th>
-            <th lay-data="{field:'gender'}">性别</th>
-            <th lay-data="{field:'height'}">身高</th>
-            <th lay-data="{field:'weight'}">体重</th>
-            <th lay-data="{field:'date', sort: true , templet: '#titleTpl'}">加入时间</th>
+            <th lay-data="{field:'questionnaire_id'}">问卷ID</th>
+            <th lay-data="{field:'administrator_id'}">管理员ID</th>
+            <th lay-data="{field:'name'}">问卷名称</th>
+            <th lay-data="{field:'problemNum'}">问题数目</th>
+<!--            <th lay-data="{field:'date', sort: true , templet: '#titleTpl'}">加入时间</th>-->
             <th  lay-data="{fixed: 'right',align:'left', toolbar: '#barDemo'}">操作</th>
         </tr>
         </thead>
@@ -53,8 +53,8 @@
 </div>
 <script src="../../lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/html" id="barDemo">
-    <a title="编辑" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
-    <a title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
+    <a title="查看" lay-event="view"><i class="layui-icon">&#xe63c;</i></a>
+    <a title="增加" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
 </script>
 <script type="text/html" id="titleTpl">
     {{#
@@ -70,88 +70,26 @@
         var $ = layui.jquery
         var table = layui.table;
         //监听表格复选框选择
-        table.on('checkbox(height_weight)', function(obj) {
+        table.on('checkbox(question)', function(obj) {
             console.log(obj)
         });
         //监听工具条
-        table.on('tool(height_weight)', function(obj) {
+        table.on('tool(question)', function(obj) {
             var data = obj.data;
             console.log(data.date)
-            if (obj.event === 'del') {
-                layer.confirm('真的删除这条记录吗？', function(index) {
-                    var data = obj.data;
-                    $.ajax({
-                        //几个参数需要注意一下
-                        type: "POST",//方法类型
-
-                        url: "http://localhost:8081/height_weight/deleteOne",//url
-                        xhrFields: {
-                            withCredentials: true,
-                        },
-                        dataType:"json",
-                        contentType: "application/json",
-                        data: JSON.stringify({
-                            "date":data.date,
-                            // "user_id":1,
-                            "height":0,
-                            "weight":0
-                        }),
-                        success: function (result) {
-                            if (result.code == "0") {
-                                layer.close(index);
-                                layer.msg('删除成功');
-                                layui.table.reload("height_weight",{page:{curr:1}});
-                            }else{
-                                layer.msg('删除失败', {
-                                    icon: 5
-                                });
-                            }
-                        },
-                        error : function() {
-                            layer.msg('服务器错误', {
-                                icon: 5
-                            });
-                        }
-                    });
-                });
-            }
             if (obj.event === 'edit') {
                 var data = obj.data;
-                WeAdminShow('编辑','./edit.html?date='+data.date,600,400);
+                WeAdminShow('添加','./addquestions.html?id='+data.questionnaire_id,600,400);
+
+            }
+            if (obj.event === 'view') {
+                var data = obj.data;
+                WeAdminShow('查看','./showquestions.html?id='+data.questionnaire_id,600,400);
             }
         });
 
-        //触发事件
-        var active = {
-            tabAdd : function() {
 
-                layer.open({
-                    type: 2,
-                    title: '添加学生成绩信息',
-                    shadeClose: true,
-                    shade: false,
-                    /*    maxmin: true,  *///开启最大化最小化按钮
-                    area: ['800px', '400px'],
-                    content: '/add.html'
-                });
 
-            },search:function(){
-                var name=$("#studentNameSearch").val();
-                table.reload('height_weight',{
-                    method: 'POST'
-                    , where: {
-                        "studentName":name},page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-
-                })
-            }
-        };
-
-        $('#studentSearch .layui-btn').on('click', function() {
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
 
     });
 </script>
