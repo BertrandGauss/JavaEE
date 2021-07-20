@@ -57,4 +57,15 @@
         WHERE user_id = #{user_id}
     </select>
 
+    <select id="selectPasswdById" resultType="java.lang.String" >
+        SELECT user_password FROM user WHERE user_id = #{user_id}
+    </select>
+
+    <update id="updatePw" parameterType="cn.health.domain.User">
+        UPDATE user
+        SET user_password=#{user_password}
+        WHERE user_id=#{user_id}
+    </update>
+
+
 </mapper>

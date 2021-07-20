@@ -2,7 +2,8 @@ package cn.health.mapper;
 
 import cn.health.domain.User;
 import cn.health.domain.User_Exercise; 
-import cn.health.domain.User_Food; 
+import cn.health.domain.User_Food;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;   
@@ -33,6 +34,11 @@ public interface UserMapper {
     List<User_Food> selectALLByID(Integer user_id);
 
     List<User_Exercise> selectTotal(Integer user_id);
+
+    String selectPasswdById(Integer id);
+
+    void updatePw(@Param("user_id") Integer user_id,@Param("user_password") String user_password);
+
 
 
 }

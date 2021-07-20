@@ -81,5 +81,8 @@ public class QuestionSercvice {
            subjectMapper.add(subject);
            questionnaireMapper.update(questionnaireMapper.selectByqID(subject.getQuestionnaire_id())+1,subject.getQuestionnaire_id());
     }
-
+    //查看所有问卷概况
+    public List<Questionnaire> showALLQ(){
+        return questionnaireMapper.showALL();
+    }
 }

@@ -15,4 +15,8 @@
     <update id="update">
         UPDATE questionnaire SET problemNum=#{problemNum} WHERE questionnaire_id=#{questionnaire_id}
     </update>
+
+    <select id="showALL">
+        SELECT * FROM questionnaire
+    </select>
 </mapper>

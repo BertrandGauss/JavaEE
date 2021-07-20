@@ -28,23 +28,7 @@
 				<i title="展开左侧栏" class="layui-icon layui-icon-shrink-right"></i>
 				
 			</div>
-			<ul class="layui-nav left fast-add" lay-filter="">
-				<li class="layui-nav-item">
-					<a href="javascript:;">+新增</a>
-					<dl class="layui-nav-child">
-						<!-- 二级菜单 -->
-						<dd>
-							<a onclick="WeAdminShow('资讯','https://www.baidu.com/')"><i class="layui-icon layui-icon-list"></i>资讯</a>
-						</dd>
-						<dd>
-							<a onclick="WeAdminShow('图片','http://www.baidu.com')"><i class="layui-icon layui-icon-picture-fine"></i>图片</a>
-						</dd>
-						<dd>
-							<a onclick="WeAdminShow('用户','https://www.jiuwei.com/')"><i class="layui-icon layui-icon-user"></i>用户</a>
-						</dd>
-					</dl>
-				</li>
-			</ul>
+
 			<ul class="layui-nav right" lay-filter="">
 				<li class="layui-nav-item">
 					<a href="javascript:;" th:text="1222">
@@ -60,6 +44,9 @@
 						<dd>
 							<a onclick="setting()">个人信息</a>
 						</dd>
+							<dd>
+								<a onclick="updatepassword()">修改密码</a>
+							</dd>
 						<dd>
 							<a onclick="WeAdminShow('切换帐号','./login.html')">切换帐号</a>
 						</dd>
@@ -163,6 +150,10 @@
 			});
 			function setting() {
                 WeAdminShow('','./setting.html',450,250);
+
+            }
+            function updatepassword() {
+                WeAdminShow('','./updatepassword.html',450,250);
 
             }
 		</script>

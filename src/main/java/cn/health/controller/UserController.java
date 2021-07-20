@@ -3,6 +3,7 @@ package cn.health.controller;
 import  cn.health.domain.User;
 import cn.health.domain.User_Calorie;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -122,10 +123,12 @@ public class UserController {
         return json;
     }
     
-
-
-
-
+    @RequestMapping(value = "/updatepassword",method = {RequestMethod.POST})
+    private JSONObject updatepassword(@RequestParam("old_password") String old_password, @Param("new_passward") String new_password){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        JSONObject  json=userService.updatepasswd(id,old_password,new_password);
+        return json;
+    }
 
 
 }

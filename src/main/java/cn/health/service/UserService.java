@@ -1,10 +1,7 @@
 package cn.health.service;
 
-import cn.health.domain.User_Calorie;
-import cn.health.domain.User_Exercise;
-import cn.health.domain.User_Food;
+import cn.health.domain.*;
 import cn.health.mapper.UserMapper;
-import cn.health.domain.User;
 import cn.health.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
@@ -21,6 +18,7 @@ import static java.lang.StrictMath.max;
 public class UserService {
     @Autowired
     private UserMapper userMapper;
+
 
     public Integer phoneisregister(String telephone){//查询手机号是否被注册
         System.out.print(telephone);
@@ -67,6 +65,8 @@ public class UserService {
         Integer re=phoneisregister(telephone);
         String pw=MD5Util.md5(user.getUser_password());
         String passw=userMapper.selectpwByTelphone(telephone);
+        System.out.println("pw"+pw);
+        System.out.println("paw"+passw);
         if(re==null){
             JSONObject json = new JSONObject();
             json.put("msg","该用户不存在");
@@ -163,4 +163,24 @@ public class UserService {
         Collections.sort(ucl);
         return ucl;
     }
+
+    public JSONObject updatepasswd(Integer id,String old_pw,String new_pw){
+        JSONObject json = new JSONObject();
+        String origin_pw=userMapper.selectPasswdById(id);
+        String pw=MD5Util.md5(old_pw);
+        System.out.println(pw);
+        System.out.println(origin_pw);
+        if(!origin_pw.equals(pw)){
+            json.put("code",1);
+            json.put("msg","旧密码输入错误");
+        }
+        else{
+            userMapper.updatePw(id,MD5Util.md5(new_pw));
+            json.put("code",0);
+            json.put("msg","成功修改密码");
+        }
+        return json;
+    }
+
+
 }

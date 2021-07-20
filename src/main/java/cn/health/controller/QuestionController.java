@@ -69,4 +69,14 @@ public class QuestionController {
         json.put("msg","添加问题成功");
         return json;
     }
+
+    @RequestMapping(value = "/showQ",method = {RequestMethod.GET})
+    private JSONObject showQues(){
+        JSONObject json = new JSONObject();
+        List<Questionnaire> questionnaires=questionSercvice.showALLQ();
+        json.put("code",0);
+        json.put("msg","展示问卷概况成功");
+        json.put("data",questionnaires);
+        return json;
+    }
 }
