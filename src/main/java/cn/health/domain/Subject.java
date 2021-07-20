@@ -7,11 +7,11 @@ public class Subject {
     private Integer subject_id;
     @NotNull(message = "问卷id不能不填")
     private Integer questionnaire_id;
-    private String Q;
-    private String A1;
-    private String A2;
-    private String A3;
-    private String A4;
+    private String question;
+    private String answerOne;
+    private String answerTwo;
+    private String answerThree;
+    private String answerFour;
     private Integer point;
 
     public Integer getSubject_id() {
@@ -30,44 +30,44 @@ public class Subject {
         this.questionnaire_id = questionnaire_id;
     }
 
-    public String getQ() {
-        return Q;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setQ(String q) {
-        Q = q;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getA1() {
-        return A1;
+    public String getAnswerOne() {
+        return answerOne;
     }
 
-    public void setA1(String a1) {
-        A1 = a1;
+    public void setAnswerOne(String answerOne) {
+        this.answerOne = answerOne;
     }
 
-    public String getA2() {
-        return A2;
+    public String getAnswerTwo() {
+        return answerTwo;
     }
 
-    public void setA2(String a2) {
-        A2 = a2;
+    public void setAnswerTwo(String answerTwo) {
+        this.answerTwo = answerTwo;
     }
 
-    public String getA3() {
-        return A3;
+    public String getAnswerThree() {
+        return answerThree;
     }
 
-    public void setA3(String a3) {
-        A3 = a3;
+    public void setAnswerThree(String answerThree) {
+        this.answerThree = answerThree;
     }
 
-    public String getA4() {
-        return A4;
+    public String getAnswerFour() {
+        return answerFour;
     }
 
-    public void setA4(String a4) {
-        A4 = a4;
+    public void setAnswerFour(String answerFour) {
+        this.answerFour = answerFour;
     }
 
     public Integer getPoint() {

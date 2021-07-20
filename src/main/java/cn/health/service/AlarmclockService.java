@@ -46,11 +46,8 @@ public class AlarmclockService {
         Date now = Date.from(instant1);
 
         List<Alarmclock> clocks=alarmclockMapper.selectByDate(now);
-            System.out.println("闹钟"+clocks.size());
         for (int i=0;i<clocks.size();i++){
             Alarmclock clock=clocks.get(i);
-            System.out.println(now);
-            System.out.print(clock.getTime());
             if(clock.getTime().toLocalTime().getHour()==localTime.getHour()&&clock.getTime().toLocalTime().getMinute()==localTime.getMinute()){
                 sendSimpleMail(clock);
             }

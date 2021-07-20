@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : demo
+Source Server         : user
 Source Server Version : 80023
 Source Host           : localhost:3306
 Source Database       : health_management
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80023
 File Encoding         : 65001
 
-Date: 2021-07-19 19:18:13
+Date: 2021-07-20 21:28:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,11 +45,16 @@ CREATE TABLE `alarmclock` (
   PRIMARY KEY (`id`),
   KEY `FK_Relationship_9` (`user_id`),
   CONSTRAINT `FK_Relationship_9` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='alarmclock';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='alarmclock';
 
 -- ----------------------------
 -- Records of alarmclock
 -- ----------------------------
+INSERT INTO `alarmclock` VALUES ('1', '1', '开会', '16:22:50', '仅此一次', '2021-07-20');
+INSERT INTO `alarmclock` VALUES ('2', '1', '吃药', '16:27:00', '每天提醒', '2021-07-20');
+INSERT INTO `alarmclock` VALUES ('3', '1', '起床', '16:30:00', '仅此一次', '2021-07-20');
+INSERT INTO `alarmclock` VALUES ('4', '1', '起床', '16:34:46', '仅此一次', '2021-07-20');
+INSERT INTO `alarmclock` VALUES ('5', '1', '吃药', '16:40:38', '仅此一次', '2021-07-20');
 
 -- ----------------------------
 -- Table structure for exerciseinf
@@ -217,7 +222,7 @@ CREATE TABLE `questionnaire` (
 -- ----------------------------
 -- Records of questionnaire
 -- ----------------------------
-INSERT INTO `questionnaire` VALUES ('1', '1', '心理调查问卷', '13');
+INSERT INTO `questionnaire` VALUES ('1', '1', '心理调查问卷', '18');
 INSERT INTO `questionnaire` VALUES ('2', '1', '身体健康状况调查问卷', '10');
 
 -- ----------------------------
@@ -227,43 +232,43 @@ DROP TABLE IF EXISTS `subject`;
 CREATE TABLE `subject` (
   `subject_id` int NOT NULL AUTO_INCREMENT,
   `questionnaire_id` int NOT NULL,
-  `Q` varchar(50) DEFAULT NULL,
-  `A1` varchar(20) DEFAULT NULL,
-  `A2` varchar(20) DEFAULT NULL,
-  `A3` varchar(20) DEFAULT NULL,
-  `A4` varchar(20) DEFAULT NULL,
+  `question` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `answerOne` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `answerTwo` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `answerThree` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `answerFour` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `point` int DEFAULT NULL,
   PRIMARY KEY (`subject_id`,`questionnaire_id`),
   KEY `FK_Relationship_5` (`questionnaire_id`),
   CONSTRAINT `FK_Relationship_5` FOREIGN KEY (`questionnaire_id`) REFERENCES `questionnaire` (`questionnaire_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='问卷中的题目';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='问卷中的题目';
 
 -- ----------------------------
 -- Records of subject
 -- ----------------------------
-INSERT INTO `subject` VALUES ('1', '1', '以下情况最符合你的是：', '我不感到忧郁', '我感到忧郁或沮丧', '我整天忧郁，无法摆脱', '我十分忧郁，已经承受不住', '3');
+INSERT INTO `subject` VALUES ('1', '1', '以下情况最符合你的是：', '我不感到忧郁              ', '我感到忧郁或沮丧', '我整天忧郁，无法摆脱', '我十分忧郁，已经承受不住', '1');
 INSERT INTO `subject` VALUES ('1', '2', '你的身体成分达标吗？（脂肪率和去脂体重指数）', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('2', '1', '你对未来抱有什么态度？', '我对未来并不感到悲观失望', '我感到前途不太乐观', '我感到我对前途不抱希望', '我感到今后毫无希望，不可能有所好转', '3');
+INSERT INTO `subject` VALUES ('2', '1', '你对未来抱有什么态度？', '我对未来并不感到悲观失望', '我感到前途不太乐观', '我感到我对前途不抱希望', '我感到今后毫无希望，不可能有所好转', '1');
 INSERT INTO `subject` VALUES ('2', '2', '膝盖不弯曲能摸到脚趾吗？', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('3', '1', '你是如何看待失败的感觉？', '我并无失败的感觉', '我觉得和大多数人相比我是失败的', '回顾我的一生，我觉得那是一连串的失败', '我觉得我是个彻底失败的人', '3');
+INSERT INTO `subject` VALUES ('3', '1', '你是如何看待失败的感觉？', '我并无失败的感觉            ', '我觉得和大多数人相比我是失败的', '回顾我的一生，我觉得那是一连串的失败', '我觉得我是个彻底失败的人', '1');
 INSERT INTO `subject` VALUES ('3', '2', '你是否偶尔才会喘不上气？', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('4', '1', '你对生活的满意度如何？', '我并不觉得我有什么不满意', '我觉得我不能像平时那样享受生活', '任何事情都不能使我感到满意一些 ', '我对所有的事情都不满意', '3');
+INSERT INTO `subject` VALUES ('4', '1', '你对生活的满意度如何？', '我并不觉得我有什么不满意', '我觉得我不能像平时那样享受生活', '任何事情都不能使我感到满意一些 ', '我对所有的事情都不满意', '1');
 INSERT INTO `subject` VALUES ('4', '2', '你能在12分钟内跑完两公里吗？', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('5', '1', '你的内疚感有多深？', '我没有特殊的内疚感', '我有时感到内疚或觉得自己没价值', '我感到非常内疚', '我觉得自己非常坏，一钱不值', '3');
+INSERT INTO `subject` VALUES ('5', '1', '你的内疚感有多深？', '我没有特殊的内疚感', '我有时感到内疚或觉得自己没价值', '我感到非常内疚', '我觉得自己非常坏，一钱不值', '1');
 INSERT INTO `subject` VALUES ('5', '2', '活动完是否一会儿就能恢复？', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('6', '1', '你是否会对自己感到失望？', '我没有对自己感到失望', '我对自己感到失望', '我讨厌自己', '我憎恨自己', '3');
+INSERT INTO `subject` VALUES ('6', '1', '你是否会对自己感到失望？', '我没有对自己感到失望', '我对自己感到失望', '我讨厌自己', '我憎恨自己', '1');
 INSERT INTO `subject` VALUES ('6', '2', '你能举木板保持1分钟吗？', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('7', '1', '你会有想要伤害自己的想法吗？', '我没有要伤害自己的想法 ', '我感到还是死掉的好', '我考虑过自杀', '如果有机会，我还会杀了自己 ', '3');
+INSERT INTO `subject` VALUES ('7', '1', '你会有想要伤害自己的想法吗？', '我没有要伤害自己的想法 ', '我感到还是死掉的好', '我考虑过自杀', '如果有机会，我还会杀了自己 ', '1');
 INSERT INTO `subject` VALUES ('7', '2', '你中午经常休息吗？', '是 ', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('8', '1', '你是否失去与他人交往的兴趣？', '我没失去和他人交往的兴趣', '和平时相比，我和他人交往的兴趣有所减退 ', '我已失去大部分和人交往的兴趣，我对他们没', '我对他人全无兴趣，也完全不理睬别人', '3');
+INSERT INTO `subject` VALUES ('8', '1', '你是否失去与他人交往的兴趣？', '我没失去和他人交往的兴趣', '和平时相比，我和他人交往的兴趣有所减退 ', '我已失去大部分和人交往的兴趣，我对他们没', '我对他人全无兴趣，也完全不理睬别人', '1');
 INSERT INTO `subject` VALUES ('8', '2', '你是否不容易紧张？', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('9', '1', '做决定对你来说，是否感到困难？', '我能像平时一样做出决断', '我尝试避免做决定', '对我而言，做出决断十分困难 ', '我无法做出任何决断 ', '3');
+INSERT INTO `subject` VALUES ('9', '1', '做决定对你来说，是否感到困难？', '我能像平时一样做出决断', '我尝试避免做决定', '对我而言，做出决断十分困难 ', '我无法做出任何决断 ', '1');
 INSERT INTO `subject` VALUES ('9', '2', '你记性好吗？', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('10', '1', '与过去相比，你是否对你的形象不自信？', '我觉得我的形象一点也不比过去糟', '我担心我看起来老了，不吸引人了', '我觉得我的外表肯定变了，变得不具吸引力', '我觉得我的形象丑陋不堪且讨人厌 ', '3');
+INSERT INTO `subject` VALUES ('10', '1', '与过去相比，你是否对你的形象不自信？', '我觉得我的形象一点也不比过去糟', '我担心我看起来老了，不吸引人了', '我觉得我的外表肯定变了，变得不具吸引力', '我觉得我的形象丑陋不堪且讨人厌 ', '1');
 INSERT INTO `subject` VALUES ('10', '2', '你的睡眠好吗？', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('11', '1', '你对工作抱有何种态度？', '我能像平时那样工作', '我做事时，要额外地努力才能开始', '我必须努力迫使自己，方能干事 ', '我完全不能做事情', '3');
-INSERT INTO `subject` VALUES ('12', '1', '和以往相比，你是否会很容易就感到疲倦？', '和以往相比，我并不容易疲倦', '我比过去容易觉得疲倦', '我做任何事都感到疲倦', '我太易疲倦了，不能干任何事', '3');
-INSERT INTO `subject` VALUES ('13', '1', '与过去相比，你的胃口如何？', '我的胃口不比过去差 ', '我的胃口没有过去那样好', '现在我的胃口比过去差多了', '我一点食欲都没有', '3');
+INSERT INTO `subject` VALUES ('11', '1', '你对工作抱有何种态度？', '我能像平时那样工作', '我做事时，要额外地努力才能开始', '我必须努力迫使自己，方能干事 ', '我完全不能做事情', '1');
+INSERT INTO `subject` VALUES ('12', '1', '和以往相比，你是否会很容易就感到疲倦？', '和以往相比，我并不容易疲倦', '我比过去容易觉得疲倦', '我做任何事都感到疲倦', '我太易疲倦了，不能干任何事', '1');
+INSERT INTO `subject` VALUES ('13', '1', '与过去相比，你的胃口如何？', '我的胃口不比过去差 ', '我的胃口没有过去那样好', '现在我的胃口比过去差多了', '我一点食欲都没有', '1');
 
 -- ----------------------------
 -- Table structure for user
@@ -278,11 +283,12 @@ CREATE TABLE `user` (
   `birthday` date NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表，其中包含属性为用户id，用户名，和用户密码';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表，其中包含属性为用户id，用户名，和用户密码';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('1', 'Claire', '81dc9bdb52d04dc20036dbd8313ed055', '18779459456', 'male', '2001-04-26', 'healthcare_group@yeah.net');
 
 -- ----------------------------
 -- Table structure for usereat
@@ -300,6 +306,9 @@ CREATE TABLE `usereat` (
 -- ----------------------------
 -- Records of usereat
 -- ----------------------------
+INSERT INTO `usereat` VALUES ('1', '猪肉', '1', '2021-07-20');
+INSERT INTO `usereat` VALUES ('1', '米饭', '2', '2021-07-20');
+INSERT INTO `usereat` VALUES ('1', '香蕉', '1', '2021-07-20');
 
 -- ----------------------------
 -- Table structure for user_evaluation
@@ -334,6 +343,7 @@ CREATE TABLE `user_exercise` (
 -- ----------------------------
 -- Records of user_exercise
 -- ----------------------------
+INSERT INTO `user_exercise` VALUES ('2021-07-20', '1', '350');
 
 -- ----------------------------
 -- Table structure for user_food
@@ -359,6 +369,7 @@ CREATE TABLE `user_food` (
 -- ----------------------------
 -- Records of user_food
 -- ----------------------------
+INSERT INTO `user_food` VALUES ('2021-07-20', '1', '627', '0.0295', '1.0899999999999999', '12', '0.00025', '0.53', '21.61', '4.48', '126.99');
 
 -- ----------------------------
 -- Table structure for user_height_weight
@@ -396,6 +407,9 @@ CREATE TABLE `user_questionnaire_grade` (
 -- ----------------------------
 -- Records of user_questionnaire_grade
 -- ----------------------------
+INSERT INTO `user_questionnaire_grade` VALUES ('1', '2021-07-20', '1', '0');
+INSERT INTO `user_questionnaire_grade` VALUES ('2', '2021-07-19', '1', '10');
+INSERT INTO `user_questionnaire_grade` VALUES ('2', '2021-07-20', '1', '10');
 
 -- ----------------------------
 -- Table structure for user_sleep
