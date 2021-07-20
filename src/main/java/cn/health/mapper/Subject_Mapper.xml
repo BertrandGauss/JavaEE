@@ -11,8 +11,8 @@
         SELECT point FROM subject WHERE questionnaire_id = #{questionnaire_id}
     </select>
 
-    <insert id="add" parameterType="cn.health.domain.Subject" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO subject(subject_id, questionnaire_id, Q, A1,a2,A2,A3,A4, point) VALUES (#{subject_id}, #{questionnaire_id}, #{Q}, #{A1}, #{A2},#{A3}, #{A4},#{point})
+    <insert id="add" parameterType="cn.health.domain.Subject" useGeneratedKeys="true" keyProperty="subject_id">
+        INSERT INTO subject( questionnaire_id, Q, A1,A2,A3,A4, point) VALUES ( #{questionnaire_id}, #{Q}, #{A1}, #{A2},#{A3}, #{A4},#{point})
     </insert>
 
 </mapper>

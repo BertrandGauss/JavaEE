@@ -78,8 +78,12 @@ public class QuestionSercvice {
     }
     //管理员添加问题
     public void addQuestion(Subject subject){
-           subjectMapper.add(subject);
+
+
+        subjectMapper.add(subject);
+
            questionnaireMapper.update(questionnaireMapper.selectByqID(subject.getQuestionnaire_id())+1,subject.getQuestionnaire_id());
+
     }
     //查看所有问卷概况
     public List<Questionnaire> showALLQ(){

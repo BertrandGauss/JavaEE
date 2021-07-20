@@ -40,7 +40,7 @@
                                         </a>
                                     </li>
                                     <li class="layui-col-xs3">
-                                        <a href="http://layim.layui.com/" target="_blank">
+                                        <a href="./admin/QuestionList.html" target="_blank">
                                             <i class="layui-icon">&#xe606;</i>
                                             <cite>查看问卷</cite>
                                             <p><span>管理员可以在这里查看问卷并且为用户添加问卷</span></p>
@@ -178,26 +178,8 @@
         <div class="layui-col-lg6 layui-col-md12">
             <fieldset class="layui-elem-field we-changelog" style="padding: 5px;">
                 <!--更新日志-->
-                <blockquote class="layui-elem-quote font16">发展历程&amp;更新日志</blockquote>
+                <blockquote class="layui-elem-quote font16">公告日志</blockquote>
                 <ul class="layui-timeline" id="noticeall" name="noticeall" style="height: 729px; overflow-y: auto;">
-
-                    <li class="layui-timeline-item">
-                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                        <div class="layui-timeline-content layui-text">
-                            <div class="layui-timeline-title">
-                                <h3>WeAdmin更新layui基础版本为V2.5.4</h3>
-                                <span class="layui-badge-rim">2019-06-18</span>
-                            </div>
-                            <ul>
-                                <li>更新layui基础版本为V2.5.4</li>
-                                <li>左侧菜单更新为动态获取方式(本地JSON模拟)</li>
-                            </ul>
-                        </div>
-                    </li>
-
-
-
-
 
                 </ul>
             </fieldset>
@@ -217,6 +199,7 @@
 
         var noticenum
         var usernum
+        var nairnum
         $(document).ready(
             $.ajax({
                 type: "GET",   //提交的方法
@@ -247,12 +230,27 @@
                     usernum = f.length
                 }
             }))
+        $(document).ready(
+            $.ajax({
+                type: "GET",   //提交的方法
+                url: "http://localhost:8081/question/showQ",
+                xhrFields: {
+                    withCredentials: true,
+                },
+                dataType: "json",
+                contentType: "application/json",
+                async: false,
+                success: function (data){
+                    var f =data.data
+                    nairnum = f.length
+                }
+            }))
         $("#tongji").append(
             '<tr>'+
             '<td>'+noticenum+'</td>'+
             '<td>'+usernum+'</td>'+
             '<td>'+1+'</td>'+
-            '<td>'+2+'</td>'
+            '<td>'+nairnum+'</td>'
         )
     })
 </script>

@@ -7,7 +7,7 @@ public class Subject {
     private Integer subject_id;
     @NotNull(message = "问卷id不能不填")
     private Integer questionnaire_id;
-    private String Q;
+    private String question;
     private String A1;
     private String A2;
     private String A3;
@@ -30,12 +30,12 @@ public class Subject {
         this.questionnaire_id = questionnaire_id;
     }
 
-    public String getQ() {
-        return Q;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setQ(String q) {
-        Q = q;
+    public void setQuestion(String q) {
+        this.question = q;
     }
 
     public String getA1() {
@@ -43,7 +43,7 @@ public class Subject {
     }
 
     public void setA1(String a1) {
-        A1 = a1;
+        this.A1 = a1;
     }
 
     public String getA2() {
@@ -51,7 +51,7 @@ public class Subject {
     }
 
     public void setA2(String a2) {
-        A2 = a2;
+        this.A2 = a2;
     }
 
     public String getA3() {
@@ -59,7 +59,7 @@ public class Subject {
     }
 
     public void setA3(String a3) {
-        A3 = a3;
+        this.A3 = a3;
     }
 
     public String getA4() {
@@ -67,7 +67,7 @@ public class Subject {
     }
 
     public void setA4(String a4) {
-        A4 = a4;
+        this.A4 = a4;
     }
 
     public Integer getPoint() {

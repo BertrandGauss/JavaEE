@@ -3,20 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.health.mapper.QuestionnaireMapper">
 
-    <select id="selectByqID" resultType="cn.health.domain.Questionnaire" >
+    <select id="selectByqID" resultType="java.lang.Integer" >
         SELECT problemNum FROM questionnaire WHERE questionnaire_id = #{questionnaire_id}
     </select>
 
 
-    <insert id="add" parameterType="cn.health.domain.Questionnaire" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO questionnaire(questionnaire_id,administrator_id,name,problemNum) VALUES (#{questionnaire_id}, #{administrator_id}, #{name}, #{problemNum})
+    <insert id="add" parameterType="cn.health.domain.Questionnaire" useGeneratedKeys="true" keyProperty="questionnaire_id">
+        INSERT INTO questionnaire(administrator_id,name,problemNum) VALUES (#{administrator_id}, #{name}, #{problemNum})
     </insert>
 
-    <update id="update">
+    <update id="update" >
         UPDATE questionnaire SET problemNum=#{problemNum} WHERE questionnaire_id=#{questionnaire_id}
     </update>
 
-    <select id="showALL">
+    <select id="showALL" resultType="cn.health.domain.Questionnaire">
         SELECT * FROM questionnaire
     </select>
 </mapper>
