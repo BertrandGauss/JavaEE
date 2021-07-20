@@ -10,20 +10,24 @@ function checkAll() {
     checkSurepassword();
     checkUsername();
     checkPhone();
+
 }
 
 function checkEmail(){
     var email = $("#email").val();
     var c_email = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$ /;
     var flag = c_email.test(email)
+    console.log(email);
+    console.log(c_email);
+    console.log(flag);
     if(flag){
-        $("#s_email").text("");
+        $("#email").text("");
         CheckRegSuccess5 = true;
     }
     else{
-        $("#s_email").removeClass("fa-check");
-        $("#s_email").addClass("fa-times");
-        $("#s_email").css("color","#EB2929");
+        $("#semail").removeClass("fa-check");
+        $("#email").addClass("fa-times");
+        $("#email").css("color","#EB2929");
         $("#RegErrInfo").text("邮箱不合规范");
         CheckRegSuccess5 = false;
     }

@@ -42,8 +42,8 @@
 
                     <div class="checkList">
                         <!--                根据我的客户需求，需要在渲染页面的时候，如果之前有过问卷提交记录，则radio自动渲染出上次所选的选项-->
-                        <input  type="radio" name="{{index+1}}" value="1" title="{{item.a1}}"/>
-                        <input  type="radio" name="{{index+1}}" value="2" title="{{item.a2}}"/>
+                        <input  type="radio" name="{{index+1}}" value="2" title="{{item.a1}}"/>
+                        <input  type="radio" name="{{index+1}}" value="1" title="{{item.a2}}"/>
 
                     </div>
                     {{# }); }}
@@ -158,9 +158,15 @@
                     async: false,
                     success:function (data) {
                         if (data.code == "0") {
-                            alert(data.date);
+                            layer.tab({
+                                area: ['450px', '200px'],
+                                tab: [{
+                                    title: '结果',
+                                    content: data.data
+                                }]
+                            });
                         } else  {
-                            alert(data.date);
+                            alert(data.data);
                         }
                     }
                 })

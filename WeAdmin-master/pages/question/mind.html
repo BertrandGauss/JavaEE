@@ -40,12 +40,12 @@
 
                 <label style="font-size: 16px;font-weight: normal"> <span>{{index+1}}.&nbsp;&nbsp;{{item.q}} </span></label>
 
-                <div class="layui-input-block">
+                <div class="checkList">
                     <!--                根据我的客户需求，需要在渲染页面的时候，如果之前有过问卷提交记录，则radio自动渲染出上次所选的选项-->
-                    <input  type="radio" name="{{item.q}}" value="1" title="{{item.a1}}" checked=""/>
-                    <input  type="radio" name="{{item.q}}" value="2" title="{{item.a2}}"/>
-                    <input  type="radio" name="{{item.q}}" value="3" title="{{item.a3}}"/>
-                    <input  type="radio" name="{{item.q}}" value="4" title="{{item.a4}}"/>
+                    <input  type="radio" name="{{index+1}}" value="1" title="{{item.a1}}" checked=""/>
+                    <input  type="radio" name="{{index+1}}" value="2" title="{{item.a2}}"/>
+                    <input  type="radio" name="{{index+1}}" value="3" title="{{item.a3}}"/>
+                    <input  type="radio" name="{{index+1}}" value="4" title="{{item.a4}}"/>
                 </div>
                 {{# }); }}
 
@@ -98,32 +98,65 @@
             //提交信息
             $("#submit").click(function () {
                 // 在提交之前需要遍历一遍所有的radio选项，并把所选对应值存入map，如果有漏选的，则提交不成功
-                var dataList = $('.layui-input-block').find('input');
-                console.log(dataList)
+                var dataList = $('.checkList').find('input');
+                var answer=[]
                 for (var b = 0; b < dataList.length; b++) {
                     if ($(dataList[b]).prop('checked')) {
-                        console.log($(dataList[b]).prop('checked'));
-                        map1.set($(dataList[b])[0].name, $(dataList[b])[0].defaultValue);
+                        // console.log($(dataList[b]).prop('checked'));
+                        // map1.set($(dataList[b])[0].name, $(dataList[b])[0].defaultValue);
+                        console.log($(dataList[b])[0].defaultValue)
+                        answer.push($(dataList[b])[0].defaultValue)
                     }
                 }
-                if (questionNumber == map1.size) {
+                console.log(answer.length)
+                if (questionNumber == answer.length) {
+                    console.log(answer.length)
 
                 } else {
                     layer.msg("请填写完所有选项");
                     return false;
                 }
+                var date = new Date();
+                var seperator1 = "-";
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var strDate = date.getDate();
+                if (month >= 1 && month <= 9) {
+                    month = "0" + month;
+                }
+                if (strDate >= 0 && strDate <= 9) {
+                    strDate = "0" + strDate;
+                }
+                var timeNow = year + seperator1 + month + seperator1 + strDate;
+                console.log(answer.length)
                 $.ajax({
-                    url:"/tbQuestionRecord/saveAnswer",
-                    contentType:"application/json",
-                    data:{
-                        map: MapToJson(map1),
-                        treeId: 1,
+                    url: "http://localhost:8081/question/score",
+                    datatype: "json",
+                    type: "POST",
+                    xhrFields: {
+                        withCredentials: true,
                     },
+                    dataType:"json",
+                    contentType: "application/json",
+                    //url:"#",
+                    data: JSON.stringify({
+                        "questionnaire_id":1,
+                        "answer":answer,
+                        "date":timeNow
+                    }),
+                    async: false,
                     success:function (data) {
                         if (data.code == "0") {
-                            alert(data.message);
+                                layer.tab({
+                                    area: ['450px', '200px'],
+                                    tab: [{
+                                        title: '结果',
+                                        content: data.data
+                                    }]
+                                });
+
                         } else  {
-                            alert(data.message);
+                            alert(data.data);
                         }
                     }
                 })
