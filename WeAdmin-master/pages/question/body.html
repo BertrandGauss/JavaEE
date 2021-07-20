@@ -20,13 +20,14 @@
 <div>
     <h1 id="headline"  ><center>身体健康问卷</center></h1>
     <br/>
-    <div class="fr">
+
+    <!--    用了layui的tpl模板引擎-->
+    <div id="view"></div>
+    <div class="fr" style="text-align: center">
         <button type="button" class="layui-btn" id="reset"><i class="layui-icon">&#xe666;</i>重置</button>
         <button type="submit" class="layui-btn" id="submit" lay-submit=""><i class="layui-icon">&#xe61f;</i>提交
         </button>
     </div>
-    <!--    用了layui的tpl模板引擎-->
-    <div id="view"></div>
 </div>
 </body>
 
@@ -36,14 +37,13 @@
             <ul>
                 <!--                对后台传过来的json数据进行遍历-->
                 {{# layui.each(d.data, function(index, item){ }}
-                <!--                遍历每二级标题下对应的问题-->
 
-                    <label style="font-size: 16px;font-weight: normal"> <span>{{index+1}}.&nbsp;&nbsp;{{item.q}} </span></label>
+                    <label class="layui-input-block layui-bg-gray" style="font-size: 20px;font-weight: normal; font-family: SimSun;text-align: center"> <span>{{index+1}}.&nbsp;&nbsp;{{item.q}} </span></label>
 
-                    <div class="checkList">
+                    <div class="layui-input-block">
                         <!--                根据我的客户需求，需要在渲染页面的时候，如果之前有过问卷提交记录，则radio自动渲染出上次所选的选项-->
-                        <input  type="radio" name="{{index+1}}" value="2" title="{{item.a1}}"/>
-                        <input  type="radio" name="{{index+1}}" value="1" title="{{item.a2}}"/>
+                        <input  type="radio" name="{{index+1}}" value="2" title="{{item.a1}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun ;text-align: center"/>
+                        <input  type="radio" name="{{index+1}}" value="1" title="{{item.a2}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun;text-align: center"/>
 
                     </div>
                     {{# }); }}
@@ -108,8 +108,8 @@
         TbQustionTechnologyInfo.initButton = function () {
             //提交信息
             $("#submit").click(function () {
-                // 在提交之前需要遍历一遍所有的radio选项，并把所选对应值存入map，如果有漏选的，则提交不成功
-                var dataList = $('.checkList').find('input');
+                // 在提交之前需要遍历一遍所有的radio选项，如果有漏选的，则提交不成功
+                var dataList = $('.layui-input-block').find('input');
                 var answer=[]
                 for (var b = 0; b < dataList.length; b++) {
                     if ($(dataList[b]).prop('checked')) {

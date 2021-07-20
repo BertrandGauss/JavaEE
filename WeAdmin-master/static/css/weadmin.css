@@ -18,7 +18,7 @@ body {
   min-height: 100%;
 }
 .fr {
-  float: right;
+  float: center;
 }
 .font16 {
   font-size: 16px;
