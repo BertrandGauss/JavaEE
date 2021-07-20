@@ -8,8 +8,8 @@
     </select>
 
 
-    <insert id="add" parameterType="cn.health.domain.Questionnaire" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO questionnaire(questionnaire_id,administrator_id,name,problemNum) VALUES (#{questionnaire_id}, #{administrator_id}, #{name}, #{problemNum})
+    <insert id="add" parameterType="cn.health.domain.Questionnaire" useGeneratedKeys="true" keyProperty="questionnaire_id">
+        INSERT INTO questionnaire(administrator_id,name,problemNum) VALUES ( #{administrator_id}, #{name}, #{problemNum})
     </insert>
 
     <update id="update">

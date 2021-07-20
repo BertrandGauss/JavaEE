@@ -3,8 +3,12 @@ package cn.health.service;
 import cn.health.domain.*;
 import cn.health.mapper.UserMapper;
 import cn.health.util.MD5Util;
+import cn.health.util.RandomSecurityCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,7 +22,11 @@ import static java.lang.StrictMath.max;
 public class UserService {
     @Autowired
     private UserMapper userMapper;
-
+    @Value("${spring.mail.username}")
+    private String whoAmI;
+    //
+    @Autowired
+    private JavaMailSenderImpl mailSender;
 
     public Integer phoneisregister(String telephone){//查询手机号是否被注册
         System.out.print(telephone);
@@ -182,5 +190,39 @@ public class UserService {
         return json;
     }
 
+
+    public JSONObject sendyzm(String email){
+        Integer id=userMapper.selectByEmail(email);
+        JSONObject json=new JSONObject();
+        RandomSecurityCode randomSecurityCode=new RandomSecurityCode();
+        if(id==null){
+            json.put("code",0);
+            json.put("msg","邮箱未被注册过");
+        }
+        else{
+            System.out.print("发送邮件----》");
+            SimpleMailMessage message = new SimpleMailMessage();
+            String yzm=randomSecurityCode.getSecurityCode();
+            String content="尊敬的"+userMapper.selectnameByEmail(email)+"用户，您好。您正在设置忘记密码，您的验证码为:"+yzm+"。如非本人操作，请忽略此邮件。";
+            message.setTo(email);
+            //添加抄送人，防止邮件发送失败
+            message.setCc(whoAmI);
+            message.setSubject("健康管理系统忘记密码");
+            message.setText(content);
+            message.setFrom(whoAmI);
+            mailSender.send(message);
+            json.put("code",0);
+            json.put("msg","验证码发送成功");
+            json.put("data",yzm);
+        }
+        return json;
+
+    }
+
+    public void forgetpw(String email,String password){
+        Integer id=userMapper.selectByEmail(email);
+        String pw=MD5Util.md5(password);
+        userMapper.updatePw(id,pw);
+    }
 
 }

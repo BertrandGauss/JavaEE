@@ -34,7 +34,11 @@
     <select id="selectByEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
         SELECT user_id FROM user WHERE email = #{email}
     </select>
-        
+
+    <select id="selectnameByEmail" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT user_name FROM user WHERE email = #{email}
+    </select>
+
     <update id="updateinfo" parameterType="cn.health.domain.User">
         UPDATE user
         SET user_name=#{user_name} , telephone=#{telephone} , email = #{email}

@@ -17,6 +17,8 @@ public interface UserMapper {
 
     Integer selectByEmail(String email);
 
+    String selectnameByEmail(String email);
+
     String selectpwByTelphone(String telephone);
 
     String selectnameByID(Integer user_id);

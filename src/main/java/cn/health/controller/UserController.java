@@ -46,35 +46,36 @@ public class UserController {
         System.out.println("sessionId"+httpServletRequest.getSession().getId());
         return json;
     }
+    //发送验证码
+    @RequestMapping(value = "/sendyzm",method = {RequestMethod.POST})
+    private JSONObject sendYzm(@RequestBody User user){
+        System.out.println("忘记密码");
+        JSONObject json = new JSONObject();
+        json= userService.sendyzm(user.getEmail());
+        return json;
+    }
+
     //忘记密码
     @RequestMapping(value = "/forget",method = {RequestMethod.POST})
-    private JSONObject forgetpassword(@RequestBody User user){
-        System.out.println("登录");
+    private JSONObject forgetPW(@RequestBody User user){
+        System.out.println("忘记密码");
         JSONObject json = new JSONObject();
-        json= userService.login(user);
+        userService.forgetpw(user.getEmail(),user.getUser_password());
 
-        //将登录凭证加入到用户登录成功的Session类
-        httpServletRequest.getSession().setAttribute("LOGIN",true);
-        //保存用户id在session
-        httpServletRequest.getSession().setAttribute("LOGIN_USER", userService.phoneisregister(user.getTelephone()));
-
+        json.put("code",0);
+        json.put("msg","修改密码成功");
         return json;
     }
     
-    
     @RequestMapping(value = "/getusername",method = {RequestMethod.GET})
     private JSONObject getUserName(){
-
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
         String user_name=userService.selectNameById(id);
-
         JSONObject json = new JSONObject();
 
         json.put("code",0);
         json.put("data",user_name);
         json.put("msg","返回用户名成功");
-        
-       
         return json;
     }
     
