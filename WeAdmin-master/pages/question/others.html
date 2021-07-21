@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>其它问卷</title>
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" href="../../static/css/font.css" />
+    <link rel="stylesheet" href="../../static/css/weadmin.css" />
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+<div class="weadmin-body">
+
+
+    <table class="layui-table"  lay-data="{ url:'http://localhost:8081/question/showQ', page:true, id:'question'}" lay-filter="question">
+        <thead>
+        <tr>
+            <!--<th>-->
+            <!--<div class="layui-unselect header layui-form-checkbox" lay-skin="primary">-->
+            <!--<i class="layui-icon">&#xe605;</i>-->
+            <!--</div>-->
+            <!--</th>-->
+            <th lay-data="{field:'questionnaire_id'}">问卷ID</th>
+            <th lay-data="{field:'name'}">问卷名称</th>
+            <th lay-data="{field:'problemNum'}">问题数目</th>
+            <!--            <th lay-data="{field:'date', sort: true , templet: '#titleTpl'}">加入时间</th>-->
+            <th  lay-data="{fixed: 'right',align:'left', toolbar: '#barDemo'}">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</div>
+<script src="../../lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/html" id="barDemo">
+    <a title="做" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>
+</script>
+<script type="text/html" id="titleTpl">
+    {{#
+    var fn = function(data){
+    return data.substring(0,10);
+    };
+    }}
+    {{ fn(d.date) }}
+</script>
+
+<script>
+    layui.use('table', function() {
+        var $ = layui.jquery
+        var table = layui.table;
+        //监听表格复选框选择
+        //监听工具条
+        table.on('tool(question)', function(obj) {
+            var data = obj.data;
+            console.log(data.date)
+            if (obj.event === 'edit') {
+                var data = obj.data;
+                WeAdminShow(data.name,'./more.html?id='+data.questionnaire_id+'?name='+data.name,600,400);
+
+            }
+        });
+    });
+
+</script>
+<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

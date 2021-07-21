@@ -100,7 +100,13 @@
 					"icon": "",
 					"url": "./pages/question/mind.html"
 			}, {
-					"id": 36,
+				"id": 36,
+				"name": "其它问卷",
+				"icon": "",
+				"url": "./pages/question/others.html"
+			},
+				{
+					"id": 37,
 					"name": "更多问卷",
 					"icon": "",
 					"url": "http://www.by-health.com/health-test"

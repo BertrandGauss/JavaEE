@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问卷</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/css/font.css">
+    <link rel="stylesheet" href="../../static/css/weadmin.css">
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../lib/layui/layui.js" charset="utf-8"></script>
+
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+
+</head>
+
+<body>
+<div>
+
+    <!--姓名展示-->
+    <center><cite class="cite-user-name" style="text-align: center"></cite></center>
+
+    <!--    用了layui的tpl模板引擎-->
+    <div id="view"></div>
+    <div class="fr" style="text-align: center">
+        <button type="button" class="layui-btn" id="reset"><i class="layui-icon">&#xe666;</i>重置</button>
+        <button type="submit" class="layui-btn" id="submit" lay-submit="" ><i class="layui-icon">&#xe61f;</i>提交</button>
+    </div>
+</div>
+</body>
+
+<script id="questionInfo" type="text/html">
+    <div class="layui-row">
+        <form class="layui-form">
+            <ul>
+                <!--                对后台传过来的json数据进行遍历-->
+                {{# layui.each(d.data, function(index, item){ }}
+                <!--                遍历每二级标题下对应的问题-->
+
+                <label class="layui-input-block  layui-bg-gray" style="font-size: 18px;font-weight: normal ;font-family: SimSun;text-align: left"> <span>{{index+1}}.&nbsp;&nbsp;{{item.question}} </span></label>
+
+                <div class="layui-input-block">
+                    <!--                根据我的客户需求，需要在渲染页面的时候，如果之前有过问卷提交记录，则radio自动渲染出上次所选的选项-->
+                    <input  type="radio" name="{{index+1}}" value="1" title="{{item.answerOne}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun ;text-align: center" />
+                    <input  type="radio" name="{{index+1}}" value="2" title="{{item.answerTwo}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun; text-align: center"/>
+                    <input  type="radio" name="{{index+1}}" value="3" title="{{item.answerThree}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun;text-align: center"/>
+                    <input  type="radio" name="{{index+1}}" value="4" title="{{item.answerFour}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun;text-align: center"/>
+                </div>
+                {{# }); }}
+
+            </ul>
+        </form>
+    </div>
+</script>
+
+<script src="../../lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script>
+    layui.use(['form', 'laytpl', 'layer'], function () {
+        var  $ = layui.jquery
+            , form = layui.form
+            , layer = layui.layer
+            , laytpl = layui.laytpl;
+        form.render();
+
+        var questionNumber = 0;
+        var url = decodeURI(window.location.href);
+        var nameIndex = url .split("?name=");
+        var name = nameIndex[1];
+        console.log(nameIndex[0])
+        var arsgIndex = nameIndex[0] .split("?id=");
+        var time = arsgIndex[1];
+
+        console.log(name)
+        $('.cite-user-name').text(name);
+        alert(name)
+        //获取后台数据
+        $.ajax({
+            url: "http://localhost:8081/question/showallquestion",
+            datatype: "json",
+            type: "POST",
+
+            xhrFields: {
+                withCredentials: true,
+            },
+            dataType:"json",
+            contentType: "application/json",
+            //url:"#",
+            data: JSON.stringify({
+                "questionnaire_id":time
+            }),
+            async: false,
+            success: function (data) {
+                questionNumber=data.count
+                var getTpl = questionInfo.innerHTML
+                    , view = document.getElementById('view');
+                laytpl(getTpl).render(data, function (html) {
+                    view.innerHTML = html;
+                });
+                form.render();
+            }
+        })
+
+        var TbQustionTechnologyInfo = {};
+        //按钮操作
+        TbQustionTechnologyInfo.initButton = function () {
+            //提交信息
+            $("#submit").click(function () {
+                // 在提交之前需要遍历一遍所有的radio选项，并把所选对应值存入map，如果有漏选的，则提交不成功
+                var dataList = $('.layui-input-block').find('input');
+                var answer=[]
+                for (var b = 0; b < dataList.length; b++) {
+                    if ($(dataList[b]).prop('checked')) {
+                        // console.log($(dataList[b]).prop('checked'));
+                        // map1.set($(dataList[b])[0].name, $(dataList[b])[0].defaultValue);
+                        console.log($(dataList[b])[0].defaultValue)
+                        answer.push($(dataList[b])[0].defaultValue)
+                    }
+                }
+                console.log(answer.length)
+                if (questionNumber == answer.length) {
+                    console.log(answer.length)
+
+                } else {
+                    layer.msg("请填写完所有选项");
+                    return false;
+                }
+                var date = new Date();
+                var seperator1 = "-";
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1;
+                var strDate = date.getDate();
+                if (month >= 1 && month <= 9) {
+                    month = "0" + month;
+                }
+                if (strDate >= 0 && strDate <= 9) {
+                    strDate = "0" + strDate;
+                }
+                var timeNow = year + seperator1 + month + seperator1 + strDate;
+                console.log(answer.length)
+                $.ajax({
+                    url: "http://localhost:8081/question/score",
+                    datatype: "json",
+                    type: "POST",
+                    xhrFields: {
+                        withCredentials: true,
+                    },
+                    dataType:"json",
+                    contentType: "application/json",
+                    //url:"#",
+                    data: JSON.stringify({
+                        "questionnaire_id":time,
+                        "answer":answer,
+                        "date":timeNow
+                    }),
+                    async: false,
+                    success:function (data) {
+                        if (data.code == "0") {
+                            layer.tab({
+                                area: ['450px', '200px'],
+                                tab: [{
+                                    title: '结果',
+                                    content: data.data
+                                }]
+                            });
+
+                        } else  {
+                            alert(data.data);
+                        }
+                    }
+                })
+            });
+
+            //重置
+            $("#reset").click(function () {
+                window.location.reload();
+            });
+        }
+
+        $(function () {
+            TbQustionTechnologyInfo.initButton();   //初始化按钮操作
+            form.render();
+        });
+    });
+</script>
+</html>
