@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<!--
+	作者：github.com/WangEn
+	时间：2018-02-02
+	描述：添加文章类别
+-->
+<head>
+  <meta charset="UTF-8">
+  <title>新建问卷</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../static/css/font.css">
+  <link rel="stylesheet" href="../../static/css/weadmin.css">
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+  <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+<div class="weadmin-body">
+  <form class="layui-form">
+
+    <div class="layui-form-item">
+      <label for="categoryName" class="layui-form-label">管理员ID</label>
+      <div class="layui-input-inline">
+        <input type="text" id="aid" name="aid" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label for="categoryName" class="layui-form-label">内容</label>
+      <div class="layui-input-inline">
+        <input type="text" id="content" name="content" autocomplete="off" class="layui-input">
+      </div>
+
+    </div>
+
+    <div class="layui-form-item">
+      <label for="L_repass" class="layui-form-label">
+      </label>
+      <button class="layui-btn" lay-filter="add" lay-submit="">确定</button>
+    </div>
+
+  </form>
+</div>
+<script src="../../lib/layui/layui.js" charset="utf-8"></script>
+<script>
+  layui.use(['form','layer','util'], function(){
+    var form = layui.form,
+            $ = layui.jquery,
+            util = layui.util,
+            layer = layui.layer;
+
+    //监听提交
+    form.on('submit(add)', function(data){
+      console.log(data);
+      layer.alert("增加成功", {icon: 6},function () {
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+          month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+          strDate = "0" + strDate;
+        }
+        var timeNow = year + seperator1 + month + seperator1 + strDate;
+        var index = parent.layer.getFrameIndex(window.name);
+        $.ajax({
+          type: "POST",   //提交的方法
+          url:"http://localhost:8081/admin/writenotice",
+          xhrFields: {
+            withCredentials: true,
+          },
+          dataType:"json",
+          contentType: "application/json",
+          data: JSON.stringify({
+            "administrator_id":Number($("#aid").val()),
+            "content":$("#content").val(),
+            "date":"2021-07-22"
+
+          }),
+
+          async: false,
+          error: function(request) {  //失败的话
+            alert("Connection error");
+          },
+          success: function(data) {
+
+            if (data.code==0){
+              parent.layer.close(index);
+              window.parent.location.reload();
+            }
+            else{
+              alert(data.msg)
+            }
+          }
+
+        })
+      });
+      return false;
+    });
+  });
+
+
+</script>
+</body>
+
+</html>
