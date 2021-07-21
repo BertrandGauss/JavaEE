@@ -1,6 +1,7 @@
 package cn.health.controller;
 
 import cn.health.domain.DateRange;
+import cn.health.domain.SomeDate;
 import cn.health.domain.User_Sleep;
 import cn.health.service.User_SleepService;
 import com.alibaba.fastjson.JSONObject;
@@ -58,6 +59,16 @@ public class User_SleepController {
         return json;
     }
 
+    //删除部分睡眠记录
+    @RequestMapping(value = "/deleteSomesleep",method = {RequestMethod.POST})
+    private JSONObject deleteSomesleep(@RequestBody SomeDate someDate){
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        user_sleepService.deleteSomeSleep(id,someDate.getDates());
+        JSONObject json = new JSONObject();
+        json.put("code",0);
+        json.put("msg","删除部分睡眠记录成功");
+        return json;
+    }
     //删除单条睡眠记录
     @RequestMapping(value = "/deleteOnesleep",method = {RequestMethod.POST})
     private JSONObject deleteOnesleep(@RequestBody User_Sleep user_sleep){

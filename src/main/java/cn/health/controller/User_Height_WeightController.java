@@ -2,6 +2,7 @@ package cn.health.controller;
 
 
 import cn.health.domain.DateRange;
+import cn.health.domain.SomeDate;
 import cn.health.domain.User_Height_Weight;
 import cn.health.domain.User_Information;
 import cn.health.service.User_Height_Weight_Service;
@@ -89,11 +90,22 @@ public class User_Height_WeightController {
 
         JSONObject json = new JSONObject();
 
-        json = user_height_weight_service.deleteAll(id);
+        json = user_height_weight_service.deleteAllHW(id);
 
         json.put("code",0);
         json.put("msg","删除所有成功");
 
+        return json;
+
+    }
+
+    @RequestMapping(value = "/deleteSome",method = {RequestMethod.POST})
+    private JSONObject deleteSomeInfo(@RequestBody SomeDate someDate){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        JSONObject json = new JSONObject();
+        user_height_weight_service.deleteSome(id,someDate.getDates());
+        json.put("code",0);
+        json.put("msg","删除部分成功");
         return json;
 
     }

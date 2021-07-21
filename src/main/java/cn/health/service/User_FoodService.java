@@ -1,5 +1,6 @@
 package cn.health.service;
 
+import cn.health.domain.User;
 import cn.health.domain.User_Food;
 import cn.health.domain.UserEat;
 import cn.health.mapper.FoodInfMapper;
@@ -201,6 +202,18 @@ public class User_FoodService {
         return user_foods;
     }
 
+    public void deleteSome(Integer id,List<Date> dates){
+        System.out.println(id);
+        System.out.println(dates.size());
+        for(int i=0;i<dates.size();i++){
+            System.out.println(dates.get(i));
+            User_Food user_food = new User_Food();
+            user_food.setDate(dates.get(i));
+            user_food.setUser_id(id);
+            user_foodMapper.delete(user_food);
+            userEatMapper.delete(id,dates.get(i));
+        }
+    }
 
 
 }

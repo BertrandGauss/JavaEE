@@ -1,9 +1,6 @@
 package cn.health.controller;
 
-import cn.health.domain.DateRange;
-import cn.health.domain.User;
-import cn.health.domain.UserEat;
-import cn.health.domain.User_Food;
+import cn.health.domain.*;
 import cn.health.service.User_FoodService;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.annotations.Param;
@@ -75,6 +72,18 @@ public class User_FoodController {
         return  json;
     }
 
+    //删除部分饮食记录
+    @RequestMapping(value = "/deleteSomeFood",method={RequestMethod.POST})
+    private JSONObject deleteSomeInfor(@RequestBody SomeDate someDate){
+        System.out.println("删除部分食物");
+        JSONObject json = new JSONObject();
+
+        Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        user_foodService.deleteSome(id,someDate.getDates());
+        json.put("code",0);
+        json.put("msg","删除用户部分饮食记录成功");
+        return  json;
+    }
 
     //展示用户某天的饮食
     @RequestMapping(value = "/showeat",method = {RequestMethod.POST})

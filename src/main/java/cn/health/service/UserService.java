@@ -126,6 +126,8 @@ public class UserService {
             Date d=uf.get(i).getDate();
 
             for (int j = 0; j < ue.size(); j++) {
+                System.out.println(d);
+                System.out.println(ue.get(j).getDate());
 
                 int f = d.compareTo(ue.get(j).getDate());
 
@@ -133,7 +135,7 @@ public class UserService {
                     User_Calorie uc=new User_Calorie();
                     uc.setDate(uf.get(i).getDate());
                     uc.setFood_calorie(uf.get(i).getTotal_calorie());
-                    uc.setExercise_calorie(ue.get(i).getTotal_calorie());
+                    uc.setExercise_calorie(ue.get(j).getTotal_calorie());
                     ucl.add(uc);
                     uf.remove(i);
                     ue.remove(j);

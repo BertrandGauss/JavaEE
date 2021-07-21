@@ -41,6 +41,11 @@ public class User_SleepService {
         user_sleepMapper.deleteALL(id);
     }
 
+    public void deleteSomeSleep(Integer id,List<Date> dates){
+        for(int i=0;i<dates.size();i++){
+            user_sleepMapper.deleteOne(dates.get(i),id);
+        }
+    }
     public  void deleteOne(Date date , Integer id ){
         user_sleepMapper.deleteOne(date,id);
     }

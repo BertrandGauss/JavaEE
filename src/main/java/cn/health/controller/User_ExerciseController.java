@@ -1,6 +1,7 @@
 package cn.health.controller;
 
 import cn.health.domain.DateRange;
+import cn.health.domain.SomeDate;
 import cn.health.domain.UserSport;
 
 import cn.health.domain.User_Exercise;
@@ -48,16 +49,22 @@ public class User_ExerciseController {
     @RequestMapping(value = "/deleteall",method = {RequestMethod.POST})
     private JSONObject deleteAllInfo(){
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
-
         JSONObject json = new JSONObject();
-
         json = user_exercise_Service.deleteall(id);
-
         json.put("code",0);
         json.put("msg","删除所有成功");
 
         return json;
 
+    }
+    @RequestMapping(value = "/deleteSomeE",method = {RequestMethod.POST})
+    private JSONObject deleteSomeE(@RequestBody SomeDate someDate){
+        Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
+        JSONObject json = new JSONObject();
+        user_exercise_Service.deleteSomeE(id,someDate.getDates());
+        json.put("code",0);
+        json.put("msg","删除部分成功");
+        return json;
     }
 
     @RequestMapping(value = "/selectbydate",method = {RequestMethod.GET})

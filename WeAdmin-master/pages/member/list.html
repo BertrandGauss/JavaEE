@@ -45,7 +45,7 @@
 		</form>
 	</div>
 	<div class="weadmin-block" id="topline" name=""topline>
-		<button class="layui-btn layui-btn-danger" onclick="deleAll()">
+		<button class="layui-btn layui-btn-danger" onclick="deleteSome()">
 			<i class="layui-icon layui-icon-delete"></i>批量删除
 		</button>
 		<button class="layui-btn" onclick="WeAdminShow('添加信息','./add.html',600,400)">
@@ -89,12 +89,26 @@
 </script>
 
 <script>
+    var dates=[]
     layui.use('table', function() {
         var $ = layui.jquery
         var table = layui.table;
         //监听表格复选框选择
         table.on('checkbox(height_weight)', function(obj) {
             console.log(obj)
+            var flag=0;
+            for(let i=0;i<dates.length;i++){
+                if(dates[i]==obj.data.date){
+                    console.log("delete")
+                    dates.splice(i,1);
+                    i--;
+                    flag=1;
+                    console.log(dates)
+                }
+            }
+            if(flag==0){
+                dates.push(obj.data.date);
+            }
         });
         //监听工具条
         table.on('tool(height_weight)', function(obj) {
@@ -177,6 +191,33 @@
         });
 
     });
+    function deleteSome() {
+        console.log(dates)
+        layui.use(['form', 'jquery','util','admin', 'layer'], function() {
+            var $ = layui.jquery;
+            $.ajax({
+                type: "POST",   //提交的方法
+                url:"http://localhost:8081/height_weight/deleteSome",
+                xhrFields: {
+                    withCredentials: true,
+                },
+                dataType:"json",
+                data: JSON.stringify({
+                    "dates":dates
+                }),
+                contentType: "application/json",
+                async: true,
+
+                error: function(request) {  //失败的话
+                    alert("Connection error");
+                },
+                success: function(data) {
+
+                }
+            })
+        });
+        window.delAll();
+    }
 </script>
 
 

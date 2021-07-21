@@ -59,12 +59,16 @@ public class User_Exercise_Service {
     
     public JSONObject deleteall(Integer id){
         user_exerciseMapper.deleteall(id);
-
         JSONObject json=new JSONObject();
         json.put("code",0);
         json.put("msg","删除全部记录成功");
         return json;
+    }
 
+    public void deleteSomeE(Integer id, List<Date> dates){
+        for(int i=0;i<dates.size();i++){
+            user_exerciseMapper.deleteone(id,dates.get(i));
+        }
     }
 
     public List<User_Exercise> selectByDate(Integer id, Date start, Date end){

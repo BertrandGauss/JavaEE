@@ -81,20 +81,16 @@ public class User_Height_Weight_Service {
     }
     
    //返回所有身高体重信息
- public JSONObject showAllinfo(Integer id){
+    public JSONObject showAllinfo(Integer id){
 
         List<User_Height_Weight> user_info = user_height_weightMapper.selecttotal(id);
-
         String gender=user_height_weightMapper.selectgender(id);
-
         List<User_Information> user_all_info=new ArrayList<User_Information>();
         for (int i=0;i<user_info.size();i++){
             User_Information ui=new User_Information(i+1,user_info.get(i).getDate(),user_info.get(i).getHeight(),user_info.get(i).getWeight(),gender);
             user_all_info.add(ui);
 
         }
-
-
         JSONObject json=new JSONObject();
         json.put("code",0);
         json.put("msg","所有身高体重信息");
@@ -115,15 +111,20 @@ public class User_Height_Weight_Service {
     }
     
     //删除所有记录
-    public JSONObject deleteAll(Integer id){
-
+    public JSONObject deleteAllHW(Integer id){
         user_height_weightMapper.deleteall(id);
-
         JSONObject json=new JSONObject();
         json.put("code",0);
         json.put("msg","删除全部记录成功");
         return json;
 
+    }
+    //删除部分选择记录
+    public void deleteSome(Integer id,List<Date> dates){
+        System.out.println("删除部分身高体重记录");
+        for(int i=0;i<dates.size();i++){
+            user_height_weightMapper.deleteone(id,dates.get(i));
+        }
     }
 
     //删除某条身高体重

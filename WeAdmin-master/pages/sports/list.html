@@ -45,7 +45,7 @@
         </form>
     </div>
     <div class="weadmin-block" id="topline" name=""topline>
-        <button class="layui-btn layui-btn-danger" onclick="deleAll()">
+        <button class="layui-btn layui-btn-danger" onclick="deleteSome()">
             <i class="layui-icon layui-icon-delete"></i>批量删除
         </button>
         <button class="layui-btn" onclick="WeAdminShow('添加信息','./add.html',600,400)">
@@ -90,12 +90,26 @@
 </script>
 
 <script>
+    var dates=[]
     layui.use('table', function() {
         var $ = layui.jquery
         var table = layui.table;
         //监听表格复选框选择
         table.on('checkbox(sportst)', function(obj) {
             console.log(obj)
+            var flag=0;
+            for(let i=0;i<dates.length;i++){
+                if(dates[i]==obj.data.date){
+                    console.log("delete")
+                    dates.splice(i,1);
+                    i--;
+                    flag=1;
+                    console.log(dates)
+                }
+            }
+            if(flag==0){
+                dates.push(obj.data.date);
+            }
         });
         //监听工具条
         table.on('tool(sports)', function(obj) {
@@ -141,39 +155,34 @@
             // }
         });
 
-        //触发事件
-        var active = {
-            tabAdd : function() {
-
-                layer.open({
-                    type: 2,
-                    title: '添加学生成绩信息',
-                    shadeClose: true,
-                    shade: false,
-                    /*    maxmin: true,  *///开启最大化最小化按钮
-                    area: ['800px', '400px'],
-                    content: '/add.html'
-                });
-
-            },search:function(){
-                var name=$("#studentNameSearch").val();
-                table.reload('height_weight',{
-                    method: 'POST'
-                    , where: {
-                        "studentName":name},page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-
-                })
-            }
-        };
-
-        $('#studentSearch .layui-btn').on('click', function() {
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
-
     });
+    function deleteSome() {
+        console.log(dates)
+        layui.use(['form', 'jquery','util','admin', 'layer'], function() {
+            var $ = layui.jquery;
+            $.ajax({
+                type: "POST",   //提交的方法
+                url:"http://localhost:8081/exercise/deleteSomeE",
+                xhrFields: {
+                    withCredentials: true,
+                },
+                dataType:"json",
+                data: JSON.stringify({
+                    "dates":dates
+                }),
+                contentType: "application/json",
+                async: true,
+
+                error: function(request) {  //失败的话
+                    alert("Connection error");
+                },
+                success: function(data) {
+
+                }
+            })
+        });
+        window.delAll();
+    }
 </script>
 
 
