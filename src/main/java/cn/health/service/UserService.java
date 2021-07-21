@@ -142,8 +142,7 @@ public class UserService {
 
 
             }
-            System.out.println(uf.size());
-            System.out.println(ue.size());
+
         }
 
 
