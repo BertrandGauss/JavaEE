@@ -124,6 +124,8 @@ function checkSurepassword(){
 // info.push($("#birthday").val());
 
 $(document).ready(function(){
+    var gender1 = document.getElementsByName('sex');
+    console.log(gender1)
     $("#btn_sub").click(function(){
         $.ajax({
             type: "POST",   //提交的方法
@@ -136,8 +138,9 @@ $(document).ready(function(){
                 "telephone":$("#telephone").val(),
                 "email":$("#email").val(),
                 "user_password":$("#user_password").val(),
-                "gender":$("#gender").val(),
-                "birthday":$("#birthday").val()
+                "gender":$("input[name='sex']:checked").val(),
+                "birthday":$("#birthday").val(),
+                // "gender":gender1.values()
             }),
             async: false,
             error: function(request) {  //失败的话
