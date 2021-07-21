@@ -279,17 +279,18 @@
                 for (var i = 0; i < f.length; i++) {
                   var h = i + 1
                   var content = f[i]["content"]
-                  var time = f[i]["date"].split("T")[0]
-                }
-                $("#notice").append(
-                        '<div class="layuimini-notice-title">'+
-                        content+
-                        '</div>'+
-                        '<div class="layuimini-notice-extra">'+
-                        time+
-                        '</div>'
+                  var timenow = f[i]["date"].split("T")[0]
+                  $("#notice").append(
+                          '<div class="layuimini-notice-title">'+
+                          content+'      '+
+                          // '</div>'+
+                          // '<div class="layuimini-notice-extra">'+
+                          timenow+
+                          '</div>'
 
-                )
+                  )
+                }
+
               }
 
             })
