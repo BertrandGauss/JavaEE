@@ -29,9 +29,8 @@ public class UserService {
     private JavaMailSenderImpl mailSender;
 
     public Integer phoneisregister(String telephone){//查询手机号是否被注册
-        System.out.print(telephone);
         Integer result=userMapper.selectByTelphone(telephone);//查询结果
-        System.out.print(result);
+        System.out.print("用户id"+result);
         return result;
     }
     public Integer emailisregister(String email){//查询手机号是否被注册

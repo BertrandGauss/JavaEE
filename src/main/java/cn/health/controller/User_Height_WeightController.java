@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.SimpleFormatter;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/height_weight")
 public class User_Height_WeightController {

@@ -16,7 +16,7 @@
         UPDATE questionnaire SET problemNum=#{problemNum} WHERE questionnaire_id=#{questionnaire_id}
     </update>
 
-    <select id="showALL">
+    <select id="showALL" resultType="cn.health.domain.Questionnaire">
         SELECT * FROM questionnaire
     </select>
 </mapper>

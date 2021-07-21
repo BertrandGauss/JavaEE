@@ -63,9 +63,6 @@ public class QuestionController {
 
     @RequestMapping(value ="/addQ",method = {RequestMethod.POST})
     private JSONObject addQues(@RequestBody Subject subject){
-        System.out.println(subject.getQuestion()+"###");
-        System.out.println(subject.getA1()+"###");
-        System.out.println(subject.getPoint()+"###");
         questionSercvice.addQuestion(subject);
         JSONObject json = new JSONObject();
         json.put("code",0);
