@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-@CrossOrigin
+
 @RestController
 @RequestMapping("/alarmclock")
 public class AlarmclockController {
@@ -39,6 +39,7 @@ public class AlarmclockController {
         json.put("code",0);
         json.put("msg","展示闹钟成功");
         json.put("data",alarmclocks);
+        json.put("count",alarmclocks.size());
         return json;
     }
 

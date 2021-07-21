@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.SimpleFormatter;
-@CrossOrigin
+
 @RestController
 @RequestMapping("/height_weight")
 public class User_Height_WeightController {
@@ -35,7 +35,7 @@ public class User_Height_WeightController {
         user_height_weight.setUser_id(id);
         System.out.println(httpServletRequest.getSession().getId());
         json=user_height_weight_service.SetHeightWeight(user_height_weight);
-        System.out.print(json);
+//        System.out.print(json);
 
         return json;
     }
@@ -64,7 +64,8 @@ public class User_Height_WeightController {
     private JSONObject showINFO(){
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
         JSONObject user_info=user_height_weight_service.showAllinfo(id);
-        System.out.println("sessionId"+httpServletRequest.getSession().getId());
+//        System.out.println("sessionId"+httpServletRequest.getSession().getId());
+
         return user_info;
 
     }

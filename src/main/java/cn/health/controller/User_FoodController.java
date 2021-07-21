@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-@CrossOrigin
+
 @RestController
 @RequestMapping("/food")
 public class User_FoodController {
@@ -46,6 +46,7 @@ public class User_FoodController {
         json.put("code",0);
         json.put("msg","展示饮食分析成功");
         json.put("data",user_foods);
+        json.put("count",user_foods.size());
         return  json;
 
     }

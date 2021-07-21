@@ -32,9 +32,11 @@ spring:
     check-template-location: true
     charset: UTF-8
     content-type: text/html
-    expose-request-attributes: false
-    expose-session-attributes: false
-    expose-spring-macro-helpers: false
+    expose-request-attributes: true
+    expose-session-attributes: true
+    expose-spring-macro-helpers: true
+    request-context-attribute: base
+
    #设置面板后缀
     suffix: .ftl
 

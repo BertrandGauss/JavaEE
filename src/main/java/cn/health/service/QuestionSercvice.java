@@ -33,8 +33,7 @@ public class QuestionSercvice {
 
         Integer score=0;
         List<Integer> point= subjectMapper.getScore(questionnaire_id);
-        System.out.println(questionnaire_id);
-        System.out.println("答案"+point.size());
+
         for(int i=0;i<Answer.size();i++){
             score+=point.get(i)*(Answer.get(i)-1);
         }

@@ -17,8 +17,8 @@ public class AdminService {
 
     public JSONObject login(String name,String password){
         if(!adminMapper.getadmin().getAdministrator_name().equals(name) || !adminMapper.getadmin().getPassword().equals(password)){
-            System.out.println(name);
-            System.out.println(password);
+//            System.out.println(name);
+//            System.out.println(password);
             JSONObject json = new JSONObject();
             json.put("msg", "管理员登陆失败");
             json.put("code", 1);

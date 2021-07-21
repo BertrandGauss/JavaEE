@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8" />
-    <title>图片上传Demo</title>
+    <title>上传饮食图片</title>
+    <link rel="stylesheet" href="../../../../WeAdmin-master/static/css/font.css" />
+    <link rel="stylesheet" href="../../../../WeAdmin-master/static/css/weadmin.css" />
 </head>
 <body>
-<h1 style="text-align: center ;font-size: 20px;">上传饮食图片</h1>
-<form action="fileUpload" method="post" enctype="multipart/form-data">
-    <p style="font-size: 14px; text-align: center">选择文件: <input type="file" name="fileName" /></p>
-    <p ><input type="submit" value="提交"/></p>
+<h1  class="layui-bg-gray " style="text-align: center ;font-size: 20px;font-family: SimSun;">上传饮食图片</h1>
+<form action="fileUpload" method="post" enctype="multipart/form-data" class="layui-form">
+    <div class="layui-inline" style="text-align: center">
+    <p style="font-size: 14px; text-align: center">选择文件: <input class="layui-btn" type="file" name="fileName" /></p>
+    </div>
+    <div class="layui-inline" style="text-align: center">
+    <p ><input type="submit" class="layui-btn" value="提交"/></p>
+    </div>
 </form>
+<div style="text-align: center">
 <#--判断是否上传文件-->
 <#if msg??>
 <span style="text-align: center;font-size: 12px;">${msg}</span><br>
@@ -33,5 +40,6 @@
 <#if data4??>
 <span  style="font-size: 12px; text-align: center">图片中食品为：${data4} 概率为：${con4}%</span><br>
 </#if>
+</div>
 </body>
 </html>

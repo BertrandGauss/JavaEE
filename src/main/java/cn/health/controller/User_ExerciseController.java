@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-@CrossOrigin
+
 @RestController
 @RequestMapping("/exercise")
 public class User_ExerciseController {
@@ -30,7 +30,6 @@ public class User_ExerciseController {
         JSONObject json = new JSONObject();
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         userSport.setUser_id(id);
-        System.out.print(userSport.getUser_id()+userSport.getExercise_time());
         json= user_exercise_Service.setTodayExercise(userSport);
         System.out.print(json);
         return json;
@@ -41,8 +40,6 @@ public class User_ExerciseController {
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         JSONObject user_exercise=user_exercise_Service.selectAllById(id);
 
-        user_exercise.put("code",0);
-        user_exercise.put("msg","查看成功");
 
         return user_exercise;
 
@@ -76,6 +73,7 @@ public class User_ExerciseController {
         json.put("code",0);
         json.put("data",user_date_info);
         json.put("msg","查看部分信息成功");
+        json.put("count",user_date_info.size());
 
         return json;
 

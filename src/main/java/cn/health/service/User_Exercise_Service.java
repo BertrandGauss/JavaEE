@@ -51,6 +51,7 @@ public class User_Exercise_Service {
         json.put("code",0);
         json.put("msg","运动展示");
         json.put("data",user_all_exercise);
+        json.put("count",user_all_exercise.size());
         return json;
 
 

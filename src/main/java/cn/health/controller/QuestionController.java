@@ -39,8 +39,7 @@ public class QuestionController {
 
     @RequestMapping(value ="/score",method = {RequestMethod.POST})
     private  JSONObject Score(@RequestBody Answer answer){
-        System.out.print(answer.getAnswer());
-        System.out.print(answer.getAnswer().size());
+
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
 
         String res=questionSercvice.countScore(answer.getAnswer(),answer.getQuestionnaire_id(),id,answer.getDate());
@@ -77,6 +76,7 @@ public class QuestionController {
         json.put("code",0);
         json.put("msg","展示问卷概况成功");
         json.put("data",questionnaires);
+        json.put("count",questionnaires.size());
         return json;
     }
 }

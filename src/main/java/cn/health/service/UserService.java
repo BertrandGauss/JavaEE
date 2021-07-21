@@ -124,12 +124,11 @@ public class UserService {
         for (int i=uf.size()-1;i>=0;i--) {
 
             Date d=uf.get(i).getDate();
-            System.out.println("111"+d+"111");
+
             for (int j = 0; j < ue.size(); j++) {
 
                 int f = d.compareTo(ue.get(j).getDate());
-                System.out.println("222"+ue.get(j).getDate()+"222");
-                System.out.println(f);
+
                 if(f==0){
                     User_Calorie uc=new User_Calorie();
                     uc.setDate(uf.get(i).getDate());
