@@ -37,14 +37,14 @@
                 {{# layui.each(d.data, function(index, item){ }}
                 <!--                遍历每二级标题下对应的问题-->
 
-                <label class="layui-input-block  layui-bg-gray" style="font-size: 18px;font-weight: normal ;font-family: SimSun;text-align: left"> <span>{{index+1}}.&nbsp;&nbsp;{{item.q}} </span></label>
+                <label class="layui-input-block  layui-bg-gray" style="font-size: 18px;font-weight: normal ;font-family: SimSun;text-align: left"> <span>{{index+1}}.&nbsp;&nbsp;{{item.question}} </span></label>
 
                 <div class="layui-input-block">
                     <!--                根据我的客户需求，需要在渲染页面的时候，如果之前有过问卷提交记录，则radio自动渲染出上次所选的选项-->
-                    <input  type="radio" name="{{index+1}}" value="1" title="{{item.a1}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun ;text-align: center" />
-                    <input  type="radio" name="{{index+1}}" value="2" title="{{item.a2}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun; text-align: center"/>
-                    <input  type="radio" name="{{index+1}}" value="3" title="{{item.a3}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun;text-align: center"/>
-                    <input  type="radio" name="{{index+1}}" value="4" title="{{item.a4}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun;text-align: center"/>
+                    <input  type="radio" name="{{index+1}}" value="1" title="{{item.answerOne}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun ;text-align: center" />
+                    <input  type="radio" name="{{index+1}}" value="2" title="{{item.answerTwo}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun; text-align: center"/>
+                    <input  type="radio" name="{{index+1}}" value="3" title="{{item.answerThree}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun;text-align: center"/>
+                    <input  type="radio" name="{{index+1}}" value="4" title="{{item.answerFour}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun;text-align: center"/>
                 </div>
                 {{# }); }}
 

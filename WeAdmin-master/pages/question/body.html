@@ -38,12 +38,12 @@
                 <!--                对后台传过来的json数据进行遍历-->
                 {{# layui.each(d.data, function(index, item){ }}
 
-                    <label class="layui-input-block layui-bg-gray" style="font-size: 20px;font-weight: normal; font-family: SimSun;text-align: center"> <span>{{index+1}}.&nbsp;&nbsp;{{item.q}} </span></label>
+                    <label class="layui-input-block layui-bg-gray" style="font-size: 20px;font-weight: normal; font-family: SimSun;text-align: center"> <span>{{index+1}}.&nbsp;&nbsp;{{item.question}} </span></label>
 
                     <div class="layui-input-block">
                         <!--                根据我的客户需求，需要在渲染页面的时候，如果之前有过问卷提交记录，则radio自动渲染出上次所选的选项-->
-                        <input  type="radio" name="{{index+1}}" value="2" title="{{item.a1}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun ;text-align: center"/>
-                        <input  type="radio" name="{{index+1}}" value="1" title="{{item.a2}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun;text-align: center"/>
+                        <input  type="radio" name="{{index+1}}" value="2" title="{{item.answerOne}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun ;text-align: center"/>
+                        <input  type="radio" name="{{index+1}}" value="1" title="{{item.answerTwo}}" style="font-size: 12px;font-weight: normal ;font-family: SimSun;text-align: center"/>
 
                     </div>
                     {{# }); }}
