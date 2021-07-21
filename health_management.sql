@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : user
+Source Server         : demo
 Source Server Version : 80023
 Source Host           : localhost:3306
 Source Database       : health_management
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80023
 File Encoding         : 65001
 
-Date: 2021-07-20 21:28:01
+Date: 2021-07-21 15:16:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,16 +45,14 @@ CREATE TABLE `alarmclock` (
   PRIMARY KEY (`id`),
   KEY `FK_Relationship_9` (`user_id`),
   CONSTRAINT `FK_Relationship_9` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='alarmclock';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='alarmclock';
 
 -- ----------------------------
 -- Records of alarmclock
 -- ----------------------------
-INSERT INTO `alarmclock` VALUES ('1', '1', '开会', '16:22:50', '仅此一次', '2021-07-20');
-INSERT INTO `alarmclock` VALUES ('2', '1', '吃药', '16:27:00', '每天提醒', '2021-07-20');
-INSERT INTO `alarmclock` VALUES ('3', '1', '起床', '16:30:00', '仅此一次', '2021-07-20');
-INSERT INTO `alarmclock` VALUES ('4', '1', '起床', '16:34:46', '仅此一次', '2021-07-20');
-INSERT INTO `alarmclock` VALUES ('5', '1', '吃药', '16:40:38', '仅此一次', '2021-07-20');
+INSERT INTO `alarmclock` VALUES ('1', '1', '起床', '15:31:00', '仅此一次', '2021-07-20');
+INSERT INTO `alarmclock` VALUES ('2', '1', '入睡', '16:16:00', '仅此一次', '2021-07-20');
+INSERT INTO `alarmclock` VALUES ('3', '1', 'kaihui', '16:21:20', '仅此一次', '2021-07-20');
 
 -- ----------------------------
 -- Table structure for exerciseinf
@@ -84,7 +82,7 @@ INSERT INTO `exerciseinf` VALUES ('7', '健美操', '500');
 DROP TABLE IF EXISTS `foodinf`;
 CREATE TABLE `foodinf` (
   `food_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(1024) NOT NULL,
+  `name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `weightPerOne` double NOT NULL,
   `caloriePer100g` int NOT NULL,
   `vAPer100g` double DEFAULT NULL,
@@ -95,7 +93,8 @@ CREATE TABLE `foodinf` (
   `proteinPer100g` double DEFAULT NULL,
   `fatPer100g` double DEFAULT NULL,
   `carbsPer100g` double DEFAULT NULL,
-  PRIMARY KEY (`food_id`)
+  PRIMARY KEY (`food_id`),
+  KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='foodInf';
 
 -- ----------------------------
@@ -222,7 +221,7 @@ CREATE TABLE `questionnaire` (
 -- ----------------------------
 -- Records of questionnaire
 -- ----------------------------
-INSERT INTO `questionnaire` VALUES ('1', '1', '心理调查问卷', '18');
+INSERT INTO `questionnaire` VALUES ('1', '1', '心理调查问卷', '13');
 INSERT INTO `questionnaire` VALUES ('2', '1', '身体健康状况调查问卷', '10');
 
 -- ----------------------------
@@ -241,16 +240,16 @@ CREATE TABLE `subject` (
   PRIMARY KEY (`subject_id`,`questionnaire_id`),
   KEY `FK_Relationship_5` (`questionnaire_id`),
   CONSTRAINT `FK_Relationship_5` FOREIGN KEY (`questionnaire_id`) REFERENCES `questionnaire` (`questionnaire_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='问卷中的题目';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='问卷中的题目';
 
 -- ----------------------------
 -- Records of subject
 -- ----------------------------
-INSERT INTO `subject` VALUES ('1', '1', '以下情况最符合你的是：', '我不感到忧郁              ', '我感到忧郁或沮丧', '我整天忧郁，无法摆脱', '我十分忧郁，已经承受不住', '1');
+INSERT INTO `subject` VALUES ('1', '1', '以下情况最符合你的是：', '我不感到忧郁', '我感到忧郁或沮丧', '我整天忧郁，无法摆脱', '我十分忧郁，已经承受不住', '1');
 INSERT INTO `subject` VALUES ('1', '2', '你的身体成分达标吗？（脂肪率和去脂体重指数）', '是', '否', null, null, '1');
 INSERT INTO `subject` VALUES ('2', '1', '你对未来抱有什么态度？', '我对未来并不感到悲观失望', '我感到前途不太乐观', '我感到我对前途不抱希望', '我感到今后毫无希望，不可能有所好转', '1');
 INSERT INTO `subject` VALUES ('2', '2', '膝盖不弯曲能摸到脚趾吗？', '是', '否', null, null, '1');
-INSERT INTO `subject` VALUES ('3', '1', '你是如何看待失败的感觉？', '我并无失败的感觉            ', '我觉得和大多数人相比我是失败的', '回顾我的一生，我觉得那是一连串的失败', '我觉得我是个彻底失败的人', '1');
+INSERT INTO `subject` VALUES ('3', '1', '你是如何看待失败的感觉？', '我并无失败的感觉', '我觉得和大多数人相比我是失败的', '回顾我的一生，我觉得那是一连串的失败', '我觉得我是个彻底失败的人', '1');
 INSERT INTO `subject` VALUES ('3', '2', '你是否偶尔才会喘不上气？', '是', '否', null, null, '1');
 INSERT INTO `subject` VALUES ('4', '1', '你对生活的满意度如何？', '我并不觉得我有什么不满意', '我觉得我不能像平时那样享受生活', '任何事情都不能使我感到满意一些 ', '我对所有的事情都不满意', '1');
 INSERT INTO `subject` VALUES ('4', '2', '你能在12分钟内跑完两公里吗？', '是', '否', null, null, '1');
@@ -283,12 +282,13 @@ CREATE TABLE `user` (
   `birthday` date NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表，其中包含属性为用户id，用户名，和用户密码';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表，其中包含属性为用户id，用户名，和用户密码';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'Claire', '81dc9bdb52d04dc20036dbd8313ed055', '18779459456', 'male', '2001-04-26', 'healthcare_group@yeah.net');
+INSERT INTO `user` VALUES ('1', '123asd', 'e10adc3949ba59abbe56e057f20f883e', '18175570266', 'male', '2000-03-14', '949412659@qq.com');
+INSERT INTO `user` VALUES ('2', 'HeZH123', 'e10adc3949ba59abbe56e057f20f883e', '18175577725', 'male', '2000-03-14', 'pengyupingw@outlook.com');
 
 -- ----------------------------
 -- Table structure for usereat
@@ -300,15 +300,14 @@ CREATE TABLE `usereat` (
   `number` int NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`user_id`,`name`,`date`),
-  CONSTRAINT `FK_Relationship12` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `relationship_2` (`name`),
+  CONSTRAINT `FK_Relationship12` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `relationship_2` FOREIGN KEY (`name`) REFERENCES `foodinf` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of usereat
 -- ----------------------------
-INSERT INTO `usereat` VALUES ('1', '猪肉', '1', '2021-07-20');
-INSERT INTO `usereat` VALUES ('1', '米饭', '2', '2021-07-20');
-INSERT INTO `usereat` VALUES ('1', '香蕉', '1', '2021-07-20');
 
 -- ----------------------------
 -- Table structure for user_evaluation
@@ -343,7 +342,7 @@ CREATE TABLE `user_exercise` (
 -- ----------------------------
 -- Records of user_exercise
 -- ----------------------------
-INSERT INTO `user_exercise` VALUES ('2021-07-20', '1', '350');
+INSERT INTO `user_exercise` VALUES ('2021-07-20', '1', '500');
 
 -- ----------------------------
 -- Table structure for user_food
@@ -369,7 +368,6 @@ CREATE TABLE `user_food` (
 -- ----------------------------
 -- Records of user_food
 -- ----------------------------
-INSERT INTO `user_food` VALUES ('2021-07-20', '1', '627', '0.0295', '1.0899999999999999', '12', '0.00025', '0.53', '21.61', '4.48', '126.99');
 
 -- ----------------------------
 -- Table structure for user_height_weight
@@ -388,6 +386,7 @@ CREATE TABLE `user_height_weight` (
 -- ----------------------------
 -- Records of user_height_weight
 -- ----------------------------
+INSERT INTO `user_height_weight` VALUES ('2021-07-20', '1', '161', '56');
 
 -- ----------------------------
 -- Table structure for user_questionnaire_grade
@@ -407,9 +406,8 @@ CREATE TABLE `user_questionnaire_grade` (
 -- ----------------------------
 -- Records of user_questionnaire_grade
 -- ----------------------------
-INSERT INTO `user_questionnaire_grade` VALUES ('1', '2021-07-20', '1', '0');
-INSERT INTO `user_questionnaire_grade` VALUES ('2', '2021-07-19', '1', '10');
-INSERT INTO `user_questionnaire_grade` VALUES ('2', '2021-07-20', '1', '10');
+INSERT INTO `user_questionnaire_grade` VALUES ('1', '2021-07-20', '1', '6');
+INSERT INTO `user_questionnaire_grade` VALUES ('2', '2021-07-20', '1', '8');
 
 -- ----------------------------
 -- Table structure for user_sleep
@@ -428,3 +426,4 @@ CREATE TABLE `user_sleep` (
 -- ----------------------------
 -- Records of user_sleep
 -- ----------------------------
+INSERT INTO `user_sleep` VALUES ('2021-07-20', '1', '8', '23:45:00');
