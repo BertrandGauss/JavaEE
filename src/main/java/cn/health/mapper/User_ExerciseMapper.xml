@@ -29,7 +29,7 @@
     <select id="selectTotal" resultType="cn.health.domain.User_Exercise">
         SELECT *
         FROM user_exercise
-        ORDER BY user_exercise.date DESC LIMIT 30
+        WHERE user_id=#{user_id}
     </select>
     
    <delete id="deleteall">

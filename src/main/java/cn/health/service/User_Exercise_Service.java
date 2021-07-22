@@ -73,6 +73,9 @@ public class User_Exercise_Service {
 
     public List<User_Exercise> selectByDate(Integer id, Date start, Date end){
         List<User_Exercise> userinfoBydate =user_exerciseMapper.selectByTwoDate(id,start,end);
+        System.out.println("start"+start);
+        System.out.println(end);
+        System.out.println(userinfoBydate.size());
         return userinfoBydate;
 
     }

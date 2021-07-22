@@ -76,17 +76,17 @@
 <script type="text/html" id="barDemo">
     <a title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
 </script>
-<!--<script type="text/html" id="titleTpl">-->
-    <!--{{#-->
-    <!--var fn = function(data){-->
-    <!--return data.substring(0,10);-->
-    <!--};-->
-    <!--}}-->
-    <!--{{ fn(d.date) }}-->
-<!--</script>-->
-<!--<script type="text/html" id="xuhao">-->
-    <!--{{d.LAY_TABLE_INDEX+1}}-->
-<!--</script>-->
+<script type="text/html" id="titleTpl">
+    {{#
+    var fn = function(data){
+    return data.substring(0,10);
+    };
+    }}
+    {{ fn(d.date) }}
+</script>
+<script type="text/html" id="xuhao">
+    {{d.LAY_TABLE_INDEX+1}}
+</script>
 
 <script>
     var dates=[]
@@ -134,7 +134,7 @@
                             if (result.code == "0") {
                                 layer.close(index);
                                 layer.msg('删除成功');
-                                layui.table.reload("sportst",{page:{curr:1}});
+                                layui.table.reload("sports",{page:{curr:1}});
                             }else{
                                 layer.msg('删除失败', {
                                     icon: 5
@@ -220,7 +220,7 @@
             layer = layui.layer;
         form.on('submit(search)',function (data){(
 
-            table.reload('sportst', {
+            table.reload('sports', {
                 url:"http://localhost:8081/exercise/selectbydate",
                 method: 'POST',
                 contentType: 'application/json'

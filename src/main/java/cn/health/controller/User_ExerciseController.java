@@ -67,7 +67,7 @@ public class User_ExerciseController {
         return json;
     }
 
-    @RequestMapping(value = "/selectbydate",method = {RequestMethod.GET})
+    @RequestMapping(value = "/selectbydate",method = {RequestMethod.POST})
     private JSONObject selectByDate(@RequestBody DateRange dateRange){
 
         Integer id=(Integer) httpServletRequest.getSession().getAttribute("LOGIN_USER");
