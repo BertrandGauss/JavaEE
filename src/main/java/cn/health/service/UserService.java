@@ -118,9 +118,6 @@ public class UserService {
         List<User_Exercise> ue = userMapper.selectTotal(id);
 
         List<User_Calorie> ucl = new ArrayList<>();
-
-
-
         for (int i=uf.size()-1;i>=0;i--) {
 
             Date d=uf.get(i).getDate();
@@ -178,7 +175,7 @@ public class UserService {
         System.out.println(pw);
         System.out.println(origin_pw);
         if(!origin_pw.equals(pw)){
-            json.put("code",1);
+            json.put("code",1);System.out.println("旧密码错误");
             json.put("msg","旧密码输入错误");
         }
         else{

@@ -133,6 +133,7 @@
 						alert("Connection error");
 					},
 					success: function (data) {
+					    console.log(data.data)
 						var f = data.data
 						$("#quote").append(
 								'<blockquote class="layui-elem-quote">'+

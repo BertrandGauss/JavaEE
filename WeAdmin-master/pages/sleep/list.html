@@ -157,37 +157,6 @@
             }
         });
 
-        //触发事件
-        var active = {
-            tabAdd : function() {
-
-                layer.open({
-                    type: 2,
-                    title: '添加学生成绩信息',
-                    shadeClose: true,
-                    shade: false,
-                    /*    maxmin: true,  *///开启最大化最小化按钮
-                    area: ['800px', '400px'],
-                    content: '/add.html'
-                });
-
-            },search:function(){
-                var name=$("#studentNameSearch").val();
-                table.reload('height_weight',{
-                    method: 'POST'
-                    , where: {
-                        "studentName":name},page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-
-                })
-            }
-        };
-
-        $('#studentSearch .layui-btn').on('click', function() {
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
 
     });
     function deleteSome() {
@@ -256,7 +225,7 @@
         form.on('submit(search)',function (data){(
 
             table.reload('sleept', {
-                url:"http://localhost:8081/sleep/",
+                url:"http://localhost:8081/sleep/selectbydate",
                 method: 'POST',
                 contentType: 'application/json'
                 , where: {

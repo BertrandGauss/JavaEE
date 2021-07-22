@@ -63,7 +63,7 @@ public class UserController {
         userService.forgetpw(user.getEmail(),user.getUser_password());
 
         json.put("code",0);
-        json.put("msg","修改密码成功");
+        json.put("msg","重置密码成功");
         return json;
     }
     

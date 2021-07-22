@@ -103,6 +103,7 @@ public class User_FoodController {
     private JSONObject showFood(){
         Integer id=(int)httpServletRequest.getSession().getAttribute("LOGIN_USER");
         User_Food user_food= user_foodService.selectCloestById(id);
+        System.out.println(user_food.getDate());
         JSONObject json = new JSONObject();
         json.put("code",0);
         json.put("msg","查看成功");

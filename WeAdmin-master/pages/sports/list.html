@@ -48,11 +48,11 @@
         <button class="layui-btn layui-btn-danger" onclick="deleteSome()">
             <i class="layui-icon layui-icon-delete"></i>批量删除
         </button>
-        <button class="layui-btn" onclick="WeAdminShow('添加信息','./add.html',600,400)">
+        <button class="layui-btn" onclick="WeAdminShow('添加信息','./add.html',450,250)">
             <i class="layui-icon layui-icon-add-circle-fine"></i>添加信息
         </button>
     </div>
-    <table class="layui-table"  lay-data="{ url:'http://localhost:8081/exercise/showexercise', page:true, id:'sportst'}" lay-filter="sportst">
+    <table class="layui-table"  lay-data="{ url:'http://localhost:8081/exercise/showexercise', page:true, id:'sports'}" lay-filter="sports">
         <thead>
         <tr>
             <!--<th>-->
@@ -74,20 +74,19 @@
 </div>
 <script src="../../lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/html" id="barDemo">
-<!--    <a title="编辑" lay-event="edit"><i class="layui-icon">&#xe642;</i></a>-->
     <a title="删除" lay-event="del"><i class="layui-icon">&#xe640;</i></a>
 </script>
-<script type="text/html" id="titleTpl">
-    {{#
-    var fn = function(data){
-    return data.substring(0,10);
-    };
-    }}
-    {{ fn(d.date) }}
-</script>
-<script type="text/html" id="xuhao">
-    {{d.LAY_TABLE_INDEX+1}}
-</script>
+<!--<script type="text/html" id="titleTpl">-->
+    <!--{{#-->
+    <!--var fn = function(data){-->
+    <!--return data.substring(0,10);-->
+    <!--};-->
+    <!--}}-->
+    <!--{{ fn(d.date) }}-->
+<!--</script>-->
+<!--<script type="text/html" id="xuhao">-->
+    <!--{{d.LAY_TABLE_INDEX+1}}-->
+<!--</script>-->
 
 <script>
     var dates=[]
