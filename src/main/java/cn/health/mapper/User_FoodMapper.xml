@@ -18,7 +18,7 @@
     </select>
 
     <select id="selectCloestById"  resultType="cn.health.domain.User_Food" parameterType="java.lang.Integer">
-        select * FROM (SELECT * From user_food WHERE user_id = #{user_id}) as new_uf ORDER BY user_id desc LIMIT 1
+        select * FROM (SELECT * From user_food WHERE user_id = #{user_id}) as new_uf ORDER BY date desc LIMIT 1
     </select>
 
     <select id="selectALLByID"  resultType="cn.health.domain.User_Food" >
