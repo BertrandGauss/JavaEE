@@ -1,3 +1,3 @@
 # JavaEE
-一个简单的健康管理系统。使用Spring Boot框架 + Layui +Mysql。
+一个简单的健康管理系统。使用Spring Boot框架 + Layui +Mysql。<br>
 包含用户端和管理员端。提供了包括个人基本信息管理、因素管理、运动管理、闹钟管理以及健康问卷等一系列功能。
